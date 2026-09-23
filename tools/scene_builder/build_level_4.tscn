@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://tools/scene_builder/build_level_4.gd" id="1"]
+
+[node name="BuildLevel4" type="Node"]
+script = ExtResource("1")

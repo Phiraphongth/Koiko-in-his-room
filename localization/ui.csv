@@ -1,0 +1,169 @@
+keys,en,th
+MENU_TITLE,KOPIKO IN HIS ROOM,โกปิ๊กโกะในห้องของเขา
+MENU_SUBTITLE,A game you did not agree to play,เกมที่คุณไม่ได้ตกลงจะเล่น
+MENU_START,Start Game,เริ่มเกม
+MENU_CONTINUE,Continue,เล่นต่อ
+MENU_LEVEL_SELECT,Level Select,เลือกด่าน
+MENU_SETTINGS,Settings,ตั้งค่า
+MENU_QUIT,Quit,ออกจากเกม
+MENU_BACK,Back,ย้อนกลับ
+MENU_RESUME,Resume,เล่นต่อ
+MENU_RETURN_TO_MENU,Return to Menu,กลับเมนูหลัก
+COMMON_ON,On,เปิด
+COMMON_OFF,Off,ปิด
+COMMON_YES,Yes,ใช่
+COMMON_NO,No,ไม่
+COMMON_LOCKED,Locked,ยังไม่ปลดล็อก
+SETTINGS_TITLE,Settings,ตั้งค่า
+SETTINGS_AUDIO,Audio,เสียง
+SETTINGS_MASTER_VOLUME,Master Volume,ระดับเสียงรวม
+SETTINGS_BGM_VOLUME,Music,เสียงดนตรี
+SETTINGS_SFX_VOLUME,Sound Effects,เสียงประกอบ
+SETTINGS_GRAPHICS,Graphics,ภาพ
+SETTINGS_RESOLUTION,Resolution,ความละเอียด
+SETTINGS_WINDOW_MODE,Window Mode,โหมดหน้าต่าง
+SETTINGS_WINDOWED,Windowed,หน้าต่าง
+SETTINGS_FULLSCREEN,Fullscreen,เต็มจอ
+SETTINGS_VSYNC,V-Sync,V-Sync
+SETTINGS_SHADOW_QUALITY,Shadow Quality,คุณภาพเงา
+SETTINGS_SHADOW_OFF,Off,ปิด
+SETTINGS_SHADOW_LOW,Low,ต่ำ
+SETTINGS_SHADOW_MEDIUM,Medium,ปานกลาง
+SETTINGS_SHADOW_HIGH,High,สูง
+SETTINGS_GAMEPLAY,Gameplay,การเล่น
+SETTINGS_MOUSE_SENSITIVITY,Mouse Sensitivity,ความไวเมาส์
+SETTINGS_LANGUAGE,Language,ภาษา
+SETTINGS_RESET,Reset to Defaults,คืนค่าเริ่มต้น
+LEVEL_HUB,Prologue — The Room,บทนำ — ห้องนั้น
+LEVEL_1,Level 1 — The Maze of Whispers,ด่าน 1 — เขาวงกตกระซิบ
+LEVEL_2,Level 2 — The Blind Stalker,ด่าน 2 — ผู้ล่าตาบอด
+LEVEL_3,Level 3 — Vertical Abyss,ด่าน 3 — เหวดิ่ง
+LEVEL_4,Level 4 — The Pressure Valve,ด่าน 4 — วาล์วแรงดัน
+HUD_OBJECTIVE,OBJECTIVE,ภารกิจ
+HUD_CLOSE,Close,ปิด
+HUD_HOLD_BREATH,Hold breath,กลั้นหายใจ
+HUD_LEAVE,Leave,ออก
+HUD_THROW_HINT,[LMB] throw   [RMB] aim   [R] switch,[คลิกซ้าย] ขว้าง   [คลิกขวา] เล็ง   [R] สลับ
+HUD_KEYCARDS,KEYCARDS  %d,คีย์การ์ด  %d
+HUD_FIND_KEYCARDS,Find the keycards (%d/%d),หาคีย์การ์ด (%d/%d)
+HUD_INSERT_KEYCARDS,Insert the keycards at the control panel,เสียบคีย์การ์ดที่แผงควบคุม
+HUD_SURVIVE_COUNTDOWN,SURVIVE — the exit opens in %d,เอาตัวรอด — ประตูเปิดในอีก %d
+HUD_RUN_TO_EXIT,RUN TO THE EXIT!,วิ่งไปที่ทางออก!
+ENDING_GOOD_TITLE,GOOD ENDING,ฉากจบที่ดี
+ENDING_BAD_TITLE,BAD ENDING,ฉากจบที่เลวร้าย
+ENDING_PRESS_ANY_KEY,Press any key to wake up again,กดปุ่มใดก็ได้เพื่อตื่นขึ้นมาอีกครั้ง
+PROMPT_INTERACT,Interact,โต้ตอบ
+PROMPT_OPEN,Open,เปิด
+PROMPT_CLOSE,Close,ปิด
+PROMPT_LOCKED,Locked,ล็อกอยู่
+PROMPT_HIDE,Hide,ซ่อน
+PROMPT_HIDE_LOCKER,Hide in locker,ซ่อนในตู้
+PROMPT_LEAVE_HIDING,Leave hiding spot,ออกจากที่ซ่อน
+PROMPT_TAKE_BOTTLE,Take bottle,หยิบขวด
+PROMPT_TAKE_CLOCK,Take alarm clock,หยิบนาฬิกาปลุก
+PROMPT_TAKE_KEYCARD,Take keycard,หยิบคีย์การ์ด
+PROMPT_CHECK_PHONE,Check phone,ดูโทรศัพท์
+PROMPT_TAKE_PHONE,Take a phone,หยิบโทรศัพท์
+PROMPT_INSERT_KEYCARDS,Insert keycards (%d/%d),เสียบคีย์การ์ด (%d/%d)
+HUB_ROOM_DOOR_STUCK,It won't open...,มันเปิดไม่ออก...
+HUB_ROOM_DOOR_LOCKED,Locked. There's no going back.,ล็อกแล้ว ไม่มีทางกลับ
+HUB_PHONE_TITLE,1 NEW MESSAGE  —  UNKNOWN SENDER,ข้อความใหม่ 1 ฉบับ — ไม่ทราบผู้ส่ง
+HUB_PHONE_BODY,"Congratulations.\nYou have been selected as a PLAYER.\n\nA game is about to begin.\nFollow the cards to the venue.\n\nPlayers who refuse to participate\nwill be eliminated.","ยินดีด้วย\nคุณถูกเลือกให้เป็นผู้เล่น\n\nเกมกำลังจะเริ่ม\nเดินตามไพ่ไปยังสถานที่จัดเกม\n\nผู้เล่นที่ปฏิเสธจะเข้าร่วม\nจะถูกกำจัด"
+HUB_SAY_HEAD,...ugh. My head...,...อื้อ หัวฉัน...
+HUB_SAY_QUIET,Where... is everyone? It's so quiet.,ทุกคน... หายไปไหนหมด เงียบจัง
+HUB_SAY_PHONE,My phone...?,โทรศัพท์ฉัน...?
+HUB_SAY_JOKE,...What kind of sick joke is this?,...นี่มันเรื่องตลกบ้าอะไรกัน
+HUB_SAY_DOOR_UNLOCKED,The door... just unlocked by itself?,ประตู... ปลดล็อกเองเหรอ
+HUB_SAY_SHOCK,!!,!!
+HUB_SAY_LOCKED_BEHIND,It locked behind me...,มันล็อกอยู่ข้างหลังฉัน...
+HUB_SAY_WHOS_THERE,W-who's there...?!,ใ-ใครน่ะ...?!
+HUB_OBJ_CHECK_PHONE,Check your phone,ดูโทรศัพท์ของคุณ
+HUB_OBJ_LEAVE_ROOM,Leave the room,ออกจากห้อง
+HUB_OBJ_FOLLOW_CARDS,Follow the cards,เดินตามไพ่
+HUB_OBJ_KEEP_MOVING,Keep moving. Don't look back.,เดินต่อไป อย่าหันกลับไปมอง
+HUB_OBJ_TAKE_PHONE,Take a phone,หยิบโทรศัพท์
+HUB_OBJ_ENTER_VENUE,Enter the venue,เข้าไปในสถานที่จัดเกม
+HUB_PA_ENTRY_OPEN,Entry is now open. Please take a phone to register.,เปิดให้ลงทะเบียนแล้ว กรุณาหยิบโทรศัพท์เพื่อลงทะเบียน
+HUB_PA_REGISTERED,Registration complete. Number of players: one.,ลงทะเบียนเรียบร้อย จำนวนผู้เล่น หนึ่งคน
+HUB_PA_GAME_INFO,"Game: The Maze of Whispers. Difficulty: diamonds, and clubs.",เกม เขาวงกตกระซิบ ความยาก ข้าวหลามตัด และ ดอกจิก
+HUB_PA_SOON,The game will begin shortly.,เกมกำลังจะเริ่มในไม่ช้า
+HUB_PA_GAME_START,Game start.,เริ่มเกม
+L2_RULES_TITLE,THE BLIND STALKER   ♠ ♥ 10,ผู้ล่าตาบอด   ♠ ♥ 10
+L2_RULES_BODY,"Find 3 keycards and insert them at the control panel.\nThe exit opens 30 seconds later. You have 10 minutes.\n\nIt cannot see you. It hears everything.\n• Walk, don't run. Crouch [C] to be almost silent.\n• Water splashes — every step is loud.\n• Throw bottles and alarm clocks [LMB] to lure it away.\n• Your collar beeps when your heart races. It hears that too.\n• Hide in lockers [E] and hold your breath [Q] to calm down.\n• Flashlight [F]: it is blind — light is safe.","หาคีย์การ์ด 3 ใบแล้วเสียบที่แผงควบคุม\nประตูจะเปิดหลังจากนั้น 30 วินาที คุณมีเวลา 10 นาที\n\nมันมองไม่เห็น แต่ได้ยินทุกอย่าง\n• เดิน อย่าวิ่ง กด [C] ย่อตัวเพื่อให้เงียบที่สุด\n• น้ำกระเซ็น — ทุกก้าวในน้ำดังมาก\n• ขว้างขวดและนาฬิกาปลุก [คลิกซ้าย] เพื่อล่อมันไปที่อื่น\n• ปลอกคอจะร้องเมื่อหัวใจเต้นแรง มันได้ยินด้วย\n• ซ่อนในตู้ [E] แล้วกลั้นหายใจ [Q] เพื่อสงบสติ\n• ไฟฉาย [F] มันตาบอด แสงจึงปลอดภัย"
+L2_PA_INTRO,"Game: The Blind Stalker. Difficulty: spades... hearts, ten.",เกม ผู้ล่าตาบอด ความยาก โพดำ... โพแดง สิบ
+L2_PA_START,It cannot see you. Game start.,มันมองไม่เห็นคุณ เริ่มเกม
+L2_PA_FIVE_MIN,Five minutes remain.,เหลือเวลาห้านาที
+L2_PA_ONE_MIN,One minute remains.,เหลือเวลาหนึ่งนาที
+L2_PA_BACKUP_POWER,Backup power restored.,ไฟสำรองกลับมาแล้ว
+L2_PA_OVERRIDE,Override accepted. The exit will open in thirty seconds.,ยอมรับรหัสผ่าน ประตูจะเปิดในสามสิบวินาที
+L2_SAY_BREATHING,...something is breathing in the dark.  [F] Flashlight,...มีบางอย่างหายใจอยู่ในความมืด  [F] ไฟฉาย
+L2_SAY_FASTER,It's moving faster now...,มันเคลื่อนที่เร็วขึ้นแล้ว...
+L2_SAY_KEYCARD,Keycard %d of %d.,คีย์การ์ดใบที่ %d จาก %d
+L2_SAY_NEED_KEYCARD,I need a keycard.,ฉันต้องใช้คีย์การ์ด
+L2_SAY_COLLAR,Your collar is beeping — calm down! Hide and hold your breath [Q].,ปลอกคอกำลังร้อง — ใจเย็น ๆ! ไปซ่อนแล้วกลั้นหายใจ [Q]
+L2_OBJ_FIND,Find the keycards (%d/%d),หาคีย์การ์ด (%d/%d)
+L2_OBJ_INSERT,Insert the keycards at the control panel,เสียบคีย์การ์ดที่แผงควบคุม
+L2_OBJ_SURVIVE,SURVIVE — the exit opens in %d,เอาตัวรอด — ประตูเปิดในอีก %d
+L2_OBJ_RUN,RUN TO THE EXIT!,วิ่งไปที่ทางออก!
+ENDING_BAD_BODY,"Your visa has expired.\nSomewhere, a new player wakes up in a quiet room.",วีซ่าของคุณหมดอายุแล้ว\nที่ไหนสักแห่ง ผู้เล่นคนใหม่กำลังตื่นขึ้นในห้องเงียบ ๆ
+ENDING_GOOD_BODY,"You walked out together.\nThe city is still empty — but you are not alone.",พวกคุณเดินออกมาด้วยกัน\nเมืองยังคงว่างเปล่า — แต่คุณไม่ได้อยู่คนเดียว
+ITEM_BOTTLE,Bottle,ขวด
+ITEM_CLOCK,Alarm clock,นาฬิกาปลุก
+HUD_HIDING_HINT,[Q] Hold breath      [E] Leave,[Q] กลั้นหายใจ      [E] ออก
+HUD_MESSAGE_CLOSE,[E]  Close,[E]  ปิด
+PROMPT_TOUCH_STONE,Touch the stone,แตะหิน
+L1_RULES_TITLE,THE MAZE OF WHISPERS   ♦ ♣,เขาวงกตกระซิบ   ♦ ♣
+L1_RULES_BODY,"Find 3 whisper stones, then reach the exit. You have 6 minutes.\n\n• The walls move every 35 seconds — the way back may be gone.\n• Listen: each stone whispers. Follow the voices.\n• Red beams are alarms. Crouch [C] under the low ones,\n  and wait for the blinking ones to switch off.\n• 3 alarms and you are eliminated. Each one costs 20 seconds.","หาหินกระซิบ 3 ก้อนแล้วไปที่ทางออก คุณมีเวลา 6 นาที\n\n• กำแพงจะเลื่อนทุก 35 วินาที ทางที่เคยเดินอาจหายไป\n• ตั้งใจฟัง หินแต่ละก้อนจะกระซิบ เดินตามเสียงไป\n• ลำแสงสีแดงคือสัญญาณเตือนภัย ย่อตัว [C] ลอดอันที่อยู่ต่ำ\n  และรออันที่กะพริบให้ดับก่อน\n• โดนเตือนภัย 3 ครั้งคือถูกกำจัด และเสียเวลาครั้งละ 20 วินาที"
+L1_PA_INTRO,"Game: The Maze of Whispers. Difficulty: diamonds, and clubs.",เกม เขาวงกตกระซิบ ความยาก ข้าวหลามตัด และ ดอกจิก
+L1_PA_START,The walls remember you. Game start.,กำแพงจดจำคุณได้ เริ่มเกม
+L1_PA_EXIT_OPEN,All stones found. The exit is open.,พบหินครบแล้ว ทางออกเปิดแล้ว
+L1_SAY_LISTEN,...someone is whispering. Follow the voices.  [F] Flashlight,...มีเสียงกระซิบ เดินตามเสียงไป  [F] ไฟฉาย
+L1_SAY_WALLS_MOVING,The walls are moving...,กำแพงกำลังเลื่อน...
+L1_SAY_STONE,Whisper stone %d of %d.,หินกระซิบก้อนที่ %d จาก %d
+L1_SAY_ALARM,ALARM! %d of %d. The maze is rearranging.,สัญญาณเตือนภัย! ครั้งที่ %d จาก %d เขาวงกตกำลังสลับทาง
+L1_SAY_ALARM_FINAL,Third alarm. They found you.,เตือนภัยครั้งที่สาม พวกมันเจอคุณแล้ว
+L1_OBJ_STONES,Whisper stones %d/%d   ·   alarms left %d,หินกระซิบ %d/%d   ·   เหลือโอกาส %d ครั้ง
+L1_OBJ_EXIT,Reach the exit,ไปที่ทางออก
+L3_RULES_TITLE,VERTICAL ABYSS   ♠ 5,เหวดิ่ง   ♠ 5
+L3_RULES_BODY,"Climb 40 metres to the roof in 10 minutes. The acid below never stops rising.\n\n• [Space] jump, [Shift] sprint. Run at a wall in mid-air to wall-run along it.\n• Blue panels are safe to climb. Orange ones tear out 3 seconds after you grab them.\n• Hanging on drains stamina — rest on the ledges.\n• Jump into a bar to swing. [Space] releases: time it for distance.\n• 03:00 the lower scaffolding drops. 07:00 the main route falls away.","ปีนขึ้นไป 40 เมตรถึงดาดฟ้าใน 10 นาที กรดข้างล่างสูงขึ้นเรื่อย ๆ ไม่มีหยุด\n\n• [Space] กระโดด [Shift] วิ่ง พุ่งเข้าหากำแพงกลางอากาศเพื่อวิ่งบนกำแพง\n• แผงสีน้ำเงินปีนได้ปลอดภัย สีส้มจะหลุดหลังจับได้ 3 วินาที\n• การห้อยตัวกินพลัง แวะพักบนชานพัก\n• กระโดดเกาะราวเพื่อโหน [Space] เพื่อปล่อย จับจังหวะให้ดีเพื่อไปได้ไกล\n• นาทีที่ 3 นั่งร้านด้านล่างจะถล่ม นาทีที่ 7 เส้นทางหลักจะหลุด"
+L3_PA_INTRO,Game: Vertical Abyss. Difficulty: spades five.,เกม เหวดิ่ง ความยาก โพดำ ห้า
+L3_PA_START,The acid is already rising. Game start.,กรดเริ่มสูงขึ้นแล้ว เริ่มเกม
+L3_PA_SCAFFOLD,Lower scaffolding released.,ปลดนั่งร้านด้านล่างแล้ว
+L3_PA_HOLDS,Primary holds released.,ปลดจุดยึดหลักแล้ว
+L3_OBJ_CLIMB,Reach the roof,ปีนขึ้นไปให้ถึงดาดฟ้า
+L3_SAY_START,Up. Only up.,ขึ้นไป ทางเดียวคือขึ้นไป
+L3_SAY_SCAFFOLD,The scaffolding is gone. No way back down.,นั่งร้านหายไปแล้ว ไม่มีทางลง
+L3_SAY_HOLDS,The holds are falling! Find another way!,จุดยึดกำลังหลุด! หาทางอื่น!
+L3_SAY_ACID_CLOSE,The acid is right below me...,กรดอยู่ใต้เท้าแล้ว...
+L3_SAY_ACID_DEATH,It burns—,มันไหม้—
+L3_SAY_TIME_UP,The scaffolding crumbles into the acid.,นั่งร้านพังลงไปในกรด
+PROMPT_SEND_SIGNAL,Send signal,ส่งสัญญาณ
+PROMPT_PUSH_CRATE,Push the crate onto the plate,ดันลังไปบนแป้นกด
+L4_RULES_TITLE,THE PRESSURE VALVE   ♣ 9,วาล์วแรงดัน   ♣ 9
+L4_RULES_BODY,"You have the gas diagram. Your partner has the valves. Neither of you has both.\n\n• Read the diagram on the wall: each symbol changes the pressure.\n• Press a key on the console [E] to send that symbol through the glass.\n• Your partner turns whatever valve you send. Hit the target pressure 3 times.\n• 03:00 the gas leaks and the pressure starts drifting up.\n• 06:30 the radio dies — only the symbols are left.\n• Wrong pressure costs 15 seconds. You have 9 minutes.","คุณมีแผนผังแก๊ส ส่วนเพื่อนของคุณมีวาล์ว ไม่มีใครมีครบทั้งสองอย่าง\n\n• อ่านแผนผังบนกำแพง แต่ละสัญลักษณ์เปลี่ยนแรงดันไม่เท่ากัน\n• กดปุ่มบนแผงควบคุม [E] เพื่อส่งสัญลักษณ์นั้นผ่านกระจกไป\n• เพื่อนจะหมุนวาล์วตามที่คุณส่ง ทำแรงดันให้ตรงเป้าหมาย 3 ครั้ง\n• นาทีที่ 3 แก๊สรั่วและแรงดันจะไต่ขึ้นเอง\n• นาทีที่ 6 ครึ่ง วิทยุเสีย เหลือแค่สัญลักษณ์\n• แรงดันผิดเสียเวลา 15 วินาที คุณมีเวลา 9 นาที"
+L4_PA_INTRO,"Game: The Pressure Valve. Difficulty: clubs nine.",เกม วาล์วแรงดัน ความยาก ดอกจิก เก้า
+L4_PA_START,Two rooms. One diagram. Game start.,สองห้อง แผนผังเดียว เริ่มเกม
+L4_PA_LEAK,Warning. Gas leak detected.,คำเตือน ตรวจพบแก๊สรั่ว
+L4_PA_COMMS,Communication error. Text channel lost.,การสื่อสารขัดข้อง ช่องข้อความใช้ไม่ได้
+L4_PA_FINAL,Final valve. Both switches must be held. The exit opens for the room holding the switch last.,วาล์วสุดท้าย ต้องกดสวิตช์ทั้งสองฝั่งพร้อมกัน ประตูจะเปิดให้ห้องที่กดสวิตช์ค้างไว้เป็นคนสุดท้าย
+L4_PA_BOTH_FREE,Both switches held. Both doors open.,สวิตช์ถูกกดค้างทั้งสองฝั่ง ประตูเปิดทั้งสองบาน
+L4_OBJ_ROUND,Round %d/%d — bring the pressure to %d,รอบที่ %d/%d — ปรับแรงดันให้ได้ %d
+L4_OBJ_FINAL,Both plates must be held at once,ต้องกดแป้นทั้งสองฝั่งพร้อมกัน
+L4_OBJ_LEAVE,Leave through the door,ออกไปทางประตู
+L4_SAY_ROUND,Target pressure %d. Read the diagram.,แรงดันเป้าหมาย %d อ่านแผนผัง
+L4_SAY_SENT,Sent: %s,ส่งแล้ว: %s
+L4_SAY_STABLE,Pressure stable.,แรงดันนิ่งแล้ว
+L4_SAY_OVERPRESSURE,Pressure out of range! Gas is venting!,แรงดันเกินพิกัด! แก๊สกำลังพุ่งออกมา!
+L4_SAY_DRIFT,The leak is pushing the pressure up...,แก๊สที่รั่วดันแรงดันขึ้นเรื่อย ๆ...
+L4_SAY_LEAK,Gas. I can barely see the diagram.,แก๊ส... แทบมองไม่เห็นแผนผังแล้ว
+L4_SAY_COMMS,The radio is dead. Only symbols now.,วิทยุเงียบแล้ว เหลือแค่สัญลักษณ์
+L4_SAY_REFUSED,"They shake their head. They don't trust the order.",เขาส่ายหัว เขาไม่เชื่อคำสั่งนี้
+L4_SAY_NOT_YET,That key does nothing yet.,ปุ่มนี้ยังใช้ไม่ได้ตอนนี้
+L4_SAY_VALVES_DONE,The valves are finished. Deal with the switches.,วาล์วเสร็จหมดแล้ว จัดการสวิตช์ต่อ
+L4_SAY_FINAL,"Both switches, at once. If one of us holds it down, that one stays behind.",ต้องกดสวิตช์พร้อมกันทั้งสองฝั่ง ถ้าใครเป็นคนกดค้าง คนนั้นต้องอยู่ต่อ
+L4_SAY_ORDER_HOLD,"You signal: hold it down. They walk onto the plate and look at you.",คุณส่งสัญญาณให้กดค้าง เขาเดินไปยืนบนแป้นแล้วมองมาที่คุณ
+L4_SAY_ORDER_PUSH,"You signal: push. They put their shoulder into the crate.",คุณส่งสัญญาณให้ดัน เขาเอาไหล่ดันลังไป
+L4_SAY_CRATE_PUSHED,The crate holds the plate down. Your hands are free.,ลังกดแป้นไว้แล้ว มือคุณว่างแล้ว
+L4_SAY_BOTH_FREE,"Nobody is holding anything. We both walk out.",ไม่มีใครต้องกดค้าง เราออกไปได้ทั้งคู่
+L4_SAY_ALLY_TRAPPED,"Their door stays shut. They are still standing on the plate.",ประตูฝั่งเขาไม่เปิด เขายังยืนอยู่บนแป้น
+L4_SAY_EXPLOSION,The pressure finds the spark.,แรงดันเจอประกายไฟเข้าแล้ว

@@ -1,0 +1,77 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://Simple_Character_PSX/model/glb/simple-character-psx.glb" id="2_model"]
+[ext_resource type="Script" path="res://player/player_animator.gd" id="3_animator"]
+[ext_resource type="Script" path="res://player/player_audio.gd" id="4_audio"]
+[ext_resource type="Script" path="res://player/throw_ability.gd" id="5_throw"]
+[ext_resource type="Script" path="res://player/flashlight.gd" id="6_flashlight"]
+[ext_resource type="Script" path="res://player/climb_ability.gd" id="7_climb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+resource_local_to_scene = true
+radius = 0.3
+height = 2.0
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 0.3
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Model" parent="Visual" instance=ExtResource("2_model")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+
+[node name="CameraYaw" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="CameraPitch" type="Node3D" parent="CameraYaw"]
+
+[node name="Flashlight" type="SpotLight3D" parent="CameraYaw/CameraPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.35)
+light_color = Color(0.85, 0.9, 1, 1)
+light_energy = 4.0
+light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+spot_range = 16.0
+spot_angle = 26.0
+spot_angle_attenuation = 0.8
+script = ExtResource("6_flashlight")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraYaw/CameraPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+collision_mask = 1
+spring_length = 2.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraYaw/CameraPitch/SpringArm3D"]
+current = true
+fov = 70.0
+
+[node name="InteractRay" type="RayCast3D" parent="CameraYaw/CameraPitch/SpringArm3D/Camera3D"]
+target_position = Vector3(0, 0, -6)
+collision_mask = 9
+collide_with_areas = true
+
+[node name="HeadCheck" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, 0.8, 0)
+collision_mask = 1
+
+[node name="PlayerAnimator" type="Node" parent="."]
+script = ExtResource("3_animator")
+
+[node name="PlayerAudio" type="AudioStreamPlayer3D" parent="."]
+script = ExtResource("4_audio")
+
+[node name="ThrowAbility" type="Node" parent="."]
+script = ExtResource("5_throw")
+
+[node name="ClimbAbility" type="Node" parent="."]
+script = ExtResource("7_climb")

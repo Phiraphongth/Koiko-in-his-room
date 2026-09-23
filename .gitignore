@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Blender backup files
+*.blend1
+
+# Exported builds
+/builds/
+/export/
