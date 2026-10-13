@@ -7,6 +7,8 @@ extends Node3D
 
 const CAMERA_PAN_TIME := 26.0
 const PANEL_FADE := 0.22
+## TEMP (playtest): levels selectable even when still locked. Empty this to restore normal progression.
+const PLAYTEST_UNLOCKED: Array[StringName] = [&"level_4"]
 
 @onready var _camera: Camera3D = %BackgroundCamera
 @onready var _buttons: VBoxContainer = %Buttons
@@ -85,7 +87,7 @@ func _build_level_list() -> void:
 		button.custom_minimum_size = Vector2(340, 38)
 		button.add_theme_font_size_override("font_size", 17)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		if index < unlocked:
+		if index < unlocked or level_id in PLAYTEST_UNLOCKED:
 			Localization.set_text(button, GameManager.LEVEL_NAME_KEYS[level_id])
 			button.pressed.connect(_on_level.bind(level_id))
 		else:

@@ -8,7 +8,7 @@ signal game_state_changed(new_state: int, old_state: int)
 signal level_started(level_id: StringName)
 signal level_completed(level_id: StringName)
 signal level_failed(level_id: StringName, reason: String)
-signal ally_fate_decided(escaped_together: bool) # Level 4 -> decides the ending
+signal good_ending_earned(earned: bool) # Level 4 -> decides the ending
 signal ending_reached(is_good: bool)
 
 # --- Level timer / timeline ---
