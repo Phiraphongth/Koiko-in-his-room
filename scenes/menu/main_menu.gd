@@ -33,6 +33,7 @@ func _ready() -> void:
 	_level_button.pressed.connect(func() -> void: _show_panel(_level_select))
 	_settings_button.pressed.connect(func() -> void: _show_panel(_settings_panel))
 	_quit_button.pressed.connect(_on_quit)
+	_quit_button.visible = not SettingsManager.is_web # a browser tab cannot be quit from the game
 	_back_button.pressed.connect(_close_panels)
 	_settings_panel.closed.connect(_close_panels)
 	SettingsManager.language_changed.connect(func(_locale: String) -> void: _build_level_list())

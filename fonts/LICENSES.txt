@@ -1,0 +1,5 @@
+Fonts bundled so text renders the same on every platform (the Web export has no system-font fallback).
+
+NotoSansThai-Regular.ttf  - Noto Sans Thai, SIL Open Font License 1.1 (see OFL.txt). https://github.com/notofonts/thai
+DejaVuSans-Symbols.ttf    - Subset of DejaVu Sans (card suits, arrows, bullets, shapes). Bitstream Vera / DejaVu license
+                            (free to use, modify and redistribute; see https://dejavu-fonts.github.io/License.html).

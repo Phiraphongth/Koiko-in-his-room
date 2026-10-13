@@ -316,6 +316,7 @@ func _on_timeline_event(event_id: StringName) -> void:
 		&"gas_leak":
 			_leaking = true
 			_gas.visible = true
+			_gas_fog_fallback()
 			_fx.set_blur(1.2)
 			player.add_heartbeat_spike(20.0)
 			_announcer.announce("L4_PA_LEAK", false)
@@ -327,6 +328,21 @@ func _on_timeline_event(event_id: StringName) -> void:
 			_play_at(_repeater, &"shutter")
 			_announcer.announce("L4_PA_POWER", false)
 			EventBus.subtitle_requested.emit("L4_SAY_POWER", 4.0)
+
+
+## FogVolume needs Forward+. On the Compatibility renderer (web build) tint the
+## room's distance fog green instead, so the leak still reads on screen.
+func _gas_fog_fallback() -> void:
+	if not SettingsManager.is_compatibility_renderer():
+		return
+	var world := get_node_or_null(^"WorldEnvironment") as WorldEnvironment
+	if world == null or world.environment == null:
+		return
+	var env := world.environment
+	env.fog_enabled = true
+	var tween := create_tween().set_parallel()
+	tween.tween_property(env, ^"fog_light_color", Color(0.2, 0.34, 0.14), 5.0)
+	tween.tween_property(env, ^"fog_density", env.fog_density + 0.06, 5.0)
 
 
 # =========================================================================

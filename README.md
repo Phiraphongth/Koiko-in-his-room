@@ -54,7 +54,28 @@ tools/         สคริปต์สร้างฉากและอนิ�
   ให้คืนค่า `AudioStream` ที่โหลดจากไฟล์ใน `get_stream()`
 - **ข้อความในเกม** ใช้คีย์จาก `localization/ui.csv` ข้อความที่ตั้งจากโค้ดต้องผ่าน `Localization.set_text()`
 
+## เวอร์ชันเว็บ (itch.io)
+
+โปรเจกต์ตั้งค่าให้ใช้ renderer **Compatibility** (WebGL 2) เพราะเบราว์เซอร์รัน Forward+ ไม่ได้
+สิ่งที่เห็นใน editor จึงตรงกับที่ผู้เล่นบน itch.io เห็น
+
+- **Export:** Project → Export → `Web (itch.io)` → Export Project ไปที่ `builds/web/index.html`
+  แล้ว zip ไฟล์ทั้งหมดในโฟลเดอร์นั้น (ให้ `index.html` อยู่ชั้นบนสุดของ zip)
+- **ตั้งค่าบน itch.io:** Kind of project = HTML · ติ๊ก "This file will be played in the browser"
+  · Viewport 1280 × 720 · เปิด "Fullscreen button" · ไม่ต้องเปิด SharedArrayBuffer (build ไม่ใช้ threads)
+- **ความละเอียด:** ขนาดฐาน UI = 1280 × 720 (stretch `canvas_items` / `expand`)
+  บนเว็บ canvas ปรับตามหน้าเว็บอัตโนมัติ ส่วน "ความละเอียดภาพ 3D" ในเมนูตั้งค่า (50–100%, เว็บเริ่มที่ 75%)
+  ลดความละเอียดเฉพาะฉาก 3D เพื่อให้ลื่น UI ยังคมเหมือนเดิม
+- **เอฟเฟกต์ที่ Compatibility ไม่มี:** volumetric fog, FogVolume, SSAO, SSR
+  `SettingsManager._adapt_environment()` แทน volumetric fog ด้วย distance fog ให้อัตโนมัติ
+  และด่าน 4 ใช้ fog สีเขียวแทนแก๊ส ถ้าสลับกลับไปใช้ Forward+ (เช่นทำ build Windows) เอฟเฟกต์เดิมกลับมาเอง
+- **ฟอนต์:** `fonts/game_font.tres` (Noto Sans Thai + สัญลักษณ์ไพ่จาก DejaVu) เพราะบนเว็บไม่มีฟอนต์ระบบให้ยืม
+  ถ้าเพิ่มข้อความที่มีสัญลักษณ์แปลกใหม่ ให้เช็คว่าฟอนต์มีตัวนั้น
+- **ข้อควรระวังเวลาเพิ่มโมเดล/ระบบ:** texture ไม่เกิน 1024 px, ไฟในบริเวณเดียวกันไม่เกิน 16 ดวง
+  (`limits/opengl/max_lights_per_object`), ไฟที่มีเงาให้น้อยที่สุด, อย่าใช้ฟีเจอร์ที่มีเฉพาะ Forward+
+
 ## เครดิต
 
 - โมเดลตัวละคร: Simple PSX Character โดย [JashiPSX](https://jashi-psx.itch.io)
 - เอนจิน: [Godot Engine](https://godotengine.org)
+- ฟอนต์: Noto Sans Thai (SIL OFL 1.1) และ DejaVu Sans (subset) — ดู `fonts/LICENSES.txt`
