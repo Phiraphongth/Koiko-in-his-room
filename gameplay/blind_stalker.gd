@@ -27,6 +27,8 @@ const HEAD_HEIGHT := 2.15 # skull height above the feet once it straightens up
 const RUN_STRIDE := 3.24 * 1.25
 ## LOOK_AROUND head turns, in radians off the way it was facing: left, right, back.
 const LOOK_SWEEP := [-1.1, 1.1, 0.0]
+## Seconds pressed on the spot before it counts as arrived (see _arrived).
+const STALL_TIME := 1.0
 
 @export var patrol_speed := 1.2
 @export var investigate_speed := 2.2
@@ -38,6 +40,7 @@ const LOOK_SWEEP := [-1.1, 1.1, 0.0]
 @export var threat_radius := 14.0
 @export var search_pause := 2.5
 @export var check_time := 3.5
+@export var check_reach := 2.5 ## listens at a locker door from no farther than this
 @export var look_time := 3.2 ## stands and looks around after losing a hidden player
 @export var leave_distance := 12.0 ## then walks off to a patrol point at least this far
 @export var give_up_time := 12.0 ## ignores the heartbeat from a locker it gave up on
@@ -65,6 +68,7 @@ var _step_accum := 0.0
 var _target_source: Node
 var _check_spot: Node3D
 var _check_arrived_at := -1.0
+var _stalled_for := 0.0
 var _given_up_spot: Node3D
 var _given_up_until := -100.0
 var _look_yaw := 0.0
@@ -255,6 +259,11 @@ func _check_hiding() -> void:
 		return
 	if not _arrived():
 		return
+	if _flat_distance(_agent.target_position) > check_reach:
+		# Stuck on a ledge it cannot climb, nowhere near the door: it never
+		# gets to listen, so it gives up on this locker instead of waiting forever.
+		_give_up_on_check_spot()
+		return
 	# Standing right outside the locker, listening.
 	if _check_arrived_at < 0.0:
 		_check_arrived_at = _now()
@@ -269,10 +278,14 @@ func _check_hiding() -> void:
 	if _player.hold_meter <= 0.0 and listening > 0.5:
 		_catch()
 	elif listening > check_time:
-		_given_up_spot = _check_spot
-		_given_up_until = _now() + give_up_time
-		_check_spot = null
-		_look_around()
+		_give_up_on_check_spot()
+
+
+func _give_up_on_check_spot() -> void:
+	_given_up_spot = _check_spot
+	_given_up_until = _now() + give_up_time
+	_check_spot = null
+	_look_around()
 
 
 ## It lost the player: it stops dead and turns its head left and right for a
@@ -411,7 +424,8 @@ func _move(delta: float) -> void:
 	var desired := Vector3.ZERO
 	var standing := state == State.SEARCH or state == State.LOOK_AROUND \
 		or (state == State.CHECK_HIDING and _arrived())
-	if not standing and not _agent.is_navigation_finished():
+	var pathing := not standing and not _agent.is_navigation_finished()
+	if pathing:
 		var to_next := _agent.get_next_path_position() - global_position
 		to_next.y = 0.0
 		if to_next.length() > 0.05:
@@ -425,6 +439,10 @@ func _move(delta: float) -> void:
 
 	var horizontal := Vector2(velocity.x, velocity.z)
 	var moving := horizontal.length()
+	# A path up a ledge it cannot climb (the flooded bay catwalk) leaves it
+	# pressed on the spot with the navigation never finishing.
+	if pathing:
+		_stalled_for = _stalled_for + delta if moving < 0.15 else 0.0
 	if moving > 0.2 and state != State.LOOK_AROUND: # it turns its own head there
 		rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), 1.0 - exp(-8.0 * delta))
 	# Hunched and creeping while it listens; it only straightens up to charge.
@@ -453,11 +471,18 @@ func _speed_for_state() -> float:
 
 func _go(target: Vector3, new_state: State) -> void:
 	_agent.target_position = target
+	_stalled_for = 0.0
 	_set_state(new_state)
 
 
+## Also true once it has been stuck for a moment: as close as it can get.
 func _arrived() -> bool:
-	return _agent.is_navigation_finished() or global_position.distance_to(_agent.target_position) < 1.1
+	return _agent.is_navigation_finished() or global_position.distance_to(_agent.target_position) < 1.1 \
+		or _stalled_for > STALL_TIME
+
+
+func _flat_distance(point: Vector3) -> float:
+	return Vector2(point.x - global_position.x, point.z - global_position.z).length()
 
 
 func _set_state(new_state: State) -> void:
