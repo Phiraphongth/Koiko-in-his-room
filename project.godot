@@ -40,8 +40,8 @@ theme/custom_font="res://fonts/game_font.tres"
 
 [internationalization]
 
-locale/include_text_server_data=true
 locale/translations=PackedStringArray("res://localization/ui.en.translation", "res://localization/ui.th.translation")
+locale/include_text_server_data=true
 
 [layer_names]
 
@@ -57,7 +57,7 @@ locale/translations=PackedStringArray("res://localization/ui.en.translation", "r
 
 [rendering]
 
+rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-rendering_device/driver.windows="d3d12"
 limits/opengl/max_lights_per_object=16
