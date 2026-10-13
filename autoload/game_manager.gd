@@ -26,7 +26,7 @@ const GAME_OVER_DELAY := 2.0
 
 var state: State = State.BOOT
 var current_level_id: StringName = &""
-var ally_escaped := false # set by Level 4
+var good_ending := false # set by Level 4
 ## Per-run results levels can record (e.g. who survived Level 1).
 var run_data: Dictionary = {}
 
@@ -41,7 +41,7 @@ func _ready() -> void:
 	EventBus.level_started.connect(_on_level_started)
 	EventBus.level_completed.connect(_on_level_completed)
 	EventBus.level_failed.connect(_on_level_failed)
-	EventBus.ally_fate_decided.connect(func(escaped: bool) -> void: ally_escaped = escaped)
+	EventBus.good_ending_earned.connect(func(earned: bool) -> void: good_ending = earned)
 	EventBus.player_spawned.connect(_apply_player_settings)
 	SettingsManager.settings_changed.connect(func(section: StringName, _key: StringName, _value: Variant) -> void:
 		if section == &"gameplay":
@@ -84,7 +84,7 @@ func return_to_menu() -> void:
 
 
 func start_new_game() -> void:
-	ally_escaped = false
+	good_ending = false
 	run_data.clear()
 	go_to_level(LEVEL_ORDER[0])
 
@@ -115,7 +115,7 @@ func _on_level_started(level_id: StringName) -> void:
 
 func _on_level_completed(level_id: StringName) -> void:
 	if level_id == LEVEL_ORDER.back():
-		_trigger_ending(ally_escaped)
+		_trigger_ending(good_ending)
 		return
 	var index := LEVEL_ORDER.find(level_id)
 	if index == -1:
