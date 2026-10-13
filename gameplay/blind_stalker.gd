@@ -5,6 +5,8 @@ extends CharacterBody3D
 ##  - the player's heartbeat, audible within a radius that grows with BPM
 ##    (holding your breath inside a hiding spot makes you silent)
 ## States: DORMANT -> PATROL <-> INVESTIGATE / HUNT -> SEARCH, CHECK_HIDING.
+## Losing a hidden player -> LOOK_AROUND: it stops, looks around for a moment,
+## then walks off to a far patrol point and leaves that locker alone for a while.
 ## It never sees: a silent player standing still right in front of it is safe.
 
 signal player_caught
@@ -13,7 +15,7 @@ signal player_caught
 signal kill_impact
 signal state_changed(new_state: State)
 
-enum State { DORMANT, PATROL, INVESTIGATE, HUNT, SEARCH, CHECK_HIDING, FEEDING }
+enum State { DORMANT, PATROL, INVESTIGATE, HUNT, SEARCH, CHECK_HIDING, LOOK_AROUND, FEEDING }
 
 const MODEL := preload("res://Simple_Character_PSX/model/glb/simple-character-psx.glb")
 const ANIMATIONS := preload("res://player/animations/player_animations.res")
@@ -21,6 +23,8 @@ const BODY_SCALE := Vector3(0.8, 1.25, 0.85) # too tall, too thin
 const CREEP_STRIDE := 0.9 * 1.25 # crouch_walk stride scaled by body height
 const HEAD_HEIGHT := 2.15 # skull height above the feet once it straightens up
 const RUN_STRIDE := 3.24 * 1.25
+## LOOK_AROUND head turns, in radians off the way it was facing: left, right, back.
+const LOOK_SWEEP := [-1.1, 1.1, 0.0]
 
 @export var patrol_speed := 1.2
 @export var investigate_speed := 2.2
@@ -32,6 +36,9 @@ const RUN_STRIDE := 3.24 * 1.25
 @export var threat_radius := 14.0
 @export var search_pause := 2.5
 @export var check_time := 3.5
+@export var look_time := 3.2 ## stands and looks around after losing a hidden player
+@export var leave_distance := 12.0 ## then walks off to a patrol point at least this far
+@export var give_up_time := 12.0 ## ignores the heartbeat from a locker it gave up on
 @export var screech_cooldown := 8.0
 
 var state: State = State.DORMANT
@@ -56,6 +63,10 @@ var _step_accum := 0.0
 var _target_source: Node
 var _check_spot: Node3D
 var _check_arrived_at := -1.0
+var _given_up_spot: Node3D
+var _given_up_until := -100.0
+var _look_yaw := 0.0
+var _lost_at := Vector3.ZERO
 var _current_anim: StringName = &""
 
 
@@ -140,6 +151,8 @@ func _listen_heartbeat(delta: float) -> void:
 
 ## `loud`: an actual noise (gasp, collar) rather than a heartbeat.
 func _hear_player(pos: Vector3, loud: bool) -> void:
+	if not loud and _gave_up_on_player():
+		return # it already listened at that locker and heard nothing
 	_heard_player_at = _now()
 	_target_source = null
 	if _player and _player.is_hidden and _player.current_hide_spot:
@@ -155,6 +168,12 @@ func _hear_player(pos: Vector3, loud: bool) -> void:
 	if state != State.HUNT:
 		_screech()
 	_go(pos, State.HUNT)
+
+
+## A quiet heartbeat from the locker it just gave up on is not worth a second look.
+func _gave_up_on_player() -> bool:
+	return _player != null and _player.is_hidden and _player.current_hide_spot == _given_up_spot \
+		and _now() < _given_up_until
 
 
 ## Heartbeat rises the closer it is (the player "feels" it before seeing it).
@@ -186,12 +205,17 @@ func _physics_process(delta: float) -> void:
 				_on_reached_noise()
 		State.HUNT:
 			if _arrived() and _now() - _heard_player_at > 1.0:
-				_begin_search()
+				if _player and _player.is_hidden:
+					_look_around() # the trail went cold at a hiding spot
+				else:
+					_begin_search()
 		State.SEARCH:
 			if _state_time > search_pause:
 				_continue_search()
 		State.CHECK_HIDING:
 			_check_hiding()
+		State.LOOK_AROUND:
+			_update_look_around(delta)
 	_move(delta)
 	_check_catch()
 
@@ -241,9 +265,41 @@ func _check_hiding() -> void:
 	if loud_heart and listening > 1.0:
 		_catch()
 	elif listening > check_time:
+		_given_up_spot = _check_spot
+		_given_up_until = _now() + give_up_time
 		_check_spot = null
-		_search_left = 1
-		_set_state(State.SEARCH)
+		_look_around()
+
+
+## It lost the player: it stops dead and turns its head left and right for a
+## moment, as if it could see, before giving up and walking away.
+func _look_around() -> void:
+	_lost_at = global_position
+	_look_yaw = rotation.y
+	_set_state(State.LOOK_AROUND)
+
+
+func _update_look_around(delta: float) -> void:
+	if _state_time > look_time:
+		_walk_away()
+		return
+	# A quick turn, then a still beat holding it, for each head turn.
+	var turn := mini(int(_state_time / look_time * LOOK_SWEEP.size()), LOOK_SWEEP.size() - 1)
+	rotation.y = lerp_angle(rotation.y, _look_yaw + float(LOOK_SWEEP[turn]), 1.0 - exp(-7.0 * delta))
+
+
+## Off to a patrol point well away from where it lost the player, rather than
+## circling the same lockers.
+func _walk_away() -> void:
+	var far: Array[Vector3] = []
+	for point in patrol_points:
+		if point.distance_to(_lost_at) >= leave_distance:
+			far.append(point)
+	if far.is_empty():
+		_set_state(State.PATROL)
+		_pick_patrol_point()
+	else:
+		_go(far[_rng.randi_range(0, far.size() - 1)], State.PATROL)
 
 
 func _check_catch() -> void:
@@ -349,7 +405,8 @@ func _pick_patrol_point() -> void:
 func _move(delta: float) -> void:
 	var speed := _speed_for_state() * speed_multiplier
 	var desired := Vector3.ZERO
-	var standing := state == State.SEARCH or (state == State.CHECK_HIDING and _arrived())
+	var standing := state == State.SEARCH or state == State.LOOK_AROUND \
+		or (state == State.CHECK_HIDING and _arrived())
 	if not standing and not _agent.is_navigation_finished():
 		var to_next := _agent.get_next_path_position() - global_position
 		to_next.y = 0.0
@@ -364,7 +421,7 @@ func _move(delta: float) -> void:
 
 	var horizontal := Vector2(velocity.x, velocity.z)
 	var moving := horizontal.length()
-	if moving > 0.2:
+	if moving > 0.2 and state != State.LOOK_AROUND: # it turns its own head there
 		rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), 1.0 - exp(-8.0 * delta))
 	# Hunched and creeping while it listens; it only straightens up to charge.
 	if moving > 2.8:
