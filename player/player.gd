@@ -60,6 +60,11 @@ enum State { IDLE, WALK, RUN, CROUCH, AIRBORNE, HIDDEN, CLIMB, SWING, DISABLED }
 @export var gasp_noise := 10.0
 @export var gasp_bpm_spike := 25.0
 
+@export_group("Hiding") ## while something listens right outside the hiding spot
+@export var mash_start := 0.8 ## hold meter when the check begins (0..1)
+@export var mash_gain := 0.15 ## added per [Q] tap
+@export var mash_drain := 0.6 ## lost per second, so it takes ~4 taps a second
+
 @export_group("Noise") ## values are hearing radii in meters
 @export var walk_step_length := 0.72 ## half of the animation stride
 @export var run_step_length := 1.62
@@ -96,6 +101,10 @@ var surface_noise_multiplier: float:
 		return _surface_noise_mult
 ## Where the player is hiding (HidePoint of a HideSpot), or null.
 var current_hide_spot: Node3D
+## True while an enemy listens outside the hiding spot (see begin_hide_check).
+var is_hide_checked := false
+## 0..1 during a hide check: [Q] taps fill it, it drains on its own.
+var hold_meter := 0.0
 
 @onready var _collision: CollisionShape3D = $CollisionShape3D
 @onready var _capsule: CapsuleShape3D = _collision.shape as CapsuleShape3D
@@ -160,6 +169,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed(&"crouch") and state != State.HIDDEN:
 		_toggle_crouch()
+	elif event.is_action_pressed(&"hold_breath") and is_hide_checked:
+		hold_meter = minf(hold_meter + mash_gain, 1.0)
+		EventBus.player_hold_meter_changed.emit(hold_meter)
 
 
 func _physics_process(delta: float) -> void:
@@ -339,8 +351,27 @@ func exit_hiding() -> void:
 	_camera.make_current()
 	_visual.visible = true
 	_collision.set_deferred(&"disabled", false)
+	end_hide_check()
 	_set_state(State.IDLE)
 	EventBus.player_hidden_changed.emit(false)
+
+
+## An enemy is listening right outside the hiding spot. Holding [Q] is not
+## enough any more: the breath stays in only while the player mashes it.
+func begin_hide_check() -> void:
+	if is_hide_checked or not is_hidden:
+		return
+	is_hide_checked = true
+	hold_meter = mash_start
+	EventBus.player_hide_check_changed.emit(true)
+	EventBus.player_hold_meter_changed.emit(hold_meter)
+
+
+func end_hide_check() -> void:
+	if not is_hide_checked:
+		return
+	is_hide_checked = false
+	EventBus.player_hide_check_changed.emit(false)
 
 
 func get_camera() -> Camera3D:
@@ -566,6 +597,10 @@ func _set_stamina(value: float) -> void:
 func _update_breath(delta: float) -> void:
 	var previous := breath
 	var wants_hold := state != State.DISABLED and Input.is_action_pressed(&"hold_breath")
+	if is_hide_checked:
+		hold_meter = maxf(hold_meter - mash_drain * delta, 0.0)
+		EventBus.player_hold_meter_changed.emit(hold_meter)
+		wants_hold = hold_meter > 0.0
 	if wants_hold and not _breath_recovering and breath > 0.0:
 		is_holding_breath = true
 		breath = maxf(breath - delta, 0.0)

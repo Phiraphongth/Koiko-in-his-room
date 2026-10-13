@@ -9,6 +9,8 @@ MENU_QUIT,Quit,ออกจากเกม
 MENU_BACK,Back,ย้อนกลับ
 MENU_RESUME,Resume,เล่นต่อ
 MENU_RETURN_TO_MENU,Return to Menu,กลับเมนูหลัก
+PAUSE_TITLE,PAUSED,หยุดเกมชั่วคราว
+PAUSE_HINT,Press Esc to resume,กด Esc เพื่อเล่นต่อ
 COMMON_ON,On,เปิด
 COMMON_OFF,Off,ปิด
 COMMON_YES,Yes,ใช่
@@ -90,7 +92,7 @@ HUB_PA_GAME_INFO,"Game: The Maze of Whispers. Difficulty: diamonds, and clubs.",
 HUB_PA_SOON,The game will begin shortly.,เกมกำลังจะเริ่มในไม่ช้า
 HUB_PA_GAME_START,Game start.,เริ่มเกม
 L2_RULES_TITLE,THE BLIND STALKER   ♠ ♥ 10,ผู้ล่าตาบอด   ♠ ♥ 10
-L2_RULES_BODY,"Find 3 keycards and insert them at the control panel.\nThe exit opens 30 seconds later. You have 10 minutes.\n\nIt cannot see you. It hears everything.\n• Walk, don't run. Crouch [C] to be almost silent.\n• Water splashes — every step is loud.\n• Throw bottles and alarm clocks [LMB] to lure it away.\n• Your collar beeps when your heart races. It hears that too.\n• Hide in lockers [E] and hold your breath [Q] to calm down.\n• Flashlight [F]: it is blind — light is safe.","หาคีย์การ์ด 3 ใบแล้วเสียบที่แผงควบคุม\nประตูจะเปิดหลังจากนั้น 30 วินาที คุณมีเวลา 10 นาที\n\nมันมองไม่เห็น แต่ได้ยินทุกอย่าง\n• เดิน อย่าวิ่ง กด [C] ย่อตัวเพื่อให้เงียบที่สุด\n• น้ำกระเซ็น — ทุกก้าวในน้ำดังมาก\n• ขว้างขวดและนาฬิกาปลุก [คลิกซ้าย] เพื่อล่อมันไปที่อื่น\n• ปลอกคอจะร้องเมื่อหัวใจเต้นแรง มันได้ยินด้วย\n• ซ่อนในตู้ [E] แล้วกลั้นหายใจ [Q] เพื่อสงบสติ\n• ไฟฉาย [F] มันตาบอด แสงจึงปลอดภัย"
+L2_RULES_BODY,"Find 3 keycards and insert them at the control panel.\nThe exit opens 30 seconds later. You have 10 minutes.\n\nIt cannot see you. It hears everything.\n• Walk, don't run. Crouch [C] to be almost silent.\n• Water splashes — every step is loud.\n• Throw bottles and alarm clocks [LMB] to lure it away.\n• Your collar beeps when your heart races. It hears that too.\n• Hide in lockers [E] and hold your breath [Q] to calm down.\n• If it listens at your locker, mash [Q] — stop and it drags you out.\n• Flashlight [F]: it is blind — light is safe.","หาคีย์การ์ด 3 ใบแล้วเสียบที่แผงควบคุม\nประตูจะเปิดหลังจากนั้น 30 วินาที คุณมีเวลา 10 นาที\n\nมันมองไม่เห็น แต่ได้ยินทุกอย่าง\n• เดิน อย่าวิ่ง กด [C] ย่อตัวเพื่อให้เงียบที่สุด\n• น้ำกระเซ็น — ทุกก้าวในน้ำดังมาก\n• ขว้างขวดและนาฬิกาปลุก [คลิกซ้าย] เพื่อล่อมันไปที่อื่น\n• ปลอกคอจะร้องเมื่อหัวใจเต้นแรง มันได้ยินด้วย\n• ซ่อนในตู้ [E] แล้วกลั้นหายใจ [Q] เพื่อสงบสติ\n• ถ้ามันมาฟังที่ตู้ ให้กด [Q] รัว ๆ — หยุดเมื่อไหร่มันจะลากคุณออกมา\n• ไฟฉาย [F] มันตาบอด แสงจึงปลอดภัย"
 L2_PA_INTRO,"Game: The Blind Stalker. Difficulty: spades... hearts, ten.",เกม ผู้ล่าตาบอด ความยาก โพดำ... โพแดง สิบ
 L2_PA_START,It cannot see you. Game start.,มันมองไม่เห็นคุณ เริ่มเกม
 L2_PA_FIVE_MIN,Five minutes remain.,เหลือเวลาห้านาที
@@ -111,11 +113,13 @@ L2_DEATH_SUIT,♠ ♥ 10,♠ ♥ 10
 L2_DEATH_TITLE,IT HEARD YOU,มันได้ยินคุณ
 L2_DEATH_LINE,PLAYER ELIMINATED,ผู้เล่นถูกคัดออก
 L2_DEATH_WHISPER,Your heart was too loud.,เสียงหัวใจของคุณดังเกินไป
+L2_DEATH_WHISPER_HIDING,You let your breath out.,คุณเผลอปล่อยลมหายใจออกมา
 ENDING_BAD_BODY,"Your visa has expired.\nSomewhere, a new player wakes up in a quiet room.",วีซ่าของคุณหมดอายุแล้ว\nที่ไหนสักแห่ง ผู้เล่นคนใหม่กำลังตื่นขึ้นในห้องเงียบ ๆ
 ENDING_GOOD_BODY,"You walked out together.\nThe city is still empty — but you are not alone.",พวกคุณเดินออกมาด้วยกัน\nเมืองยังคงว่างเปล่า — แต่คุณไม่ได้อยู่คนเดียว
 ITEM_BOTTLE,Bottle,ขวด
 ITEM_CLOCK,Alarm clock,นาฬิกาปลุก
 HUD_HIDING_HINT,[Q] Hold breath      [E] Leave,[Q] กลั้นหายใจ      [E] ออก
+HUD_MASH_BREATH,MASH [Q] — HOLD YOUR BREATH!,กด [Q] รัว ๆ — กลั้นหายใจไว้!
 HUD_MESSAGE_CLOSE,[E]  Close,[E]  ปิด
 PROMPT_TOUCH_STONE,Touch the stone,แตะหิน
 L1_RULES_TITLE,THE MAZE OF WHISPERS   ♦ ♣,เขาวงกตกระซิบ   ♦ ♣

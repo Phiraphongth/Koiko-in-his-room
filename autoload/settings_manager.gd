@@ -22,6 +22,11 @@ const CONFIG_PATH := "user://settings.cfg"
 const VOLUME_BUSES: Dictionary[StringName, String] = {
 	&"master_volume": "Master", &"bgm_volume": "BGM", &"sfx_volume": "SFX"}
 const MIN_VOLUME_DB := -40.0
+## Trim applied on top of each slider, so "100%" is a comfortable level rather
+## than the loudest the mix can go. Lives here, not in the bus layout, because
+## the sliders overwrite the layout's own volumes at startup.
+const BUS_HEADROOM_DB: Dictionary[String, float] = {
+	"Master": -5.0, "BGM": -3.0, "SFX": -3.0}
 ## Locale -> name shown in the language switcher.
 const LANGUAGES: Dictionary[String, String] = {"en": "English", "th": "ไทย"}
 const RESOLUTIONS: Array[Vector2i] = [
@@ -53,7 +58,7 @@ const SHADOW_PRESETS: Dictionary[int, Dictionary] = {
 }
 
 const DEFAULTS: Dictionary[StringName, Dictionary] = {
-	&"audio": {&"master_volume": 0.9, &"bgm_volume": 0.8, &"sfx_volume": 1.0},
+	&"audio": {&"master_volume": 0.8, &"bgm_volume": 0.75, &"sfx_volume": 0.8},
 	&"graphics": {&"resolution": 2, &"render_scale": RENDER_SCALE_DEFAULT_DESKTOP,
 		&"window_mode": WindowMode.WINDOWED, &"vsync": true, &"shadow_quality": ShadowQuality.MEDIUM},
 	&"language": {&"locale": "en"},
@@ -156,7 +161,8 @@ func _apply_volume(key: StringName, value: Variant) -> void:
 		return
 	var linear := clampf(value, 0.0, 1.0)
 	AudioServer.set_bus_mute(bus, is_zero_approx(linear))
-	AudioServer.set_bus_volume_db(bus, maxf(linear_to_db(linear), MIN_VOLUME_DB))
+	var headroom: float = BUS_HEADROOM_DB.get(VOLUME_BUSES[key], 0.0)
+	AudioServer.set_bus_volume_db(bus, maxf(linear_to_db(linear) + headroom, MIN_VOLUME_DB))
 
 
 # =========================================================================

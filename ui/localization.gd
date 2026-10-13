@@ -23,6 +23,18 @@ static func t(key: StringName, args: Array = []) -> String:
 	return text % args if not args.is_empty() else text
 
 
+## Same as t(), but in one fixed language whatever the player has selected.
+## The announcer uses this so the PA voice always speaks English while the
+## banner on screen follows the player's language.
+static func t_in(locale: String, key: StringName, args: Array = []) -> String:
+	var translation := TranslationServer.get_translation_object(locale)
+	var text := String(translation.get_message(key)) if translation else ""
+	if text.is_empty():
+		return t(key, args) # not a key, or that language has no entry for it
+	text = text.replace("\\n", "\n")
+	return text % args if not args.is_empty() else text
+
+
 ## True when this string is a known translation key (used by the HUD to decide
 ## whether incoming text should be bound for live language switching).
 static func is_key(text: String) -> bool:

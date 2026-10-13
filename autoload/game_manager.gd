@@ -32,6 +32,7 @@ var run_data: Dictionary = {}
 
 var _state_before_pause: State = State.PLAYING
 var _current_player: Player
+var _pause_menu: PauseMenu
 
 
 func _ready() -> void:
@@ -53,12 +54,30 @@ func _unhandled_input(event: InputEvent) -> void:
 	if state == State.PLAYING or state == State.UI:
 		_state_before_pause = state
 		set_state(State.PAUSED)
-	elif state == State.PAUSED:
-		set_state(_state_before_pause)
+		_open_pause_menu()
+	elif state == State.PAUSED and _pause_menu == null:
+		set_state(_state_before_pause) # no menu (shouldn't happen): don't trap the player
 	get_viewport().set_input_as_handled()
 
 
-## Back to the title screen (from an ending, or a pause menu later).
+## Closes the pause menu and hands control back to the level.
+func resume() -> void:
+	if state != State.PAUSED:
+		return
+	if _pause_menu:
+		_pause_menu.close()
+	set_state(_state_before_pause)
+
+
+## The menu lives on the root, so one instance survives every level change.
+func _open_pause_menu() -> void:
+	if _pause_menu == null:
+		_pause_menu = PauseMenu.new()
+		get_tree().root.add_child(_pause_menu)
+	_pause_menu.open()
+
+
+## Back to the title screen (from an ending or the pause menu).
 func return_to_menu() -> void:
 	set_state(State.MENU)
 	LevelLoader.change_level(MAIN_MENU)
