@@ -22,6 +22,7 @@ var _pulse := 0.0
 var _beat_timer := 0.0
 var _blink := 0.0
 var _blur := 0.0
+var _locked := false
 
 
 func _ready() -> void:
@@ -35,6 +36,13 @@ func _ready() -> void:
 	add_child(rect)
 	_material.set_shader_parameter(&"grain", base_grain)
 	_material.set_shader_parameter(&"desaturation", desaturation)
+	# Every parameter needs a value before a tween can read it back.
+	_material.set_shader_parameter(&"vignette", base_vignette)
+	_material.set_shader_parameter(&"aberration", base_aberration)
+	_material.set_shader_parameter(&"pulse", 0.0)
+	_material.set_shader_parameter(&"blink", 0.0)
+	_material.set_shader_parameter(&"blur", 0.0)
+	_material.set_shader_parameter(&"tint", Color.WHITE)
 
 	_heart_player = AudioStreamPlayer.new()
 	_heart_player.bus = "SFX"
@@ -44,6 +52,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if _locked: # a cutscene owns the overlay
+		return
 	_beat_timer -= delta
 	if _beat_timer <= 0.0:
 		_beat_timer = 60.0 / maxf(_bpm, 40.0)
@@ -52,6 +62,35 @@ func _process(delta: float) -> void:
 	_material.set_shader_parameter(&"pulse", _pulse)
 	_material.set_shader_parameter(&"vignette", base_vignette + _heart * 0.35)
 	_material.set_shader_parameter(&"aberration", base_aberration + _heart * 0.004)
+
+
+## Hands the overlay to a cutscene: the heartbeat stops driving the effects
+## (and stops beating audibly), so set_effect / effect_to own them instead.
+func lock_effects(locked: bool) -> void:
+	_locked = locked
+	heartbeat_audio = not locked
+
+
+func set_effect(param: StringName, value: float) -> void:
+	_material.set_shader_parameter(param, value)
+
+
+## Tweens one shader parameter (vignette, grain, aberration, pulse, blink, blur).
+func effect_to(param: StringName, value: float, duration: float) -> Tween:
+	var from: float = _material.get_shader_parameter(param)
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)
+	tween.tween_method(func(v: float) -> void:
+		_material.set_shader_parameter(param, v), from, value, duration)
+	return tween
+
+
+## Drains the colour out of the world (a red wash as the player dies).
+func tint_to(color: Color, duration: float) -> Tween:
+	var from: Color = _material.get_shader_parameter(&"tint")
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)
+	tween.tween_method(func(c: Color) -> void:
+		_material.set_shader_parameter(&"tint", c), from, color, duration)
+	return tween
 
 
 func set_blink(value: float) -> void:

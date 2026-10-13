@@ -53,6 +53,8 @@ static func _generate(id: StringName) -> AudioStreamWAV:
 		&"ring": return _ring()
 		&"growl": return _growl()
 		&"screech": return _screech()
+		&"crunch": return _crunch()
+		&"flatline": return _flatline()
 		&"thud": return _thud()
 		&"collar": return _collar()
 		&"keycard": return _keycard()
@@ -459,6 +461,36 @@ static func _screech() -> AudioStreamWAV:
 		var env := smoothstep(0.0, 0.08, t) * (1.0 - smoothstep(length - 0.5, length, t))
 		s[i] = (tanh(4.0 * sin(phase)) * 0.7 + rng.randf_range(-1.0, 1.0) * 0.3) * env
 	return _to_wav(s, false, 0.95)
+
+
+## The kill itself: a heavy wet impact with bone cracking inside it.
+static func _crunch() -> AudioStreamWAV:
+	var cracks: PackedFloat32Array = [0.00, 0.09, 0.17, 0.31, 0.46, 0.63]
+	var s := _samples(1.3)
+	var rng := _rng(83)
+	var lp := 0.0
+	for i in s.size():
+		var t := float(i) / RATE
+		lp += (rng.randf_range(-1.0, 1.0) - lp) * 0.07
+		var impact := sin(TAU * (85.0 - 45.0 * t) * t) * exp(-t * 6.0)
+		var wet := lp * 1.6 * exp(-t * 3.0)
+		var snap := 0.0
+		for crack in cracks:
+			if t >= crack:
+				snap += rng.randf_range(-1.0, 1.0) * exp(-(t - crack) * 85.0)
+		s[i] = tanh((impact + wet + snap * 0.8) * 1.4)
+	return _to_wav(s, false, 1.0)
+
+
+## Heart monitor flatline: the tone that keeps going after the beats stop.
+static func _flatline() -> AudioStreamWAV:
+	var length := 2.0
+	var n := int(length * RATE)
+	var s := _samples(length + 0.25)
+	for i in s.size():
+		var t := float(i) / RATE
+		s[i] = (sin(TAU * 988.0 * t) + sin(TAU * 1976.0 * t) * 0.15) * (0.92 + 0.08 * sin(TAU * 5.0 * t))
+	return _to_wav(_loop(s, n, int(0.25 * RATE)), true, 0.4)
 
 
 ## Heavy bare footfall of the Stalker.

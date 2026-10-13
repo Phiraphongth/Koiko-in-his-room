@@ -8,6 +8,9 @@ extends CharacterBody3D
 ## It never sees: a silent player standing still right in front of it is safe.
 
 signal player_caught
+## Fired on the lunge of the death cutscene, so the level can slam the screen
+## effects on the exact frame the skull reaches the lens.
+signal kill_impact
 signal state_changed(new_state: State)
 
 enum State { DORMANT, PATROL, INVESTIGATE, HUNT, SEARCH, CHECK_HIDING, FEEDING }
@@ -16,6 +19,7 @@ const MODEL := preload("res://Simple_Character_PSX/model/glb/simple-character-ps
 const ANIMATIONS := preload("res://player/animations/player_animations.res")
 const BODY_SCALE := Vector3(0.8, 1.25, 0.85) # too tall, too thin
 const CREEP_STRIDE := 0.9 * 1.25 # crouch_walk stride scaled by body height
+const HEAD_HEIGHT := 2.15 # skull height above the feet once it straightens up
 const RUN_STRIDE := 3.24 * 1.25
 
 @export var patrol_speed := 1.2
@@ -37,6 +41,8 @@ var patrol_points: Array[Vector3] = []
 var _player: Player
 var _agent: NavigationAgent3D
 var _anim: AnimationPlayer
+var _skull: MeshInstance3D
+var _mouth: MeshInstance3D
 var _growl: AudioStreamPlayer3D
 var _voice: AudioStreamPlayer3D
 var _steps: AudioStreamPlayer3D
@@ -191,7 +197,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_reached_noise() -> void:
-	if _target_source is Throwable and is_instance_valid(_target_source) and (_target_source as Throwable).is_ringing:
+	# A thrown bottle frees itself the moment it shatters, so the instance has
+	# to be checked before its type — `is` on a freed object is an error.
+	if is_instance_valid(_target_source) and _target_source is Throwable \
+			and (_target_source as Throwable).is_ringing:
 		(_target_source as Throwable).silence() # smashes the ringing clock
 		_steps.stream = ProceduralAudio.get_stream(&"bang")
 		_steps.play()
@@ -248,9 +257,77 @@ func _catch() -> void:
 	_set_state(State.FEEDING)
 	velocity = Vector3.ZERO
 	_face(_player.global_position)
+	player_caught.emit() # the level directs the death cutscene from here
+
+
+## Death cutscene. The level disables the player and awaits this: it steps into
+## the camera, rises out of its crouch, opens the mouth, then lunges into the
+## lens. Returns once the skull has covered the screen.
+func perform_kill(target: Player) -> void:
+	_set_state(State.FEEDING)
+	velocity = Vector3.ZERO
+	_steps.stop()
+	_growl.stop()
+	var forward := target.get_facing_direction()
+	# A light of its own, so the face reads even with the player's torch off.
+	var glow := OmniLight3D.new()
+	glow.light_color = Color(0.72, 0.76, 0.86)
+	glow.light_energy = 0.0
+	glow.omni_range = 2.8
+	glow.shadow_enabled = false
+	glow.position = Vector3(0.0, 1.4, 0.55) # under the chin, pointing up
+	add_child(glow)
+	create_tween().tween_property(glow, "light_energy", 2.4, 0.9)
+
+	# 1. It is suddenly right there, and it stands up to its full height.
+	var stand := target.global_position + forward * 1.45
+	stand.y = global_position.y
+	var approach := create_tween().set_parallel()
+	approach.tween_property(self, "global_position", stand, 0.3) \
+		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	approach.tween_property(self, "rotation:y", _yaw_towards(target.global_position), 0.3)
+	_play_anim(&"idle_tense", 0.4)
 	_screech(true)
-	_play_anim(&"run", 1.6)
-	player_caught.emit()
+	# Aim where the skull will be: this thing is a head taller than the player.
+	target.cinematic_look_at(stand + Vector3.UP * HEAD_HEIGHT, 0.35)
+	await approach.finished
+
+	# 2. It leans down into the lens and the mouth comes open.
+	_growl.play()
+	var lean := create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
+	var close := target.global_position + forward * 0.85
+	close.y = global_position.y
+	target.cinematic_look_at(close + Vector3.UP * HEAD_HEIGHT, 1.0)
+	lean.tween_property(self, "global_position", close, 1.15)
+	lean.tween_property(_skull, "position:z", _skull.position.z + 1.6, 1.15)
+	lean.tween_property(_mouth, "position:z", _mouth.position.z + 1.6, 1.15)
+	lean.tween_property(_mouth, "position:y", _mouth.position.y - 0.25, 0.95)
+	lean.tween_property(_mouth, "scale:y", 6.0, 0.95)
+	await lean.finished
+
+	# 3. The bite.
+	kill_impact.emit()
+	_steps.stream = ProceduralAudio.get_stream(&"crunch")
+	_steps.volume_db = 6.0
+	_steps.play()
+	# The head drops to the lens (3.5 skeleton units is about 42 cm) and swells.
+	var drop := 3.5
+	var bitten := target.global_position + forward * 0.12
+	bitten.y = global_position.y
+	target.cinematic_look_at(bitten + Vector3.UP * (HEAD_HEIGHT - 0.42), 0.18)
+	var bite := create_tween().set_parallel().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	bite.tween_property(self, "global_position", bitten, 0.22)
+	bite.tween_property(_skull, "scale", _skull.scale * 2.2, 0.22) # the face fills the lens
+	bite.tween_property(_skull, "position:y", _skull.position.y - drop, 0.22)
+	bite.tween_property(_mouth, "position:y", _mouth.position.y - drop - 0.3, 0.22)
+	bite.tween_property(_mouth, "scale:y", 11.0, 0.22)
+	await bite.finished
+
+
+## Shortest-path yaw that faces `point`, for tweening rotation.y.
+func _yaw_towards(point: Vector3) -> float:
+	var to := point - global_position
+	return rotation.y + wrapf(atan2(to.x, to.z) - rotation.y, -PI, PI)
 
 
 func _pick_patrol_point() -> void:
@@ -407,6 +484,8 @@ func _build_body() -> void:
 	mouth.material_override = dark
 	mouth.position = Vector3(0, 0.2, 1.15)
 	attach.add_child(mouth)
+	_skull = skull
+	_mouth = mouth
 	_anim = AnimationPlayer.new()
 	model.add_child(_anim)
 	_anim.add_animation_library(&"", ANIMATIONS)

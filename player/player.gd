@@ -125,6 +125,10 @@ var _focused: Interactable
 var _last_prompt := ""
 var _pre_hide_position := Vector3.ZERO
 var _is_dead := false
+var _cinematic := false
+var _shake_left := 0.0
+var _shake_total := 0.0
+var _shake_strength := 0.0
 var _wall_run_left := 0.0
 var _wall_normal := Vector3.ZERO
 
@@ -194,6 +198,53 @@ func set_model_visible(value: bool) -> void:
 func set_facing(yaw: float) -> void:
 	_camera_yaw.rotation.y = yaw
 	_visual.rotation.y = yaw
+
+
+## Flat direction the camera is looking (cutscene choreography).
+func get_facing_direction() -> Vector3:
+	var yaw := _camera_yaw.global_rotation.y
+	return Vector3(-sin(yaw), 0.0, -cos(yaw))
+
+
+# =========================================================================
+# Cutscene camera — death sequences and intros drive these directly
+# =========================================================================
+
+## While enabled, the movement code stops correcting the camera height and FOV,
+## so tweens own the camera completely.
+func cinematic_camera(enabled: bool) -> void:
+	_cinematic = enabled
+
+
+## Turns the head towards a point in the world.
+func cinematic_look_at(point: Vector3, duration := 0.5) -> void:
+	var to := point - _camera_yaw.global_position
+	var flat := Vector2(to.x, to.z).length()
+	if flat < 0.01:
+		return
+	var yaw := _camera_yaw.rotation.y + wrapf(atan2(-to.x, -to.z) - _camera_yaw.rotation.y, -PI, PI)
+	var pitch := clampf(atan2(to.y, flat), -1.2, 1.2)
+	var tween := create_tween().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_camera_yaw, "rotation:y", yaw, duration)
+	tween.tween_property(_camera_pitch, "rotation:x", pitch, duration)
+
+
+## Pulls the third-person camera in (0 = first person) and changes the FOV.
+## The over-the-shoulder offset is centred as well, so what the camera looks
+## at ends up in the middle of the frame.
+func cinematic_zoom(distance: float, fov: float, duration := 0.5) -> void:
+	var arm := $CameraYaw/CameraPitch/SpringArm3D as SpringArm3D
+	var tween := create_tween().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(arm, "spring_length", distance, duration)
+	tween.tween_property(arm, "position:x", 0.0, duration)
+	tween.tween_property(_camera, "fov", fov, duration)
+
+
+## Handheld shake that decays over `duration` seconds.
+func cinematic_shake(strength: float, duration: float) -> void:
+	_shake_strength = strength
+	_shake_total = maxf(duration, 0.05)
+	_shake_left = _shake_total
 
 
 func kill(reason: String) -> void:
@@ -469,6 +520,16 @@ func _rotate_camera(relative: Vector2) -> void:
 
 
 func _update_camera_fx(delta: float) -> void:
+	if _shake_left > 0.0:
+		_shake_left -= delta
+		var amount := _shake_strength * (_shake_left / _shake_total)
+		_camera.h_offset = randf_range(-amount, amount)
+		_camera.v_offset = randf_range(-amount, amount)
+	elif _camera.h_offset != 0.0 or _camera.v_offset != 0.0:
+		_camera.h_offset = move_toward(_camera.h_offset, 0.0, delta * 0.5)
+		_camera.v_offset = move_toward(_camera.v_offset, 0.0, delta * 0.5)
+	if _cinematic:
+		return
 	var target := _stand_camera_height - ((stand_height - crouch_height) if is_crouching else 0.0) - _camera_dip
 	_camera_yaw.position.y = lerpf(_camera_yaw.position.y, target, 1.0 - exp(-12.0 * delta))
 	_camera_dip = move_toward(_camera_dip, 0.0, 0.8 * delta)

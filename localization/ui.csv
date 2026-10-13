@@ -105,6 +105,11 @@ L2_OBJ_FIND,Find the keycards (%d/%d),หาคีย์การ์ด (%d/%d)
 L2_OBJ_INSERT,Insert the keycards at the control panel,เสียบคีย์การ์ดที่แผงควบคุม
 L2_OBJ_SURVIVE,SURVIVE — the exit opens in %d,เอาตัวรอด — ประตูเปิดในอีก %d
 L2_OBJ_RUN,RUN TO THE EXIT!,วิ่งไปที่ทางออก!
+L2_PA_ELIMINATED,Player eliminated. Game over.,ผู้เล่นถูกคัดออก จบเกม
+L2_DEATH_SUIT,♠ ♥ 10,♠ ♥ 10
+L2_DEATH_TITLE,IT HEARD YOU,มันได้ยินคุณ
+L2_DEATH_LINE,PLAYER ELIMINATED,ผู้เล่นถูกคัดออก
+L2_DEATH_WHISPER,Your heart was too loud.,เสียงหัวใจของคุณดังเกินไป
 ENDING_BAD_BODY,"Your visa has expired.\nSomewhere, a new player wakes up in a quiet room.",วีซ่าของคุณหมดอายุแล้ว\nที่ไหนสักแห่ง ผู้เล่นคนใหม่กำลังตื่นขึ้นในห้องเงียบ ๆ
 ENDING_GOOD_BODY,"You walked out together.\nThe city is still empty — but you are not alone.",พวกคุณเดินออกมาด้วยกัน\nเมืองยังคงว่างเปล่า — แต่คุณไม่ได้อยู่คนเดียว
 ITEM_BOTTLE,Bottle,ขวด

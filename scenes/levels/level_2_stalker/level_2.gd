@@ -30,11 +30,13 @@ var _found := 0
 var _inserted := 0
 var _collar_on := false
 var _caught := false
+var _heart_stopped := false
 
 
 func _ready() -> void:
 	ProceduralAudio.preload_sounds([&"growl", &"screech", &"thud", &"glass", &"ring", &"collar",
-		&"keycard", &"clang", &"alarm", &"splash_0", &"splash_1", &"splash_2"])
+		&"keycard", &"clang", &"alarm", &"splash_0", &"splash_1", &"splash_2",
+		&"crunch", &"flatline", &"gasp"])
 	super()
 	_bake_navigation()
 	for marker in _patrol_points.get_children():
@@ -182,12 +184,83 @@ func _on_caught() -> void:
 		return
 	_caught = true
 	_collar_on = false
+	_panel_alarm.stop()
+	_death_sequence()
+
+
+# =========================================================================
+# Death cutscene — "it heard you"
+# =========================================================================
+
+## The Stalker takes the camera: it steps into the lens, rises, and bites.
+## Then the heart gives out, the game announces the elimination, and only
+## after the card does the run officially end (-> bad ending).
+func _death_sequence() -> void:
+	(get_node(^"HUD") as CanvasLayer).visible = false
 	player.set_input_enabled(false)
-	player.add_heartbeat_spike(80.0)
-	_fx.set_blur(2.0)
-	await _wait(0.6)
-	await _fx.blink_to(1.0, 0.4)
+	player.set_model_visible(false)
+	player.cinematic_camera(true)
+	player.cinematic_zoom(0.05, 64.0, 0.35)
+	player.cinematic_shake(0.012, 2.4)
+	player.add_heartbeat_spike(130.0)
+	_play_at(player, &"gasp")
+	# The world closes in and drains to red.
+	_fx.lock_effects(true)
+	_fx.effect_to(&"vignette", 0.9, 1.6)
+	_fx.effect_to(&"aberration", 0.009, 1.6)
+	_fx.effect_to(&"grain", 0.13, 1.6)
+	_fx.effect_to(&"blur", 0.6, 1.6)
+	_fx.tint_to(Color(1.0, 0.6, 0.58), 1.4)
+	_last_heartbeats()
+	_stalker.kill_impact.connect(_on_kill_impact, CONNECT_ONE_SHOT)
+	await _stalker.perform_kill(player)
+
+	# Lights out behind the eyelids.
+	_heart_stopped = true
+	_fx.set_effect(&"blink", 1.0)
+	_fx.set_effect(&"pulse", 0.0)
+	await _wait(2.4) # the last three beats play out in the dark
+	var card := DeathCard.new()
+	add_child(card)
+	_announcer.announce("L2_PA_ELIMINATED")
+	await card.play(&"L2_DEATH_SUIT", &"L2_DEATH_TITLE", &"L2_DEATH_LINE", &"L2_DEATH_WHISPER")
+	await _wait(2.0)
 	player.kill("caught")
+
+
+## The frame the skull reaches the lens.
+func _on_kill_impact() -> void:
+	player.cinematic_shake(0.09, 0.7)
+	_fx.effect_to(&"blink", 1.0, 0.24)
+	_fx.effect_to(&"pulse", 1.0, 0.1)
+	_fx.tint_to(Color(1.0, 0.22, 0.2), 0.25)
+
+
+## Racing while it leans in, then three beats that slow down and stop.
+func _last_heartbeats() -> void:
+	var beats := _sound(&"heartbeat", 2.0)
+	while not _heart_stopped:
+		beats.pitch_scale = 1.3
+		beats.play()
+		await _wait(0.32)
+	for i in 3:
+		beats.pitch_scale = 0.85 - i * 0.2
+		beats.volume_db = 1.0 - i * 4.0
+		beats.play()
+		await _wait(0.5 + i * 0.3)
+	beats.queue_free()
+	var tone := _sound(&"flatline", -24.0)
+	tone.play()
+	create_tween().tween_property(tone, "volume_db", -8.0, 1.2)
+
+
+func _sound(id: StringName, volume_db: float) -> AudioStreamPlayer:
+	var sound := AudioStreamPlayer.new()
+	sound.bus = "SFX"
+	sound.stream = ProceduralAudio.get_stream(id)
+	sound.volume_db = volume_db
+	add_child(sound)
+	return sound
 
 
 func _update_objective() -> void:
