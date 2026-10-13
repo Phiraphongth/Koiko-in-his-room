@@ -12,6 +12,7 @@ const ITEM_NAMES: Dictionary[StringName, String] = {&"bottle": "ITEM_BOTTLE", &"
 @export var show_heart_monitor := false
 
 var _player: Player
+var _hidden_by_pause := false
 var _prompt: Label
 var _dot: ColorRect
 var _subtitle: Label
@@ -47,6 +48,18 @@ func _ready() -> void:
 	EventBus.player_heartbeat_changed.connect(_on_heartbeat)
 	EventBus.player_hidden_changed.connect(func(hidden: bool) -> void: _hidden_overlay.visible = hidden)
 	EventBus.inventory_changed.connect(_on_inventory)
+	EventBus.game_state_changed.connect(_on_game_state)
+
+
+## The HUD gets out of the way while the pause menu is up, and comes back
+## only if it was actually on screen before (a death cutscene hides it too).
+func _on_game_state(new_state: int, _old_state: int) -> void:
+	if new_state == GameManager.State.PAUSED:
+		_hidden_by_pause = visible
+		visible = false
+	elif _hidden_by_pause:
+		_hidden_by_pause = false
+		visible = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
