@@ -9,6 +9,8 @@ MENU_QUIT,Quit,ออกจากเกม
 MENU_BACK,Back,ย้อนกลับ
 MENU_RESUME,Resume,เล่นต่อ
 MENU_RETURN_TO_MENU,Return to Menu,กลับเมนูหลัก
+PAUSE_TITLE,PAUSED,หยุดเกมชั่วคราว
+PAUSE_HINT,Press Esc to resume,กด Esc เพื่อเล่นต่อ
 COMMON_ON,On,เปิด
 COMMON_OFF,Off,ปิด
 COMMON_YES,Yes,ใช่
