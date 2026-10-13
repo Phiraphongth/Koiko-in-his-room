@@ -39,15 +39,21 @@ func _build() -> void:
 	box.add_child(_slider_row(&"SETTINGS_SFX_VOLUME", &"audio", &"sfx_volume", 0.0, 1.0, 0.05))
 
 	box.add_child(_title(&"SETTINGS_GRAPHICS", 17, Color(0.65, 0.65, 0.6)))
-	var resolutions: Array[StringName] = []
-	for size in SettingsManager.RESOLUTIONS:
-		resolutions.append(StringName("%d x %d" % [size.x, size.y])) # not translated
-	box.add_child(_option_row(&"SETTINGS_RESOLUTION", &"graphics", &"resolution", resolutions, false))
+	if not SettingsManager.is_web: # in the browser the page decides the canvas size
+		var resolutions: Array[StringName] = []
+		for size in SettingsManager.RESOLUTIONS:
+			resolutions.append(StringName("%d x %d" % [size.x, size.y])) # not translated
+		box.add_child(_option_row(&"SETTINGS_RESOLUTION", &"graphics", &"resolution", resolutions, false))
+	var scales: Array[StringName] = []
+	for scale in SettingsManager.RENDER_SCALES:
+		scales.append(StringName("%d%%" % roundi(scale * 100.0))) # not translated
+	box.add_child(_option_row(&"SETTINGS_RENDER_SCALE", &"graphics", &"render_scale", scales, false))
 	box.add_child(_option_row(&"SETTINGS_WINDOW_MODE", &"graphics", &"window_mode",
 		[&"SETTINGS_WINDOWED", &"SETTINGS_FULLSCREEN"]))
 	box.add_child(_option_row(&"SETTINGS_SHADOW_QUALITY", &"graphics", &"shadow_quality",
 		[&"SETTINGS_SHADOW_OFF", &"SETTINGS_SHADOW_LOW", &"SETTINGS_SHADOW_MEDIUM", &"SETTINGS_SHADOW_HIGH"]))
-	box.add_child(_toggle_row(&"SETTINGS_VSYNC", &"graphics", &"vsync"))
+	if not SettingsManager.is_web: # browsers always vsync
+		box.add_child(_toggle_row(&"SETTINGS_VSYNC", &"graphics", &"vsync"))
 
 	box.add_child(_title(&"SETTINGS_GAMEPLAY", 17, Color(0.65, 0.65, 0.6)))
 	box.add_child(_slider_row(&"SETTINGS_MOUSE_SENSITIVITY", &"gameplay", &"mouse_sensitivity", 0.001, 0.008, 0.0005))
