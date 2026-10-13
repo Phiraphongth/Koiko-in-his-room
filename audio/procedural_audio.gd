@@ -116,6 +116,20 @@ static func _loop(s: PackedFloat32Array, length: int, fade: int) -> PackedFloat3
 
 
 ## Two-pole resonator (gives noise/impulses a pitched "body").
+## One-pole low-pass. Square waves and clipped tones carry harsh harmonics all
+## the way up to Nyquist; rolling the top off keeps the character and takes the
+## sting out, which matters for anything that repeats.
+static func _lowpass(input: PackedFloat32Array, cutoff: float) -> PackedFloat32Array:
+	var out := PackedFloat32Array()
+	out.resize(input.size())
+	var a := 1.0 - exp(-TAU * cutoff / RATE)
+	var y := 0.0
+	for i in input.size():
+		y += (input[i] - y) * a
+		out[i] = y
+	return out
+
+
 static func _resonate(input: PackedFloat32Array, freq: float, r: float) -> PackedFloat32Array:
 	var out := PackedFloat32Array()
 	out.resize(input.size())
@@ -159,7 +173,7 @@ static func _drone() -> AudioStreamWAV:
 		var tone := sin(TAU * 41.0 * t) * 0.5 + sin(TAU * 61.5 * t) * 0.22 \
 			+ sin(TAU * 82.0 * t + 2.0 * sin(TAU * 0.25 * t)) * 0.1
 		s[i] = lp * 2.5 + tone * 0.3 * swell
-	return _to_wav(_loop(s, n, RATE), true, 0.8)
+	return _to_wav(_loop(s, n, RATE), true, 0.55)
 
 
 ## Fluorescent tube: 120 Hz mains buzz with harmonics.
@@ -172,7 +186,7 @@ static func _hum() -> AudioStreamWAV:
 		var base := sin(TAU * 120.0 * t)
 		s[i] = base * 0.5 + sin(TAU * 240.0 * t) * 0.3 + sin(TAU * 360.0 * t) * 0.12 \
 			+ signf(base) * 0.06 + rng.randf_range(-1.0, 1.0) * 0.04
-	return _to_wav(_loop(s, n, int(0.1 * RATE)), true, 0.6)
+	return _to_wav(_loop(s, n, int(0.1 * RATE)), true, 0.38)
 
 
 static func _static_noise() -> AudioStreamWAV:
@@ -182,17 +196,23 @@ static func _static_noise() -> AudioStreamWAV:
 	for i in s.size():
 		var crackle := 1.0 if rng.randf() < 0.003 else 0.35
 		s[i] = rng.randf_range(-1.0, 1.0) * crackle
-	return _to_wav(_loop(s, n, int(0.1 * RATE)), true, 0.5)
+	return _to_wav(_lowpass(_loop(s, n, int(0.1 * RATE)), 4500.0), true, 0.3)
 
 
 ## Two-tone warning siren.
+## Two-tone PA siren. Each tone swells in and out instead of blaring, and the
+## harmonics are added by hand rather than by clipping, so it can loop for half
+## a minute (the Level 2 escape alarm) without wearing the player down.
 static func _alarm() -> AudioStreamWAV:
-	var s := _samples(1.0)
+	var s := _samples(2.0)
 	for i in s.size():
 		var t := float(i) / RATE
-		var f := 740.0 if t < 0.5 else 588.0 # whole cycles per half -> seamless
-		s[i] = tanh(3.0 * sin(TAU * f * t))
-	return _to_wav(s, true, 0.5)
+		var half := fmod(t, 1.0) # one second per tone -> whole cycles, seamless
+		var f := 523.0 if t < 1.0 else 392.0
+		var swell := smoothstep(0.0, 0.14, half) * (1.0 - smoothstep(0.78, 0.97, half))
+		var tone := sin(TAU * f * t) + 0.22 * sin(TAU * 2.0 * f * t) + 0.06 * sin(TAU * 3.0 * f * t)
+		s[i] = tone * swell
+	return _to_wav(_lowpass(s, 2200.0), true, 0.32)
 
 
 # =========================================================================
@@ -205,7 +225,7 @@ static func _heartbeat() -> AudioStreamWAV:
 	for i in s.size():
 		var t := float(i) / RATE
 		s[i] = _thump(t, 0.0, 1.0) + _thump(t, 0.22, 0.65)
-	return _to_wav(s, false, 0.95)
+	return _to_wav(s, false, 0.75)
 
 
 ## Heavy metallic impact (something hitting a door / pipe).
@@ -286,7 +306,7 @@ static func _buzz() -> AudioStreamWAV:
 		var env := smoothstep(0.0, 0.02, pulse) * (1.0 - smoothstep(0.28, 0.30, pulse)) if t < 1.3 else 0.0
 		var tone := sin(TAU * 155.0 * t) * 0.7 + signf(sin(TAU * 155.0 * t)) * 0.3
 		s[i] = tone * (0.7 + 0.3 * sin(TAU * 31.0 * t)) * env
-	return _to_wav(s, false, 0.6)
+	return _to_wav(s, false, 0.42)
 
 
 ## Descending three-note PA chime before an announcement.
@@ -310,8 +330,8 @@ static func _beep() -> AudioStreamWAV:
 	var s := _samples(0.22)
 	for i in s.size():
 		var t := float(i) / RATE
-		s[i] = sin(TAU * 1000.0 * t) * smoothstep(0.0, 0.01, t) * (1.0 - smoothstep(0.18, 0.22, t))
-	return _to_wav(s, false, 0.5)
+		s[i] = sin(TAU * 880.0 * t) * smoothstep(0.0, 0.02, t) * (1.0 - smoothstep(0.14, 0.22, t))
+	return _to_wav(s, false, 0.32)
 
 
 static func _click() -> AudioStreamWAV:
@@ -349,7 +369,7 @@ static func _shutter() -> AudioStreamWAV:
 		var env := smoothstep(0.0, 0.15, t) * (1.0 - smoothstep(length - 0.3, length, t))
 		var clack := exp(-fmod(t, 0.11) * 90.0) * rng.randf_range(-1.0, 1.0) * 0.5
 		s[i] = (lp * 3.0 + sin(TAU * 90.0 * t) * 0.3 + clack) * env
-	return _to_wav(s, false, 0.8)
+	return _to_wav(s, false, 0.6)
 
 
 ## Sharp inhale after holding breath too long.
@@ -411,9 +431,11 @@ static func _ring() -> AudioStreamWAV:
 	for i in s.size():
 		var t := float(i) / RATE
 		var hit := fmod(t, 1.0 / 22.0)
-		var bell := sin(TAU * 2350.0 * t) + 0.6 * sin(TAU * 3120.0 * t) + 0.3 * sin(TAU * 4700.0 * t)
-		s[i] = bell * (0.35 + 0.65 * exp(-hit * 90.0))
-	return _to_wav(s, true, 0.6)
+		# A bell an octave down from the old one, with the shrillest partial
+		# halved: it still carries across the level without drilling into the ear.
+		var bell := sin(TAU * 1175.0 * t) + 0.5 * sin(TAU * 1560.0 * t) + 0.15 * sin(TAU * 2350.0 * t)
+		s[i] = bell * (0.3 + 0.7 * exp(-hit * 90.0))
+	return _to_wav(_lowpass(s, 3400.0), true, 0.4)
 
 
 ## Footstep in shallow water.
@@ -459,8 +481,8 @@ static func _screech() -> AudioStreamWAV:
 		var f := 520.0 + 700.0 * sin(PI * t / length) + rng.randf_range(-60.0, 60.0)
 		phase += TAU * f / RATE
 		var env := smoothstep(0.0, 0.08, t) * (1.0 - smoothstep(length - 0.5, length, t))
-		s[i] = (tanh(4.0 * sin(phase)) * 0.7 + rng.randf_range(-1.0, 1.0) * 0.3) * env
-	return _to_wav(s, false, 0.95)
+		s[i] = (tanh(2.2 * sin(phase)) * 0.7 + rng.randf_range(-1.0, 1.0) * 0.28) * env
+	return _to_wav(_lowpass(s, 5000.0), false, 0.52)
 
 
 ## The kill itself: a heavy wet impact with bone cracking inside it.
@@ -479,7 +501,7 @@ static func _crunch() -> AudioStreamWAV:
 			if t >= crack:
 				snap += rng.randf_range(-1.0, 1.0) * exp(-(t - crack) * 85.0)
 		s[i] = tanh((impact + wet + snap * 0.8) * 1.4)
-	return _to_wav(s, false, 1.0)
+	return _to_wav(s, false, 0.75)
 
 
 ## Heart monitor flatline: the tone that keeps going after the beats stop.
@@ -490,7 +512,7 @@ static func _flatline() -> AudioStreamWAV:
 	for i in s.size():
 		var t := float(i) / RATE
 		s[i] = (sin(TAU * 988.0 * t) + sin(TAU * 1976.0 * t) * 0.15) * (0.92 + 0.08 * sin(TAU * 5.0 * t))
-	return _to_wav(_loop(s, n, int(0.25 * RATE)), true, 0.4)
+	return _to_wav(_loop(s, n, int(0.25 * RATE)), true, 0.3)
 
 
 ## Heavy bare footfall of the Stalker.
@@ -506,13 +528,23 @@ static func _thud() -> AudioStreamWAV:
 
 
 ## Player's collar: shrill electronic double beep.
+## Collar warning: two blips. This one repeats every second while the player's
+## heart is racing, so it is a rounded tone an octave down from the old square
+## wave — still urgent, no longer painful.
 static func _collar() -> AudioStreamWAV:
 	var s := _samples(0.4)
 	for i in s.size():
 		var t := float(i) / RATE
-		var on := 1.0 if t < 0.12 or (t > 0.2 and t < 0.32) else 0.0
-		s[i] = signf(sin(TAU * 2600.0 * t)) * on
-	return _to_wav(s, false, 0.5)
+		var blip := -1.0
+		if t < 0.1:
+			blip = t
+		elif t > 0.18 and t < 0.3:
+			blip = t - 0.18
+		if blip < 0.0:
+			continue
+		var env := smoothstep(0.0, 0.012, blip) * (1.0 - smoothstep(0.055, 0.1, blip))
+		s[i] = (sin(TAU * 1150.0 * t) + 0.22 * sin(TAU * 2300.0 * t)) * env
+	return _to_wav(_lowpass(s, 3000.0), false, 0.3)
 
 
 ## Keycard accepted: rising chirp.
@@ -521,9 +553,9 @@ static func _keycard() -> AudioStreamWAV:
 	var phase := 0.0
 	for i in s.size():
 		var t := float(i) / RATE
-		phase += TAU * (900.0 + 1400.0 * t / 0.35) / RATE
-		s[i] = sin(phase) * smoothstep(0.0, 0.01, t) * (1.0 - smoothstep(0.3, 0.35, t))
-	return _to_wav(s, false, 0.5)
+		phase += TAU * (760.0 + 900.0 * t / 0.35) / RATE
+		s[i] = sin(phase) * smoothstep(0.0, 0.015, t) * (1.0 - smoothstep(0.28, 0.35, t))
+	return _to_wav(s, false, 0.34)
 
 
 ## Big steel cage door slamming open.
@@ -585,7 +617,7 @@ static func _shift() -> AudioStreamWAV:
 		grind += (rng.randf_range(-1.0, 1.0) - grind) * 0.4
 		var env := smoothstep(0.0, 0.25, t) * (1.0 - smoothstep(length - 0.8, length, t))
 		s[i] = (lp * 3.0 + grind * 0.35 * (0.6 + 0.4 * sin(TAU * 7.0 * t)) + sin(TAU * 38.0 * t) * 0.4) * env
-	return _to_wav(s, false, 0.9)
+	return _to_wav(s, false, 0.65)
 
 
 ## Security laser (loop): thin electric hum.
@@ -594,8 +626,8 @@ static func _laser() -> AudioStreamWAV:
 	var rng := _rng(79)
 	for i in s.size():
 		var t := float(i) / RATE
-		s[i] = sin(TAU * 1240.0 * t) * 0.5 + sin(TAU * 2480.0 * t) * 0.2 + rng.randf_range(-1.0, 1.0) * 0.05
-	return _to_wav(s, true, 0.35)
+		s[i] = sin(TAU * 1240.0 * t) * 0.5 + sin(TAU * 2480.0 * t) * 0.08 + rng.randf_range(-1.0, 1.0) * 0.04
+	return _to_wav(_lowpass(s, 3000.0), true, 0.24)
 
 
 # =========================================================================
@@ -633,5 +665,5 @@ static func _siren_low() -> AudioStreamWAV:
 		var t := float(i) / RATE
 		var f := 110.0 + 25.0 * sin(TAU * 0.6 * t)
 		var env := smoothstep(0.0, 0.2, t) * (1.0 - smoothstep(length - 0.7, length, t))
-		s[i] = (tanh(2.5 * sin(TAU * f * t)) + 0.4 * sin(TAU * f * 2.0 * t)) * env
-	return _to_wav(s, false, 0.85)
+		s[i] = (tanh(1.6 * sin(TAU * f * t)) + 0.3 * sin(TAU * f * 2.0 * t)) * env
+	return _to_wav(s, false, 0.36)
