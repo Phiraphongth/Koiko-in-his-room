@@ -23,6 +23,9 @@ signal player_breath_changed(current: float, maximum: float)
 signal player_heartbeat_changed(bpm: float, normalized: float)
 signal player_heartbeat_critical(is_critical: bool)
 signal player_hidden_changed(is_hidden: bool)
+## Something is listening right outside the player's hiding spot: mash [Q].
+signal player_hide_check_changed(is_checked: bool)
+signal player_hold_meter_changed(value: float) # 0..1, 0 = the breath got out
 signal interaction_prompt_changed(text: String) # "" = hide prompt
 
 # --- Narrative / UI ---

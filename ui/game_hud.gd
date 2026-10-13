@@ -28,6 +28,9 @@ var _heart: Label
 var _inventory: Label
 var _keycards: Label
 var _hidden_overlay: Control
+var _mash: VBoxContainer
+var _mash_bar: ProgressBar
+var _mash_fill: StyleBoxFlat
 var _message_opened_at := 0
 var _subtitle_serial := 0
 var _banner_serial := 0
@@ -46,6 +49,8 @@ func _ready() -> void:
 	EventBus.player_stamina_changed.connect(_on_stamina)
 	EventBus.player_heartbeat_changed.connect(_on_heartbeat)
 	EventBus.player_hidden_changed.connect(func(hidden: bool) -> void: _hidden_overlay.visible = hidden)
+	EventBus.player_hide_check_changed.connect(func(checked: bool) -> void: _mash.visible = checked)
+	EventBus.player_hold_meter_changed.connect(_on_hold_meter)
 	EventBus.inventory_changed.connect(_on_inventory)
 
 
@@ -129,6 +134,12 @@ func _on_heartbeat(bpm: float, normalized: float) -> void:
 		return
 	_heart.text = "♥  %d BPM" % roundi(bpm)
 	_heart.label_settings.font_color = Color.WHITE.lerp(RED, clampf(normalized * 1.6, 0.0, 1.0))
+
+
+## White while the breath is safely held, red as it is about to slip out.
+func _on_hold_meter(value: float) -> void:
+	_mash_bar.value = value
+	_mash_fill.bg_color = RED.lerp(Color(1, 1, 1, 0.8), clampf(value * 2.0 - 0.3, 0.0, 1.0))
 
 
 func _on_inventory(items: Dictionary, selected: StringName) -> void:
@@ -239,6 +250,27 @@ func _build() -> void:
 	_place(hint, Vector4(0.0, 0.93, 1.0, 0.98))
 	_hidden_overlay.add_child(hint)
 	root.add_child(_hidden_overlay)
+
+	# Something is listening right outside the locker: mash [Q] to stay silent.
+	_mash = VBoxContainer.new()
+	_mash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_mash.visible = false
+	_mash.add_theme_constant_override("separation", 8)
+	_place(_mash, Vector4(0.3, 0.72, 0.7, 0.82))
+	var mash_label := _label(26, RED)
+	mash_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	Localization.set_text(mash_label, &"HUD_MASH_BREATH")
+	_mash.add_child(mash_label)
+	_mash_bar = ProgressBar.new()
+	_mash_bar.show_percentage = false
+	_mash_bar.max_value = 1.0
+	_mash_bar.step = 0.0
+	_mash_bar.custom_minimum_size = Vector2(0, 10)
+	_mash_bar.add_theme_stylebox_override("background", _box(Color(0, 0, 0, 0.6)))
+	_mash_fill = _box(Color(1, 1, 1, 0.8))
+	_mash_bar.add_theme_stylebox_override("fill", _mash_fill)
+	_mash.add_child(_mash_bar)
+	root.add_child(_mash)
 
 	# Announcement banner (top center, red rules above and below).
 	var banner_center := CenterContainer.new()

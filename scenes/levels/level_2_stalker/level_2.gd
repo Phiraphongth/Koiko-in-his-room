@@ -197,6 +197,9 @@ func _on_caught() -> void:
 ## after the card does the run officially end (-> bad ending).
 func _death_sequence() -> void:
 	(get_node(^"HUD") as CanvasLayer).visible = false
+	var found_hiding := player.is_hidden
+	if found_hiding:
+		await _drag_out_of_hiding()
 	player.set_input_enabled(false)
 	player.set_model_visible(false)
 	player.cinematic_camera(true)
@@ -223,9 +226,48 @@ func _death_sequence() -> void:
 	var card := DeathCard.new()
 	add_child(card)
 	_announcer.announce("L2_PA_ELIMINATED")
-	await card.play(&"L2_DEATH_SUIT", &"L2_DEATH_TITLE", &"L2_DEATH_LINE", &"L2_DEATH_WHISPER")
+	await card.play(&"L2_DEATH_SUIT", &"L2_DEATH_TITLE", &"L2_DEATH_LINE",
+		&"L2_DEATH_WHISPER_HIDING" if found_hiding else &"L2_DEATH_WHISPER")
 	await _wait(2.0)
 	player.kill("caught")
+
+
+## Found in a locker: it slams into the door, then rips the player out to stand
+## face to face with it. Returns with the player out of hiding and input off.
+func _drag_out_of_hiding() -> void:
+	var spot := player.current_hide_spot
+	var out := Vector3(spot.global_basis.z.x, 0.0, spot.global_basis.z.z).normalized() # the locker's front
+	player.add_heartbeat_spike(40.0)
+	_play_at(spot, &"slam")
+	# The lunge at the door, seen through the vents, and the whole locker shakes.
+	var stalker_at := _stalker.global_position
+	var lunge := create_tween().set_trans(Tween.TRANS_QUAD)
+	lunge.tween_property(_stalker, "global_position", stalker_at - out * 0.35, 0.1).set_ease(Tween.EASE_IN)
+	lunge.tween_property(_stalker, "global_position", stalker_at, 0.35).set_ease(Tween.EASE_OUT)
+	var view := get_viewport().get_camera_3d()
+	if view:
+		var shake := create_tween()
+		for i in 6:
+			shake.tween_property(view, "h_offset", randf_range(-0.05, 0.05), 0.04)
+			shake.parallel().tween_property(view, "v_offset", randf_range(-0.04, 0.04), 0.04)
+		shake.tween_property(view, "h_offset", 0.0, 0.05)
+		shake.parallel().tween_property(view, "v_offset", 0.0, 0.05)
+	await _wait(0.6)
+
+	# The yank: out through the door, straight into its face.
+	player.set_input_enabled(false) # also leaves the hiding spot
+	player.set_model_visible(false)
+	player.cinematic_camera(true)
+	player.cinematic_zoom(0.05, 64.0, 0.05)
+	player.set_facing(atan2(-out.x, -out.z))
+	player.global_position = spot.global_position + out * 0.45
+	player.cinematic_look_at(_stalker.global_position + Vector3.UP * 1.6, 0.2)
+	player.cinematic_shake(0.05, 0.4)
+	_play_at(player, &"thud")
+	var yank := create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	yank.tween_property(player, "global_position", spot.global_position + out * 0.9, 0.25)
+	await yank.finished
 
 
 ## The frame the skull reaches the lens.
