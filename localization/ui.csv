@@ -21,6 +21,7 @@ SETTINGS_BGM_VOLUME,Music,เสียงดนตรี
 SETTINGS_SFX_VOLUME,Sound Effects,เสียงประกอบ
 SETTINGS_GRAPHICS,Graphics,ภาพ
 SETTINGS_RESOLUTION,Resolution,ความละเอียด
+SETTINGS_RENDER_SCALE,3D Resolution,ความละเอียดภาพ 3D
 SETTINGS_WINDOW_MODE,Window Mode,โหมดหน้าต่าง
 SETTINGS_WINDOWED,Windowed,หน้าต่าง
 SETTINGS_FULLSCREEN,Fullscreen,เต็มจอ

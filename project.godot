@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Kopiko in hisroom"
 run/main_scene="res://scenes/menu/main_menu.tscn"
-config/features=PackedStringArray("4.7", "Forward Plus")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
@@ -29,11 +29,18 @@ GameManager="*res://autoload/game_manager.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="res://fonts/game_font.tres"
+
 [internationalization]
 
+locale/include_text_server_data=true
 locale/translations=PackedStringArray("res://localization/ui.en.translation", "res://localization/ui.th.translation")
 
 [layer_names]
@@ -50,4 +57,7 @@ locale/translations=PackedStringArray("res://localization/ui.en.translation", "r
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 rendering_device/driver.windows="d3d12"
+limits/opengl/max_lights_per_object=16
