@@ -19,6 +19,8 @@ const LEVEL_NAME_KEYS: Dictionary[StringName, StringName] = {
 	&"hub": &"LEVEL_HUB", &"level_1": &"LEVEL_1", &"level_2": &"LEVEL_2",
 	&"level_4": &"LEVEL_4",
 }
+## The comic that opens a new run (not the level select, which drops straight in).
+const INTRO_COMIC := "res://scenes/cutscenes/intro_comic.tscn"
 const ENDING_GOOD := "res://scenes/endings/ending_good.tscn"
 const ENDING_BAD := "res://scenes/endings/ending_bad.tscn"
 ## Played after the last level, before the good / bad ending card.
@@ -89,6 +91,13 @@ func return_to_menu() -> void:
 func start_new_game() -> void:
 	good_ending = false
 	run_data.clear()
+	current_level_id = &"intro_comic"
+	set_state(State.CUTSCENE)
+	LevelLoader.change_level(INTRO_COMIC)
+
+
+## The opening comic is over (or was skipped): into the flat.
+func finish_intro() -> void:
 	go_to_level(LEVEL_ORDER[0])
 
 

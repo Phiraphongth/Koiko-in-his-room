@@ -180,3 +180,4 @@ DREAM_OBJ_ALARM,Turn off the alarm,ปิดนาฬิกาปลุก
 DREAM_SAY_WHERE,...Where am I? It's so warm here.,...ที่นี่ที่ไหน อบอุ่นจัง
 DREAM_SAY_ALARM,That sound... my alarm?,เสียงนั่น... นาฬิกาปลุกของฉันเหรอ
 DREAM_SAY_AWAKE,...My room. Was it all just a dream?,...ห้องของฉัน ทั้งหมดนั่นเป็นแค่ความฝันเหรอ
+INTRO_HINT,Click or Space: next panel  /  Esc: skip,คลิกหรือเว้นวรรค: ช่องถัดไป  /  Esc: ข้าม
