@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bcroinstotekm"]
+
+[ext_resource type="PackedScene" uid="uid://c7mtikcb3x45b" path="res://Simple_Character_PSX/model/glb/simple-character-psx.glb" id="1_a202f"]
+
+[node name="Node3D" type="Node3D" unique_id=30218010]
+
+[node name="simple-character-psx" parent="." unique_id=1613165764 instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.113678694, -0.06887615, -0.14865208)
