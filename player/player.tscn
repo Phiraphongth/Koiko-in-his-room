@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://player/player_audio.gd" id="4_audio"]
 [ext_resource type="Script" path="res://player/throw_ability.gd" id="5_throw"]
 [ext_resource type="Script" path="res://player/flashlight.gd" id="6_flashlight"]
-[ext_resource type="Script" path="res://player/climb_ability.gd" id="7_climb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 resource_local_to_scene = true
@@ -73,5 +72,3 @@ script = ExtResource("4_audio")
 [node name="ThrowAbility" type="Node" parent="."]
 script = ExtResource("5_throw")
 
-[node name="ClimbAbility" type="Node" parent="."]
-script = ExtResource("7_climb")

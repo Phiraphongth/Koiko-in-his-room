@@ -39,15 +39,6 @@ func _build() -> void:
 	box.add_child(_slider_row(&"SETTINGS_SFX_VOLUME", &"audio", &"sfx_volume", 0.0, 1.0, 0.05))
 
 	box.add_child(_title(&"SETTINGS_GRAPHICS", 17, Color(0.65, 0.65, 0.6)))
-	if not SettingsManager.is_web: # in the browser the page decides the canvas size
-		var resolutions: Array[StringName] = []
-		for size in SettingsManager.RESOLUTIONS:
-			resolutions.append(StringName("%d x %d" % [size.x, size.y])) # not translated
-		box.add_child(_option_row(&"SETTINGS_RESOLUTION", &"graphics", &"resolution", resolutions, false))
-	var scales: Array[StringName] = []
-	for scale in SettingsManager.RENDER_SCALES:
-		scales.append(StringName("%d%%" % roundi(scale * 100.0))) # not translated
-	box.add_child(_option_row(&"SETTINGS_RENDER_SCALE", &"graphics", &"render_scale", scales, false))
 	box.add_child(_option_row(&"SETTINGS_WINDOW_MODE", &"graphics", &"window_mode",
 		[&"SETTINGS_WINDOWED", &"SETTINGS_FULLSCREEN"]))
 	box.add_child(_option_row(&"SETTINGS_SHADOW_QUALITY", &"graphics", &"shadow_quality",
@@ -197,7 +188,7 @@ func _title(key: StringName, size: int, color: Color) -> Label:
 
 
 func _button(key: StringName) -> Button:
-	var button := Button.new()
+	var button := BloodButton.new()
 	Localization.set_text(button, key)
 	button.custom_minimum_size = Vector2(150, ROW_HEIGHT + 4)
 	button.add_theme_font_size_override("font_size", 16)

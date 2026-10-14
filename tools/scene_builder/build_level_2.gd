@@ -30,7 +30,10 @@ func _build() -> void:
 	var timeline: Dictionary[int, StringName] = {300: &"five_minutes", 540: &"one_minute"}
 	_root.set("timeline_events", timeline)
 	_materials()
-	_environment(0.035, Color(0.07, 0.08, 0.11))
+	# Dark enough to be frightening, light enough to read the yard: the level
+	# used to render at 0.7% average screen brightness with 99% of pixels at
+	# pure black, which is not atmosphere, it is a black screen.
+	_environment(0.03, Color(0.11, 0.13, 0.18), 0.9, 1.6, 1.0)
 	_navigation()
 	_architecture()
 	_start_room()
@@ -224,7 +227,7 @@ func _terminal() -> void:
 	_box(zone, "DeskBase", Vector3(1.4, 0.7, 0.6), Vector3(12.5, 0.37, -25.8), _m.metal)
 	_pickup(&"keycard", Vector3(12.8, 0.78, -25.8))
 	_locker(zone, Vector3(14.68, 0, -22.5), -90.0)
-	_omni(_root, "OfficeLamp", Vector3(12.5, 2.6, -24.5), SODIUM, 0.8, 4.0, false, Light.BROKEN)
+	_omni(_root, "OfficeLamp", Vector3(12.5, 2.6, -24.5), SODIUM, 1.6, 7.0, false, Light.BROKEN)
 	_locker(zone, Vector3(-14.68, 0, -24), 90.0)
 	_locker(zone, Vector3(2.2, 0, -29.68), 0.0)
 
@@ -265,14 +268,14 @@ func _terminal() -> void:
 		beam.spot_angle = 18.0
 		beam.light_volumetric_fog_energy = 3.0
 		_add(beacon, beam, "Beam").rotation_degrees = Vector3(-20, 0, 0)
-	_omni(_root, "ExitLight", Vector3(-1, 2.8, -35.5), Color(0.8, 0.9, 1.0), 2.0, 5.0, false, Light.STEADY)
+	_omni(_root, "ExitLight", Vector3(-1, 2.8, -35.5), Color(0.8, 0.9, 1.0), 3.0, 8.0, false, Light.STEADY)
 	_trigger(_root, "ExitTrigger", Vector3(-1, 1, -34.2), Vector3(4, 2, 1))
 
 
 func _lighting() -> void:
 	var moon := DirectionalLight3D.new()
 	moon.light_color = Color(0.5, 0.6, 0.85)
-	moon.light_energy = 2.4
+	moon.light_energy = 3.6
 	moon.shadow_enabled = true
 	moon.light_volumetric_fog_energy = 2.5
 	_add(_root, moon, "Moonlight").rotation_degrees = Vector3(-62, 25, 0)
@@ -281,13 +284,14 @@ func _lighting() -> void:
 	_unique.append(house)
 	for pos in [Vector3(0, 7.5, 11.5), Vector3(-7, 7.5, 3), Vector3(7, 7.5, 3), Vector3(-7, 7.5, -12),
 			Vector3(7, 7.5, -12), Vector3(-7, 7.5, -24), Vector3(7, 7.5, -24)]:
-		var lamp := _spot(house, "SodiumLamp", pos, Vector3(-90, 0, 0), SODIUM, 7.0, 12.0, 55.0, false, Light.STEADY, false)
+		# Range 12 from 7.5 m up barely reached the floor; 20 actually lights it.
+		var lamp := _spot(house, "SodiumLamp", pos, Vector3(-90, 0, 0), SODIUM, 8.0, 20.0, 60.0, false, Light.STEADY, false)
 		_mesh(lamp, "Bulb", _cylinder(0.25, 0.12), Vector3(0, 0, 0.1), _m.sodium, Vector3(90, 0, 0))
 		lamp.set("emissive_mesh", NodePath("Bulb"))
 		lamp.set("emission_energy", 6.0)
 
 	for pos in [Vector3(-14.5, 3, 0), Vector3(14.5, 3, -10), Vector3(-14.5, 3, -20), Vector3(0, 3.3, 8.7)]:
-		var red := _omni(_root, "EmergencyLight", pos, BLOOD_RED, 0.7, 6.0, false, Light.STEADY)
+		var red := _omni(_root, "EmergencyLight", pos, BLOOD_RED, 1.6, 15.0, false, Light.STEADY)
 		_box(red, "LampMesh", Vector3(0.12, 0.08, 0.12), Vector3.ZERO, _m.red_lamp, false)
 		red.set("emissive_mesh", NodePath("LampMesh"))
 

@@ -260,10 +260,17 @@ func _adapt_environment(world: WorldEnvironment) -> void:
 	env.fog_enabled = true
 	env.fog_mode = Environment.FOG_MODE_EXPONENTIAL
 	env.fog_density = env.volumetric_fog_density * WEB_FOG_DENSITY_FACTOR
-	env.fog_light_color = env.ambient_light_color.darkened(0.35)
 	env.fog_light_energy = 1.0
-	env.fog_sky_affect = 1.0
 	env.fog_aerial_perspective = 0.0
+	if env.background_mode == Environment.BG_SKY:
+		# An outdoor level: haze belongs between the player and the far hedges,
+		# not over the sky itself — tinting the sky with fog turned a blue
+		# afternoon into a flat grey ceiling.
+		env.fog_light_color = env.ambient_light_color
+		env.fog_sky_affect = 0.0
+	else:
+		env.fog_light_color = env.ambient_light_color.darkened(0.35)
+		env.fog_sky_affect = 1.0
 	world.environment = env
 
 

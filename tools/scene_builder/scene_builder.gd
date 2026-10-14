@@ -120,15 +120,38 @@ func _emissive(color: Color, energy: float) -> StandardMaterial3D:
 # Environment & shared systems
 # =========================================================================
 
-func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 0.09)) -> void:
+func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 0.09),
+		ambient_energy: float = 0.3, exposure: float = 1.1, contrast: float = 1.12,
+		sky_kind: String = "") -> void: ## "day" / "night" for outdoor levels
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color.BLACK
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = ambient
-	env.ambient_light_energy = 0.3
+	if sky_kind != "": # outdoor levels need something above the walls
+		var sky_material := ProceduralSkyMaterial.new()
+		if sky_kind == "day":
+			sky_material.sky_top_color = Color(0.30, 0.50, 0.85)
+			sky_material.sky_horizon_color = Color(0.72, 0.80, 0.90)
+			sky_material.ground_horizon_color = Color(0.62, 0.65, 0.66)
+			sky_material.ground_bottom_color = Color(0.35, 0.34, 0.30)
+			sky_material.sun_angle_max = 6.0
+			sky_material.sun_curve = 0.12
+		else:
+			sky_material.sky_top_color = Color(0.012, 0.016, 0.04)
+			sky_material.sky_horizon_color = Color(0.05, 0.055, 0.085)
+			sky_material.ground_horizon_color = Color(0.035, 0.04, 0.06)
+			sky_material.ground_bottom_color = Color(0.01, 0.012, 0.02)
+		sky_material.sky_curve = 0.25
+		var sky := Sky.new()
+		sky.sky_material = sky_material
+		env.sky = sky
+		env.background_mode = Environment.BG_SKY
+		# Daylight bounces off everything; take the ambient from the sky itself.
+		env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	env.ambient_light_energy = ambient_energy
 	env.tonemap_mode = Environment.TONE_MAPPER_AGX
-	env.tonemap_exposure = 1.1
+	env.tonemap_exposure = exposure
 	env.ssao_enabled = true
 	env.ssao_radius = 1.2
 	env.ssao_intensity = 2.5
@@ -143,7 +166,7 @@ func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 
 	env.volumetric_fog_length = 40.0
 	env.adjustment_enabled = true
 	env.adjustment_saturation = 0.75
-	env.adjustment_contrast = 1.12
+	env.adjustment_contrast = contrast
 	var world := WorldEnvironment.new()
 	world.environment = env
 	_add(_root, world, "WorldEnvironment")
