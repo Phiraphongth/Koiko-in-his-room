@@ -54,6 +54,9 @@ static func _generate(id: StringName) -> AudioStreamWAV:
 		&"growl": return _growl()
 		&"screech": return _screech()
 		&"crunch": return _crunch()
+		&"bite": return _bite()
+		&"tear": return _tear()
+		&"bone_crack": return _bone_crack()
 		&"flatline": return _flatline()
 		&"thud": return _thud()
 		&"collar": return _collar()
@@ -502,6 +505,73 @@ static func _crunch() -> AudioStreamWAV:
 				snap += rng.randf_range(-1.0, 1.0) * exp(-(t - crack) * 85.0)
 		s[i] = tanh((impact + wet + snap * 0.8) * 1.4)
 	return _to_wav(s, false, 0.75)
+
+
+## A single savage bite: teeth clacking shut, a heavy thump, a wet squelch.
+static func _bite() -> AudioStreamWAV:
+	var s := _samples(0.75)
+	var rng := _rng(89)
+	var clack := PackedFloat32Array()
+	clack.resize(s.size())
+	var lp := 0.0
+	for i in s.size():
+		var t := float(i) / RATE
+		clack[i] = rng.randf_range(-1.0, 1.0) * exp(-t * 260.0)
+	clack = _resonate(clack, 2300.0, 0.985)
+	for i in s.size():
+		var t := float(i) / RATE
+		lp += (rng.randf_range(-1.0, 1.0) - lp) * 0.09
+		var thump := sin(TAU * (95.0 - 50.0 * t) * t) * exp(-t * 11.0)
+		var squelch := lp * 2.2 * exp(-t * 4.5) * (0.6 + 0.4 * sin(TAU * 31.0 * t))
+		s[i] = tanh(clack[i] * 0.05 + thump * 1.2 + squelch * smoothstep(0.02, 0.06, t))
+	return _to_wav(s, false, 1.0)
+
+
+## Flesh ripping while it shakes its head: irregular wet tearing grains.
+static func _tear() -> AudioStreamWAV:
+	var length := 1.4
+	var s := _samples(length)
+	var rng := _rng(97)
+	var grains: Array[Vector2] = [] # start, length
+	var t0 := 0.0
+	while t0 < length - 0.1:
+		grains.append(Vector2(t0, rng.randf_range(0.04, 0.16)))
+		t0 += rng.randf_range(0.03, 0.12)
+	var noise := PackedFloat32Array()
+	noise.resize(s.size())
+	for i in s.size():
+		noise[i] = rng.randf_range(-1.0, 1.0)
+	var body := _resonate(noise, 650.0, 0.93)
+	var lp := 0.0
+	for i in s.size():
+		var t := float(i) / RATE
+		var env := 0.0
+		for grain in grains:
+			if t >= grain.x and t < grain.x + grain.y:
+				env = maxf(env, sin(PI * (t - grain.x) / grain.y))
+		lp += (noise[i] - lp) * 0.2
+		var fade := 1.0 - smoothstep(length - 0.3, length, t)
+		s[i] = (body[i] * 0.05 + lp * 1.4) * env * fade
+	return _to_wav(s, false, 0.9)
+
+
+## Bones and cartilage cracking (the head turning over, the jaw unhinging).
+static func _bone_crack() -> AudioStreamWAV:
+	var cracks: PackedFloat32Array = [0.0, 0.07, 0.19, 0.24, 0.41]
+	var s := _samples(0.7)
+	var rng := _rng(101)
+	var raw := PackedFloat32Array()
+	raw.resize(s.size())
+	for i in s.size():
+		var t := float(i) / RATE
+		for crack in cracks:
+			if t >= crack:
+				raw[i] += rng.randf_range(-1.0, 1.0) * exp(-(t - crack) * 140.0)
+	var hi := _resonate(raw, 1700.0, 0.96)
+	var lo := _resonate(raw, 240.0, 0.97)
+	for i in s.size():
+		s[i] = tanh(hi[i] * 0.06 + lo[i] * 0.03 + raw[i] * 0.5)
+	return _to_wav(s, false, 0.95)
 
 
 ## Heart monitor flatline: the tone that keeps going after the beats stop.

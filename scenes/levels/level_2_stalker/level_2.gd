@@ -31,12 +31,13 @@ var _inserted := 0
 var _collar_on := false
 var _caught := false
 var _heart_stopped := false
+var _nav_ready := false
 
 
 func _ready() -> void:
 	ProceduralAudio.preload_sounds([&"growl", &"screech", &"thud", &"glass", &"ring", &"collar",
 		&"keycard", &"clang", &"alarm", &"splash_0", &"splash_1", &"splash_2",
-		&"crunch", &"flatline", &"gasp"])
+		&"crunch", &"flatline", &"gasp", &"bite", &"tear", &"bone_crack"])
 	super()
 	_bake_navigation()
 	for marker in _patrol_points.get_children():
@@ -51,10 +52,51 @@ func _ready() -> void:
 	_intro()
 
 
-## CSG geometry is only built at the end of the first frame, so wait for it.
+## Bakes the Stalker's navigation mesh once the CSG geometry exists (it is
+## only built at the end of the first frame), then checks the navigation map
+## really contains it before the Stalker is let out.
+##
+## Replaying Level 2 after a death used to leave the Stalker frozen in its
+## cage: the NavigationMesh is a sub-resource shared by every load of the scene
+## and was re-baked in place while the region was registered with it, so the
+## map sometimes kept an empty copy (no paths anywhere). Now each run bakes
+## into a brand-new mesh and hands it to the region only when it is complete,
+## and re-registers it if the map still comes back empty.
 func _bake_navigation() -> void:
-	await get_tree().process_frame
-	_navigation.bake_navigation_mesh(false)
+	var map := _navigation.get_navigation_map()
+	var mesh: NavigationMesh = null
+	for attempt in 10:
+		await get_tree().process_frame
+		await get_tree().physics_frame
+		mesh = _navigation.navigation_mesh.duplicate() as NavigationMesh # the settings
+		mesh.clear()
+		var source := NavigationMeshSourceGeometryData3D.new()
+		NavigationServer3D.parse_source_geometry_data(mesh, source, _navigation)
+		NavigationServer3D.bake_from_source_geometry_data(mesh, source)
+		if mesh.get_polygon_count() > 0:
+			break # otherwise the CSG is not built yet: try again next frame
+	_navigation.navigation_mesh = mesh
+	# Wait (up to ~1 s each time) for the server to put it into the map;
+	# if it never shows up, register it again.
+	for attempt in 3:
+		for wait in 60:
+			await get_tree().physics_frame
+			if _navigation_ready(map):
+				_nav_ready = true
+				return
+		_navigation.navigation_mesh = null
+		await get_tree().physics_frame
+		_navigation.navigation_mesh = mesh
+	push_error("Level 2: the navigation map is still empty, the Stalker cannot move")
+	_nav_ready = true # let the level carry on rather than hang the intro
+
+
+## True when the map can route from the cage to a patrol point.
+func _navigation_ready(map: RID) -> bool:
+	if _stalker.patrol_points.is_empty():
+		return true
+	var path := NavigationServer3D.map_get_path(map, _stalker.global_position, _stalker.patrol_points[0], true)
+	return path.size() > 1
 
 
 func _intro() -> void:
@@ -72,7 +114,9 @@ func _intro() -> void:
 	_play_at(_cage_door, &"bang")
 	player.add_heartbeat_spike(25.0)
 	await _wait(2.0)
-	# Something is let out.
+	# Something is let out (once it has somewhere to go).
+	while not _nav_ready:
+		await get_tree().physics_frame
 	create_tween().tween_property(_cage_door, "rotation_degrees:y", 115.0, 0.5).set_trans(Tween.TRANS_BACK)
 	_play_at(_cage_door, &"clang")
 	_stalker.release()
@@ -192,9 +236,10 @@ func _on_caught() -> void:
 # Death cutscene — "it heard you"
 # =========================================================================
 
-## The Stalker takes the camera: it steps into the lens, rises, and bites.
-## Then the heart gives out, the game announces the elimination, and only
-## after the card does the run officially end (-> bad ending).
+## The Stalker takes the camera and eats you (StalkerKillCutscene: it rears up
+## and unhinges its jaw, pins you, bites, then drags the body away). Then the
+## heart gives out, the game announces the elimination, and only after the
+## card does the run officially end (-> bad ending).
 func _death_sequence() -> void:
 	(get_node(^"HUD") as CanvasLayer).visible = false
 	var found_hiding := player.is_hidden
@@ -207,16 +252,17 @@ func _death_sequence() -> void:
 	player.cinematic_shake(0.012, 2.4)
 	player.add_heartbeat_spike(130.0)
 	_play_at(player, &"gasp")
-	# The world closes in and drains to red.
+	# The world closes in and drains to red (kept light enough to see its face).
 	_fx.lock_effects(true)
-	_fx.effect_to(&"vignette", 0.9, 1.6)
-	_fx.effect_to(&"aberration", 0.009, 1.6)
+	_fx.effect_to(&"vignette", 0.75, 1.6)
+	_fx.effect_to(&"aberration", 0.008, 1.6)
 	_fx.effect_to(&"grain", 0.13, 1.6)
-	_fx.effect_to(&"blur", 0.6, 1.6)
-	_fx.tint_to(Color(1.0, 0.6, 0.58), 1.4)
+	_fx.effect_to(&"blur", 0.2, 1.6)
+	_fx.tint_to(Color(1.0, 0.75, 0.72), 1.4)
 	_last_heartbeats()
-	_stalker.kill_impact.connect(_on_kill_impact, CONNECT_ONE_SHOT)
-	await _stalker.perform_kill(player)
+	var cutscene := StalkerKillCutscene.new()
+	add_child(cutscene)
+	await cutscene.play(player, _stalker, _fx)
 
 	# Lights out behind the eyelids.
 	_heart_stopped = true
@@ -268,14 +314,6 @@ func _drag_out_of_hiding() -> void:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	yank.tween_property(player, "global_position", spot.global_position + out * 0.9, 0.25)
 	await yank.finished
-
-
-## The frame the skull reaches the lens.
-func _on_kill_impact() -> void:
-	player.cinematic_shake(0.09, 0.7)
-	_fx.effect_to(&"blink", 1.0, 0.24)
-	_fx.effect_to(&"pulse", 1.0, 0.1)
-	_fx.tint_to(Color(1.0, 0.22, 0.2), 0.25)
 
 
 ## Racing while it leans in, then three beats that slow down and stop.

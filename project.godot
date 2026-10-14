@@ -51,6 +51,11 @@ locale/include_text_server_data=true
 3d_physics/layer_4="interactable"
 3d_physics/layer_5="npc"
 
+[navigation]
+
+world/map_use_async_iterations=false
+world/region_use_async_iterations=false
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
