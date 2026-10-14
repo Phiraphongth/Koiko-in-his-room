@@ -64,8 +64,8 @@ tools/         สคริปต์สร้างฉากและอนิ�
 - **ตั้งค่าบน itch.io:** Kind of project = HTML · ติ๊ก "This file will be played in the browser"
   · Viewport 1280 × 720 · เปิด "Fullscreen button" · ไม่ต้องเปิด SharedArrayBuffer (build ไม่ใช้ threads)
 - **ความละเอียด:** ขนาดฐาน UI = 1280 × 720 (stretch `canvas_items` / `expand`)
-  บนเว็บ canvas ปรับตามหน้าเว็บอัตโนมัติ ส่วน "ความละเอียดภาพ 3D" ในเมนูตั้งค่า (50–100%, เว็บเริ่มที่ 75%)
-  ลดความละเอียดเฉพาะฉาก 3D เพื่อให้ลื่น UI ยังคมเหมือนเดิม
+  บนเว็บ canvas ปรับตามหน้าเว็บอัตโนมัติ และฉาก 3D เรนเดอร์ที่ 75% ของขนาด canvas (เดสก์ท็อป 100%)
+  เพื่อให้ลื่น UI ยังคมเหมือนเดิม ผู้เล่นปรับค่านี้เองไม่ได้ (เอาออกจากเมนูตั้งค่าแล้ว)
 - **เอฟเฟกต์ที่ Compatibility ไม่มี:** volumetric fog, FogVolume, SSAO, SSR
   `SettingsManager._adapt_environment()` แทน volumetric fog ด้วย distance fog ให้อัตโนมัติ
   และด่าน 4 ใช้ fog สีเขียวแทนแก๊ส ถ้าสลับกลับไปใช้ Forward+ (เช่นทำ build Windows) เอฟเฟกต์เดิมกลับมาเอง
