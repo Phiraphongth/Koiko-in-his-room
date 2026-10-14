@@ -5,7 +5,6 @@ extends CanvasLayer
 ## have to carry their own copy. Runs while the tree is paused.
 
 const ACCENT := Color(0.9, 0.12, 0.1)
-const TEXT := Color(0.85, 0.84, 0.8)
 const MUTED := Color(0.55, 0.54, 0.5)
 const BUTTON_WIDTH := 320
 
@@ -136,29 +135,11 @@ func _label(key: StringName, size: int, color: Color) -> Label:
 	return label
 
 
-## Same look as the main menu: dark plate with a crimson edge that lights up.
+## Same look as the main menu: diamond bullet, blood smear on hover.
 func _button(key: StringName) -> Button:
-	var button := Button.new()
-	button.custom_minimum_size = Vector2(BUTTON_WIDTH, 0)
+	var button := BloodButton.new()
+	button.custom_minimum_size = Vector2(BUTTON_WIDTH, 40)
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.add_theme_font_size_override("font_size", 20)
-	button.add_theme_color_override("font_color", TEXT)
-	button.add_theme_color_override("font_hover_color", Color.WHITE)
-	button.add_theme_stylebox_override("normal", _style(Color(0.05, 0.05, 0.06, 0.8), Color(0.35, 0.05, 0.04)))
-	button.add_theme_stylebox_override("hover", _style(Color(0.35, 0.04, 0.03, 0.9), ACCENT))
-	button.add_theme_stylebox_override("pressed", _style(Color(0.2, 0.02, 0.02, 0.9), ACCENT))
-	button.add_theme_stylebox_override("focus", _style(Color(0.1, 0.05, 0.05, 0.6), ACCENT))
 	Localization.set_text(button, key)
 	return button
-
-
-func _style(background: Color, border: Color) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = background
-	style.border_color = border
-	style.border_width_left = 4
-	style.content_margin_left = 18
-	style.content_margin_right = 18
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	return style

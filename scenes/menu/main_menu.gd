@@ -84,7 +84,7 @@ func _build_level_list() -> void:
 	var unlocked := SettingsManager.get_unlocked_levels()
 	for index in GameManager.LEVEL_ORDER.size():
 		var level_id := GameManager.LEVEL_ORDER[index]
-		var button := Button.new()
+		var button := BloodButton.new()
 		button.custom_minimum_size = Vector2(340, 38)
 		button.add_theme_font_size_override("font_size", 17)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
