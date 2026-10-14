@@ -120,15 +120,16 @@ func _emissive(color: Color, energy: float) -> StandardMaterial3D:
 # Environment & shared systems
 # =========================================================================
 
-func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 0.09)) -> void:
+func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 0.09),
+		ambient_energy: float = 0.3, exposure: float = 1.1, contrast: float = 1.12) -> void:
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color.BLACK
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = ambient
-	env.ambient_light_energy = 0.3
+	env.ambient_light_energy = ambient_energy
 	env.tonemap_mode = Environment.TONE_MAPPER_AGX
-	env.tonemap_exposure = 1.1
+	env.tonemap_exposure = exposure
 	env.ssao_enabled = true
 	env.ssao_radius = 1.2
 	env.ssao_intensity = 2.5
@@ -143,7 +144,7 @@ func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 
 	env.volumetric_fog_length = 40.0
 	env.adjustment_enabled = true
 	env.adjustment_saturation = 0.75
-	env.adjustment_contrast = 1.12
+	env.adjustment_contrast = contrast
 	var world := WorldEnvironment.new()
 	world.environment = env
 	_add(_root, world, "WorldEnvironment")

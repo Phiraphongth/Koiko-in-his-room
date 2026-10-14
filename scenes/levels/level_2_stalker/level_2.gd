@@ -30,6 +30,9 @@ var _found := 0
 var _inserted := 0
 var _collar_on := false
 var _caught := false
+## Lamp brightness as built, so the blackout and the backup power can both
+## work from the original value instead of stacking multipliers.
+var _house_energy: Array[float] = []
 var _heart_stopped := false
 var _nav_ready := false
 
@@ -40,6 +43,8 @@ func _ready() -> void:
 		&"crunch", &"flatline", &"gasp", &"bite", &"tear", &"bone_crack"])
 	super()
 	_bake_navigation()
+	for light: FlickerLight in _house_lights.get_children():
+		_house_energy.append(light.on_energy)
 	for marker in _patrol_points.get_children():
 		_stalker.patrol_points.append((marker as Node3D).global_position)
 	_beacons.visible = false
@@ -108,9 +113,16 @@ func _intro() -> void:
 	await EventBus.message_closed
 	player.set_input_enabled(false)
 	await _announcer.announce("L2_PA_START")
-	# Lights out.
+	# Lights out — but not pitch black. Measured at 0.7% average screen
+	# brightness, a full blackout is not atmosphere, it is a black screen with
+	# a flashlight hole in it. The lamps drop to a dying ember instead.
 	for light: FlickerLight in _house_lights.get_children():
 		light.turn_off(false)
+	await _wait(0.9)
+	for i in _house_lights.get_child_count():
+		var light := _house_lights.get_child(i) as FlickerLight
+		light.on_energy = _house_energy[i] * 0.16
+		light.turn_on(FlickerLight.Mode.BROKEN)
 	_play_at(_cage_door, &"bang")
 	player.add_heartbeat_spike(25.0)
 	await _wait(2.0)
@@ -138,8 +150,9 @@ func _on_timeline_event(event_id: StringName) -> void:
 		&"one_minute":
 			_announcer.announce("L2_PA_ONE_MIN", false)
 		&"backup_power": # keycard #2: lights flicker back, the Stalker gets faster
-			for light: FlickerLight in _house_lights.get_children():
-				light.on_energy *= 0.35
+			for i in _house_lights.get_child_count():
+				var light := _house_lights.get_child(i) as FlickerLight
+				light.on_energy = _house_energy[i] * 0.5
 				light.turn_on(FlickerLight.Mode.BROKEN)
 			_stalker.enrage(1.25)
 			_announcer.announce("L2_PA_BACKUP_POWER", false)
