@@ -202,7 +202,7 @@ func _gas() -> void:
 
 
 func _systems() -> void:
-	_add_core_systems(-12.0)
+	_add_core_systems(1.0, &"music_level_4")
 	var alarm := AudioStreamPlayer.new()
 	alarm.set_script(SOUND)
 	alarm.set("sound_id", &"alarm")

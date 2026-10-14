@@ -8,15 +8,39 @@ const RATE := 22050
 const METAL_RINGS: Array[float] = [233.0, 377.0, 587.0, 911.0, 1307.0]
 const CHIME_NOTES: Array[Vector2] = [Vector2(0.0, 1046.5), Vector2(0.34, 783.99), Vector2(0.68, 659.26)]
 
+## Recorded audio, where it exists, wins over the synthesised version. Ids that
+## are not listed here are still generated in code, so the game keeps working
+## with or without these files.
+const FILES: Dictionary[StringName, String] = {
+	&"music_hub": "res://audio/music/hub.mp3",
+	&"music_level_1": "res://audio/music/level_1.mp3",
+	&"music_level_2": "res://audio/music/level_2.mp3",
+	&"music_level_4": "res://audio/music/level_4.mp3",
+	&"screech": "res://audio/sfx/stalker_chase.mp3",
+	&"crunch": "res://audio/sfx/stalker_bite.mp3",
+}
+
 static var _cache: Dictionary[StringName, AudioStream] = {}
 
 
 static func get_stream(id: StringName) -> AudioStream:
 	if _cache.has(id):
 		return _cache[id]
-	var stream := _generate(id)
+	var stream: AudioStream = _load_file(id)
+	if stream == null:
+		stream = _generate(id)
 	if stream:
 		_cache[id] = stream
+	return stream
+
+
+## A recorded take for this id, or null. Music loops, one-shots do not.
+static func _load_file(id: StringName) -> AudioStream:
+	if not FILES.has(id) or not ResourceLoader.exists(FILES[id]):
+		return null
+	var stream := load(FILES[id]) as AudioStream
+	if stream is AudioStreamMP3:
+		(stream as AudioStreamMP3).loop = String(id).begins_with("music")
 	return stream
 
 

@@ -630,7 +630,7 @@ func _build_props() -> void:
 
 
 func _systems() -> void:
-	_add_core_systems(-12.0)
+	_add_core_systems(1.0, &"music_level_1")
 	# Outdoors in daylight the usual vignette and desaturation read as haze
 	# over a grey sky, so this level wears them lightly.
 	var fx: CanvasLayer = _root.get_node("HorrorFX")

@@ -173,7 +173,7 @@ func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 
 
 
 ## HorrorFX, HUD, Announcer and the ambient drone every level needs.
-func _add_core_systems(ambience_db: float = -8.0) -> void:
+func _add_core_systems(ambience_db: float = -8.0, ambience_id: StringName = &"drone") -> void:
 	var fx := CanvasLayer.new()
 	fx.set_script(FX)
 	_add(_root, fx, "HorrorFX")
@@ -187,7 +187,7 @@ func _add_core_systems(ambience_db: float = -8.0) -> void:
 	_unique.append(announcer)
 	var ambience := AudioStreamPlayer.new()
 	ambience.set_script(SOUND)
-	ambience.set("sound_id", &"drone")
+	ambience.set("sound_id", ambience_id)
 	ambience.set("play_on_ready", true)
 	ambience.set("audio_bus", "BGM")
 	ambience.volume_db = ambience_db
