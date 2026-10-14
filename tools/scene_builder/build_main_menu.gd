@@ -6,6 +6,7 @@ extends SceneBuilder
 
 const MENU_SCRIPT := preload("res://scenes/menu/main_menu.gd")
 const SETTINGS_PANEL := preload("res://ui/settings_panel.gd")
+const BLOOD_BUTTON := preload("res://ui/blood_button.gd")
 const TITLE_COLOR := Color(0.92, 0.9, 0.86)
 const ACCENT := Color(0.9, 0.12, 0.1)
 
@@ -116,7 +117,7 @@ func _ui() -> void:
 	_add(root, rule, "Rule")
 
 	var buttons := VBoxContainer.new()
-	buttons.add_theme_constant_override("separation", 10)
+	buttons.add_theme_constant_override("separation", 12)
 	_place(buttons, Vector4(0.06, 0.4, 0.34, 0.8))
 	_add(root, buttons, "Buttons")
 	_unique.append(buttons)
@@ -184,33 +185,15 @@ func _ui_label(key: StringName, size: int, color: Color) -> Label:
 	return label
 
 
+## Blood-smear menu entry (ui/blood_button.gd styles itself at runtime).
 func _ui_button(key: StringName) -> Button:
 	var button := Button.new()
+	button.set_script(BLOOD_BUTTON)
 	button.text = String(key)
 	button.custom_minimum_size = Vector2(300, 46)
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.add_theme_font_size_override("font_size", 22)
-	button.add_theme_color_override("font_color", Color(0.85, 0.84, 0.8))
-	button.add_theme_color_override("font_hover_color", Color.WHITE)
-	button.add_theme_color_override("font_disabled_color", Color(0.4, 0.4, 0.4))
-	button.add_theme_stylebox_override("normal", _button_style(Color(0.05, 0.05, 0.06, 0.65), Color(0.35, 0.05, 0.04)))
-	button.add_theme_stylebox_override("hover", _button_style(Color(0.35, 0.04, 0.03, 0.9), ACCENT))
-	button.add_theme_stylebox_override("pressed", _button_style(Color(0.2, 0.02, 0.02, 0.9), ACCENT))
-	button.add_theme_stylebox_override("focus", _button_style(Color(0.1, 0.05, 0.05, 0.5), ACCENT))
-	button.add_theme_stylebox_override("disabled", _button_style(Color(0.05, 0.05, 0.05, 0.4), Color(0.2, 0.2, 0.2)))
 	return button
-
-
-func _button_style(background: Color, border: Color) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = background
-	style.border_color = border
-	style.border_width_left = 4
-	style.content_margin_left = 18
-	style.content_margin_right = 18
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	return style
 
 
 ## anchors = (left, top, right, bottom) in screen fractions.
