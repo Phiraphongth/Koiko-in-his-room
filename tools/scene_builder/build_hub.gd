@@ -331,7 +331,7 @@ func _lobby() -> void:
 # =========================================================================
 
 func _systems() -> void:
-	_add_core_systems()
+	_add_core_systems(1.0, &"music_hub")
 	var beep := AudioStreamPlayer.new()
 	beep.set_script(SOUND)
 	beep.set("sound_id", &"beep")

@@ -311,7 +311,7 @@ func _stalker() -> void:
 
 
 func _systems() -> void:
-	_add_core_systems(-12.0)
+	_add_core_systems(1.0, &"music_level_2")
 	_root.get_node(^"HUD").set("show_heart_monitor", true)
 
 

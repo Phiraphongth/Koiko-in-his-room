@@ -91,7 +91,7 @@ func _ready() -> void:
 	_agent.path_max_distance = 3.0
 	add_child(_agent)
 	_growl = _make_audio(&"growl", -6.0, 3.0)
-	_voice = _make_audio(&"screech", 2.0, 8.0)
+	_voice = _make_audio(&"screech", -8.0, 8.0) # recorded take, far louder than the synth one
 	_steps = _make_audio(&"thud", -4.0, 4.0)
 	EventBus.noise_emitted.connect(_on_noise)
 

@@ -165,7 +165,7 @@ func _shot_pinned() -> void:
 		strike.tween_property(_rig, "lunge", 1.15, 0.09)
 		strike.tween_property(_rig, "jaw_open", 0.0, 0.09)
 		await _wait(0.09)
-		_stalker.make_sound(bites[i], 5.0)
+		_stalker.make_sound(bites[i], -3.0 if bites[i] == &"crunch" else 5.0)
 		if i == bites.size() - 1:
 			_stalker.make_sound(&"bone_crack", 6.0)
 		_rig.jolt(1.0)
@@ -250,7 +250,9 @@ func _shot_body() -> void:
 		strike.tween_property(_rig, "lunge", 0.9, 0.1)
 		strike.tween_property(_rig, "jaw_open", 0.1, 0.1)
 		await _wait(0.1)
-		_stalker.make_sound(&"crunch" if i == 0 else &"bite", 4.0)
+		# "crunch" is the recorded bite; it is already a loud, finished take, so
+		# it does not want the boost the synthesised ones need.
+		_stalker.make_sound(&"crunch" if i == 0 else &"bite", -4.0 if i == 0 else 4.0)
 		_rig.jolt(0.8)
 		_spray(_rig.get_mouth_position(), 1.3)
 		_jolt_body(body)
