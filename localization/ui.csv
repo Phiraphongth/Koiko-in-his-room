@@ -127,7 +127,7 @@ L1_RULES_BODY,"Find 3 whisper stones, then reach the exit. You have 6 minutes.\n
 L1_PA_INTRO,"Game: The Maze of Whispers. Difficulty: diamonds, and clubs.",เกม เขาวงกตกระซิบ ความยาก ข้าวหลามตัด และ ดอกจิก
 L1_PA_START,The walls remember you. Game start.,กำแพงจดจำคุณได้ เริ่มเกม
 L1_PA_EXIT_OPEN,All stones found. The exit is open.,พบหินครบแล้ว ทางออกเปิดแล้ว
-L1_SAY_LISTEN,...someone is whispering. Follow the voices.  [F] Flashlight,...มีเสียงกระซิบ เดินตามเสียงไป  [F] ไฟฉาย
+L1_SAY_LISTEN,...someone is whispering. Follow the voices.,...มีเสียงกระซิบ เดินตามเสียงไป
 L1_SAY_WALLS_MOVING,The walls are moving...,กำแพงกำลังเลื่อน...
 L1_SAY_STONE,Whisper stone %d of %d.,หินกระซิบก้อนที่ %d จาก %d
 L1_SAY_ALARM,ALARM! %d of %d. The maze is rearranging.,สัญญาณเตือนภัย! ครั้งที่ %d จาก %d เขาวงกตกำลังสลับทาง
