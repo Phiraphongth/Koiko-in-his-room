@@ -81,6 +81,10 @@ static func _generate(id: StringName) -> AudioStreamWAV:
 		&"bite": return _bite()
 		&"tear": return _tear()
 		&"bone_crack": return _bone_crack()
+		&"dream_pad": return _dream_pad()
+		&"phone_alarm": return _phone_alarm()
+		&"phone_tap": return _phone_tap()
+		&"inhale": return _inhale()
 		&"flatline": return _flatline()
 		&"thud": return _thud()
 		&"collar": return _collar()
@@ -596,6 +600,77 @@ static func _bone_crack() -> AudioStreamWAV:
 	for i in s.size():
 		s[i] = tanh(hi[i] * 0.06 + lo[i] * 0.03 + raw[i] * 0.5)
 	return _to_wav(s, false, 0.95)
+
+
+## Ending dream: a warm, slowly breathing major-seventh pad (seamless loop).
+static func _dream_pad() -> AudioStreamWAV:
+	const NOTES: Array[float] = [130.81, 196.0, 246.94, 329.63, 392.0, 493.88] # C3 G3 B3 E4 G4 B4
+	var length := 8.0
+	var n := int(length * RATE)
+	var s := _samples(length + 1.0)
+	for i in s.size():
+		var t := float(i) / RATE
+		var v := 0.0
+		for k in NOTES.size():
+			var f: float = NOTES[k]
+			var drift := 1.0 + 0.0025 * sin(TAU * (0.07 + 0.013 * k) * t)
+			var swell := 0.65 + 0.35 * sin(TAU * t / length + k * 1.3) # one swell per loop
+			v += (sin(TAU * f * drift * t) + 0.25 * sin(TAU * 2.0 * f * t + 0.5)) * swell / (1.0 + k * 0.35)
+		# Shimmer: a high, quiet sparkle that comes and goes.
+		v += 0.08 * sin(TAU * 1567.98 * t) * pow(0.5 + 0.5 * sin(TAU * t / 4.0), 6.0)
+		s[i] = v
+	return _to_wav(_loop(_lowpass(s, 1800.0), n, RATE), true, 0.45)
+
+
+## Phone alarm: a bright marimba-ish melody that repeats, with a breath of
+## silence after each phrase (loop).
+static func _phone_alarm() -> AudioStreamWAV:
+	const PHRASE: Array[Vector2] = [ # start time, frequency
+		Vector2(0.0, 1046.5), Vector2(0.16, 1318.5), Vector2(0.32, 1568.0), Vector2(0.48, 1318.5),
+		Vector2(0.8, 1046.5), Vector2(0.96, 1318.5), Vector2(1.12, 1568.0), Vector2(1.28, 2093.0),
+	]
+	var length := 2.2
+	var s := _samples(length)
+	for i in s.size():
+		var t := float(i) / RATE
+		var v := 0.0
+		for note in PHRASE:
+			if t < note.x:
+				continue
+			var dt := t - note.x
+			var f := note.y
+			v += (sin(TAU * f * dt) + 0.3 * sin(TAU * 4.0 * f * dt) * exp(-dt * 30.0)) \
+				* exp(-dt * 9.0) * (1.0 - exp(-dt * 400.0))
+		s[i] = v
+	return _to_wav(s, true, 0.5)
+
+
+## A finger tapping the phone screen.
+static func _phone_tap() -> AudioStreamWAV:
+	var s := _samples(0.12)
+	var rng := _rng(131)
+	for i in s.size():
+		var t := float(i) / RATE
+		s[i] = rng.randf_range(-1.0, 1.0) * exp(-t * 160.0) * 0.6 + sin(TAU * 180.0 * t) * exp(-t * 60.0)
+	return _to_wav(_lowpass(s, 3000.0), false, 0.6)
+
+
+## Waking up: a slow, deep breath in through the nose, then out.
+static func _inhale() -> AudioStreamWAV:
+	var length := 3.2
+	var s := _samples(length)
+	var rng := _rng(137)
+	var lp := 0.0
+	var bp := 0.0
+	for i in s.size():
+		var t := float(i) / RATE
+		var noise := rng.randf_range(-1.0, 1.0)
+		lp += (noise - lp) * 0.08
+		bp += (lp - bp) * 0.3
+		var inhale := smoothstep(0.0, 1.2, t) * (1.0 - smoothstep(1.3, 1.6, t))
+		var exhale := smoothstep(1.9, 2.2, t) * (1.0 - smoothstep(2.4, 3.2, t)) * 0.7
+		s[i] = (lp - bp) * 3.0 * inhale + lp * 1.5 * exhale
+	return _to_wav(s, false, 0.55)
 
 
 ## Heart monitor flatline: the tone that keeps going after the beats stop.

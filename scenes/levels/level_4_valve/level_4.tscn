@@ -14,10 +14,9 @@
 [sub_resource type="Environment" id="Environment_45n7t"]
 background_mode = 1
 ambient_light_source = 2
-ambient_light_color = Color(0.07, 0.08, 0.09, 1)
-ambient_light_energy = 0.3
+ambient_light_color = Color(0.24, 0.24, 0.26, 1)
 tonemap_mode = 4
-tonemap_exposure = 1.1
+tonemap_exposure = 1.35
 ssr_enabled = true
 ssr_max_steps = 48
 ssao_enabled = true
@@ -189,124 +188,150 @@ texture_filter = 5
 size = Vector3(1.5, 1.4, 1.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p7yv3"]
-size = Vector3(2.4, 2.6, 0.15)
+size = Vector3(2.2, 2.65, 0.12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjri0"]
-size = Vector3(2.4, 2.6, 0.15)
+size = Vector3(2.2, 2.65, 0.12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nr55c"]
-size = Vector3(2.4, 2.6, 0.45000002)
+size = Vector3(2.2, 2.65, 0.42000002)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p6oxi"]
-size = Vector3(1.2, 2, 2.4)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6oxi"]
+albedo_color = Color(0.18, 0.2, 0.2, 1)
+metallic = 0.6
+roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekaid"]
+[sub_resource type="BoxMesh" id="BoxMesh_ekaid"]
+size = Vector3(0.14, 2.7, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bxoci"]
+size = Vector3(0.14, 2.7, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7icgo"]
+size = Vector3(0.14, 0.12, 2.36)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a5jgy"]
+size = Vector3(0.08, 0.3, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqk58"]
+albedo_color = Color(1, 0.96, 0.88, 1)
+emission_enabled = true
+emission = Color(1, 0.96, 0.88, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ql2qk"]
+size = Vector3(0.04, 2.6, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ulgy2"]
+size = Vector3(0.9, 2, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rsjv"]
 albedo_color = Color(0.22, 0.22, 0.21, 1)
 metallic = 0.8
 roughness = 0.5
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_bxoci"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_pxpey"]
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.09
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7icgo"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n383"]
 size = Vector3(0.9, 0.9, 0.7)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_a5jgy"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_mo4jy"]
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.09
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eqk58"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_wckea"]
 size = Vector3(0.9, 0.9, 0.7)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_ql2qk"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_64t8g"]
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.09
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ulgy2"]
-size = Vector3(0.9, 0.9, 0.7)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1rsjv"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.09
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pxpey"]
-size = Vector3(0.9, 0.9, 0.7)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4n383"]
-size = Vector3(0.5, 1.1, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mo4jy"]
-size = Vector3(0.5, 1.1, 0.5)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wckea"]
-top_radius = 0.12
-bottom_radius = 0.12
-height = 2.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_64t8g"]
-size = Vector3(0.5, 1.1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xtw4s"]
-size = Vector3(0.5, 1.1, 0.5)
+size = Vector3(0.9, 0.9, 0.7)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2nviu"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.09
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e324w"]
+size = Vector3(0.9, 0.9, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1khf0"]
+size = Vector3(0.5, 1.1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkyxf"]
+size = Vector3(0.5, 1.1, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x7k4t"]
 top_radius = 0.12
 bottom_radius = 0.12
 height = 2.2
 
-[sub_resource type="BoxMesh" id="BoxMesh_e324w"]
+[sub_resource type="BoxMesh" id="BoxMesh_kh2x3"]
 size = Vector3(0.5, 1.1, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1khf0"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gr03b"]
 size = Vector3(0.5, 1.1, 0.5)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_vkyxf"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_33feh"]
 top_radius = 0.12
 bottom_radius = 0.12
 height = 2.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_x7k4t"]
-size = Vector3(0.5, 1.1, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kh2x3"]
-size = Vector3(0.5, 1.1, 0.5)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_gr03b"]
-top_radius = 0.12
-bottom_radius = 0.12
-height = 2.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_33feh"]
-size = Vector3(1.2, 0.8, 0.12)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3vmsn"]
+size = Vector3(0.5, 1.1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8kik5"]
+size = Vector3(0.5, 1.1, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fjx6w"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_fjx6w"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 2.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_gbgig"]
+size = Vector3(0.5, 1.1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rrrin"]
+size = Vector3(0.5, 1.1, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q713k"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 2.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_777al"]
+size = Vector3(1.2, 0.8, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vkso"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2n865"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0r547"]
 size = Vector3(1.5, 1.4, 1.5)
 
-[sub_resource type="FogMaterial" id="FogMaterial_gbgig"]
+[sub_resource type="FogMaterial" id="FogMaterial_02j4n"]
 density = 0.28
 albedo = Color(0.55, 0.85, 0.45, 1)
 emission = Color(0.1, 0.25, 0.08, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_rrrin"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_mwmx3"]
 top_radius = 0.16
 bottom_radius = 0.16
 height = 0.2
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_q713k"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_oukln"]
 top_radius = 0.16
 bottom_radius = 0.16
 height = 0.2
 
-[node name="Level4" type="Node3D" unique_id=555326181]
+[node name="Level4" type="Node3D" unique_id=423527920]
 script = ExtResource("1_7a0s6")
 level_id = &"level_4"
 time_limit = 300.0
@@ -316,46 +341,46 @@ timeline_events = Dictionary[int, StringName]({
 })
 autostart = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1164618939]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1165653620]
 environment = SubResource("Environment_45n7t")
 
-[node name="Architecture" type="CSGCombiner3D" parent="." unique_id=457391101]
+[node name="Architecture" type="CSGCombiner3D" parent="." unique_id=283901166]
 use_collision = true
 
-[node name="Shell" type="CSGBox3D" parent="Architecture" unique_id=464879143]
+[node name="Shell" type="CSGBox3D" parent="Architecture" unique_id=914549993]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 size = Vector3(21.6, 5.6, 15)
 material = SubResource("StandardMaterial3D_qrnw5")
 
-[node name="West" type="CSGBox3D" parent="Architecture" unique_id=1609839726]
+[node name="West" type="CSGBox3D" parent="Architecture" unique_id=53818442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 1.8, 0)
 operation = 2
 size = Vector3(9, 3.6, 12)
 material = SubResource("StandardMaterial3D_qrnw5")
 
-[node name="East" type="CSGBox3D" parent="Architecture" unique_id=1150861997]
+[node name="East" type="CSGBox3D" parent="Architecture" unique_id=451163034]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 1.8, 0)
 operation = 2
 size = Vector3(9, 3.6, 12)
 material = SubResource("StandardMaterial3D_qrnw5")
 
-[node name="Floor" type="CSGBox3D" parent="Architecture" unique_id=1761936404]
+[node name="Floor" type="CSGBox3D" parent="Architecture" unique_id=1733253807]
 size = Vector3(18.6, 0.1, 12.2)
 material = SubResource("StandardMaterial3D_ssuhq")
 
-[node name="WestExit" type="CSGBox3D" parent="Architecture" unique_id=852984122]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4, 1.35, 0)
+[node name="WestExit" type="CSGBox3D" parent="Architecture" unique_id=2052488176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 1.35, 3.6)
 operation = 2
-size = Vector3(3.2, 2.7, 2.6)
+size = Vector3(1.4, 2.6, 2)
 material = SubResource("StandardMaterial3D_3fmaj")
 
-[node name="Passage" type="CSGBox3D" parent="Architecture" unique_id=366169596]
+[node name="Passage" type="CSGBox3D" parent="Architecture" unique_id=1310512056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 operation = 2
 size = Vector3(1.4, 2.5, 1.4)
 material = SubResource("StandardMaterial3D_3fmaj")
 
-[node name="PassageLight" type="OmniLight3D" parent="." unique_id=285673179]
+[node name="PassageLight" type="OmniLight3D" parent="." unique_id=1844028710]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
 light_color = Color(1, 0.55, 0.3, 1)
 light_energy = 0.8
@@ -364,17 +389,17 @@ script = ExtResource("2_65xk3")
 mode = 1
 on_energy = 0.8
 
-[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1089647801]
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=2022701439]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.1, 4)
 
-[node name="ControlRoom" type="Node3D" parent="." unique_id=679920670]
+[node name="ControlRoom" type="Node3D" parent="." unique_id=1715209145]
 
-[node name="DiagramBoard" type="MeshInstance3D" parent="ControlRoom" unique_id=1117847234]
+[node name="DiagramBoard" type="MeshInstance3D" parent="ControlRoom" unique_id=1297377505]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.15, 1.8, -1)
 material_override = SubResource("StandardMaterial3D_x4hph")
 mesh = SubResource("BoxMesh_g68qe")
 
-[node name="Label" type="Label3D" parent="ControlRoom" unique_id=2063540620]
+[node name="Label" type="Label3D" parent="ControlRoom" unique_id=639562155]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 2.6, -1)
 pixel_size = 0.004
 modulate = Color(0.6, 0.9, 1, 1)
@@ -382,10 +407,10 @@ text = "GAS DIAGRAM"
 font_size = 64
 outline_size = 0
 
-[node name="Diagram" type="Node3D" parent="ControlRoom" unique_id=2037148383]
+[node name="Diagram" type="Node3D" parent="ControlRoom" unique_id=1873514429]
 unique_name_in_owner = true
 
-[node name="Row0" type="Label3D" parent="ControlRoom/Diagram" unique_id=2033527071]
+[node name="Row0" type="Label3D" parent="ControlRoom/Diagram" unique_id=26628825]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 2.15, -1)
 pixel_size = 0.004
 modulate = Color(0.9, 0.2, 0.15, 1)
@@ -393,7 +418,7 @@ text = "♦  VALVE 1     ?? bar"
 font_size = 44
 outline_size = 0
 
-[node name="Row1" type="Label3D" parent="ControlRoom/Diagram" unique_id=180210611]
+[node name="Row1" type="Label3D" parent="ControlRoom/Diagram" unique_id=1738719984]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 1.77, -1)
 pixel_size = 0.004
 modulate = Color(0.2, 0.9, 0.4, 1)
@@ -401,7 +426,7 @@ text = "♣  VALVE 2     ?? bar"
 font_size = 44
 outline_size = 0
 
-[node name="Row2" type="Label3D" parent="ControlRoom/Diagram" unique_id=1984765207]
+[node name="Row2" type="Label3D" parent="ControlRoom/Diagram" unique_id=2001063416]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 1.39, -1)
 pixel_size = 0.004
 modulate = Color(0.6, 0.7, 1, 1)
@@ -409,7 +434,7 @@ text = "♠  VALVE 3     ?? bar"
 font_size = 44
 outline_size = 0
 
-[node name="Row3" type="Label3D" parent="ControlRoom/Diagram" unique_id=1295045484]
+[node name="Row3" type="Label3D" parent="ControlRoom/Diagram" unique_id=1880126829]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 1.01, -1)
 pixel_size = 0.004
 modulate = Color(1, 0.4, 0.6, 1)
@@ -417,7 +442,7 @@ text = "♥  VALVE 4     ?? bar"
 font_size = 44
 outline_size = 0
 
-[node name="Label2" type="Label3D" parent="ControlRoom" unique_id=825482235]
+[node name="Label2" type="Label3D" parent="ControlRoom" unique_id=1744133911]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.05, 0.75, -1)
 pixel_size = 0.004
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -425,12 +450,12 @@ text = "KEEP PRESSURE ON TARGET"
 font_size = 36
 outline_size = 0
 
-[node name="GaugeBody" type="MeshInstance3D" parent="ControlRoom" unique_id=1153585355]
+[node name="GaugeBody" type="MeshInstance3D" parent="ControlRoom" unique_id=1989061530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.4, -5.6)
 material_override = SubResource("StandardMaterial3D_1gdrl")
 mesh = SubResource("BoxMesh_nqfo4")
 
-[node name="Gauge" type="Label3D" parent="ControlRoom" unique_id=776325644]
+[node name="Gauge" type="Label3D" parent="ControlRoom" unique_id=36395447]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -5.52)
 pixel_size = 0.004
@@ -439,7 +464,7 @@ text = "10"
 font_size = 120
 outline_size = 0
 
-[node name="TargetLabel" type="Label3D" parent="ControlRoom" unique_id=351136199]
+[node name="TargetLabel" type="Label3D" parent="ControlRoom" unique_id=2004950198]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -5.52)
 pixel_size = 0.004
@@ -448,96 +473,148 @@ text = "TARGET  10"
 font_size = 48
 outline_size = 0
 
-[node name="ControlPlate" type="Area3D" parent="ControlRoom" unique_id=1362385277]
+[node name="ControlPlate" type="Area3D" parent="ControlRoom" unique_id=1664967622]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0.02, -3)
 script = ExtResource("3_5r7og")
 
-[node name="ControlCrate" type="StaticBody3D" parent="ControlRoom" unique_id=2064886727 groups=["heavy"]]
+[node name="ControlCrate" type="StaticBody3D" parent="ControlRoom" unique_id=680929725 groups=["heavy"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0.5, 1.5)
 
-[node name="Mesh" type="MeshInstance3D" parent="ControlRoom/ControlCrate" unique_id=2009244085]
+[node name="Mesh" type="MeshInstance3D" parent="ControlRoom/ControlCrate" unique_id=2028568543]
 material_override = SubResource("StandardMaterial3D_qak6d")
 mesh = SubResource("BoxMesh_7bmrs")
 
-[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ControlCrate" unique_id=1822433948]
+[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ControlCrate" unique_id=1863032123]
 shape = SubResource("BoxShape3D_s1wx7")
 
-[node name="ControlCrateHandle" type="Area3D" parent="ControlRoom/ControlCrate" unique_id=975328393]
+[node name="ControlCrateHandle" type="Area3D" parent="ControlRoom/ControlCrate" unique_id=63773511]
 unique_name_in_owner = true
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_PUSH_CRATE"
 
-[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ControlCrate/ControlCrateHandle" unique_id=947082293]
+[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ControlCrate/ControlCrateHandle" unique_id=618713075]
 shape = SubResource("BoxShape3D_gum16")
 
-[node name="ExitDoor" type="Node3D" parent="ControlRoom" unique_id=1716644989]
+[node name="ExitDoor" type="Node3D" parent="ControlRoom" unique_id=1727766401]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85, 0.02, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.38, 0.05, 3.6)
 script = ExtResource("5_opouo")
 kind = 1
-slide_offset = Vector3(0, 2.7, 0)
-open_time = 2.0
+slide_offset = Vector3(0, 2.75, 0)
+open_time = 2.2
 player_can_close = false
 interactive = false
 open_sound = &"shutter"
 
-[node name="Panel" type="AnimatableBody3D" parent="ControlRoom/ExitDoor" unique_id=722460997]
+[node name="Panel" type="AnimatableBody3D" parent="ControlRoom/ExitDoor" unique_id=1148192600]
 
-[node name="Mesh" type="MeshInstance3D" parent="ControlRoom/ExitDoor/Panel" unique_id=1278147362]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+[node name="Mesh" type="MeshInstance3D" parent="ControlRoom/ExitDoor/Panel" unique_id=1293937393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.325, 0)
 material_override = SubResource("StandardMaterial3D_3fmaj")
 mesh = SubResource("BoxMesh_p7yv3")
 
-[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ExitDoor/Panel" unique_id=1410095069]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ExitDoor/Panel" unique_id=1396262230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.325, 0)
 shape = SubResource("BoxShape3D_yjri0")
 
-[node name="Interactable" type="Area3D" parent="ControlRoom/ExitDoor/Panel" unique_id=360057288]
+[node name="Interactable" type="Area3D" parent="ControlRoom/ExitDoor/Panel" unique_id=1600230748]
 script = ExtResource("4_ulpl7")
 
-[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ExitDoor/Panel/Interactable" unique_id=726964499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+[node name="Shape" type="CollisionShape3D" parent="ControlRoom/ExitDoor/Panel/Interactable" unique_id=1611990760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.325, 0)
 shape = SubResource("BoxShape3D_nr55c")
 
-[node name="RoomLight" type="OmniLight3D" parent="ControlRoom" unique_id=1324209563]
+[node name="ExitFrame" type="MeshInstance3D" parent="ControlRoom" unique_id=1314885994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.28, 1.35, 2.54)
+material_override = SubResource("StandardMaterial3D_p6oxi")
+mesh = SubResource("BoxMesh_ekaid")
+
+[node name="ExitFrame2" type="MeshInstance3D" parent="ControlRoom" unique_id=591768934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.28, 1.35, 4.66)
+material_override = SubResource("StandardMaterial3D_p6oxi")
+mesh = SubResource("BoxMesh_bxoci")
+
+[node name="ExitLintel" type="MeshInstance3D" parent="ControlRoom" unique_id=1866187358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.28, 2.71, 3.6)
+material_override = SubResource("StandardMaterial3D_p6oxi")
+mesh = SubResource("BoxMesh_7icgo")
+
+[node name="ExitSignBox" type="MeshInstance3D" parent="ControlRoom" unique_id=1937349610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.26, 3.05, 3.6)
+material_override = SubResource("StandardMaterial3D_1gdrl")
+mesh = SubResource("BoxMesh_a5jgy")
+
+[node name="ExitSign" type="Label3D" parent="ControlRoom" unique_id=1879644025]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.21, 3.05, 3.6)
+pixel_size = 0.004
+modulate = Color(0.25, 0.08, 0.06, 1)
+text = "EXIT"
+font_size = 72
+outline_size = 0
+
+[node name="ExitLightPanel" type="MeshInstance3D" parent="ControlRoom" unique_id=2084945454]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.52, 1.35, 3.6)
+material_override = SubResource("StandardMaterial3D_eqk58")
+mesh = SubResource("BoxMesh_ql2qk")
+
+[node name="ExitGlow" type="OmniLight3D" parent="ControlRoom" unique_id=1544132161]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.95, 1.5, 3.6)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 11.0
+
+[node name="RoomLight" type="OmniLight3D" parent="ControlRoom" unique_id=1305914976]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3.3, 0)
 light_color = Color(1, 0.76, 0.48, 1)
-light_energy = 2.2
-omni_range = 10.0
+light_energy = 3.5
+omni_range = 14.0
 script = ExtResource("2_65xk3")
-on_energy = 2.2
+on_energy = 3.5
 
-[node name="ExitLightW" type="OmniLight3D" parent="ControlRoom" unique_id=1340474130]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.2, 0)
-light_color = Color(0.7, 1, 0.8, 1)
-light_energy = 1.5
+[node name="RoomFill" type="OmniLight3D" parent="ControlRoom" unique_id=1477828376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3.3, -4)
+light_color = Color(1, 0.76, 0.48, 1)
+light_energy = 1.6
+omni_range = 9.0
 script = ExtResource("2_65xk3")
-on_energy = 1.5
+on_energy = 1.6
 
-[node name="ExitTrigger" type="Area3D" parent="." unique_id=1907158542]
+[node name="RoomFill2" type="OmniLight3D" parent="ControlRoom" unique_id=334150851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3.3, 4)
+light_color = Color(1, 0.76, 0.48, 1)
+light_energy = 1.6
+omni_range = 9.0
+script = ExtResource("2_65xk3")
+on_energy = 1.6
+
+[node name="ExitTrigger" type="Area3D" parent="." unique_id=890397751]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.05, 1, 3.6)
 script = ExtResource("6_g8lj0")
 
-[node name="Shape" type="CollisionShape3D" parent="ExitTrigger" unique_id=114782539]
-shape = SubResource("BoxShape3D_p6oxi")
+[node name="Shape" type="CollisionShape3D" parent="ExitTrigger" unique_id=114533230]
+shape = SubResource("BoxShape3D_ulgy2")
 
-[node name="ValveRoom" type="Node3D" parent="." unique_id=87189439]
+[node name="ValveRoom" type="Node3D" parent="." unique_id=850991472]
 
-[node name="Valves" type="Node3D" parent="ValveRoom" unique_id=369455375]
+[node name="Valves" type="Node3D" parent="ValveRoom" unique_id=1050279550]
 unique_name_in_owner = true
 
-[node name="valve_1" type="Node3D" parent="ValveRoom/Valves" unique_id=1469540999]
+[node name="valve_1" type="Node3D" parent="ValveRoom/Valves" unique_id=899742886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.25, -3.6)
 
-[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_1" unique_id=1102532842]
+[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_1" unique_id=878387918]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_bxoci")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_pxpey")
 
-[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_1" unique_id=2126496454]
+[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_1" unique_id=997700895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 pixel_size = 0.004
 modulate = Color(0.9, 0.2, 0.15, 1)
@@ -545,22 +622,22 @@ text = "♦"
 font_size = 72
 outline_size = 0
 
-[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_1" unique_id=1434372687]
+[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_1" unique_id=1025167186]
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_TURN_VALVE"
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_1/Handle" unique_id=1072545544]
-shape = SubResource("BoxShape3D_7icgo")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_1/Handle" unique_id=2030358826]
+shape = SubResource("BoxShape3D_4n383")
 
-[node name="valve_2" type="Node3D" parent="ValveRoom/Valves" unique_id=305411338]
+[node name="valve_2" type="Node3D" parent="ValveRoom/Valves" unique_id=21348041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 1.25, -3.6)
 
-[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_2" unique_id=797705800]
+[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_2" unique_id=78608432]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_a5jgy")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_mo4jy")
 
-[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_2" unique_id=368654186]
+[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_2" unique_id=1852212235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 pixel_size = 0.004
 modulate = Color(0.2, 0.9, 0.4, 1)
@@ -568,22 +645,22 @@ text = "♣"
 font_size = 72
 outline_size = 0
 
-[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_2" unique_id=1568864718]
+[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_2" unique_id=1174841148]
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_TURN_VALVE"
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_2/Handle" unique_id=1655612967]
-shape = SubResource("BoxShape3D_eqk58")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_2/Handle" unique_id=1607091923]
+shape = SubResource("BoxShape3D_wckea")
 
-[node name="valve_3" type="Node3D" parent="ValveRoom/Valves" unique_id=1828671770]
+[node name="valve_3" type="Node3D" parent="ValveRoom/Valves" unique_id=624956255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 1.25, -3.6)
 
-[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_3" unique_id=1671083186]
+[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_3" unique_id=615544359]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_ql2qk")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_64t8g")
 
-[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_3" unique_id=1946896516]
+[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_3" unique_id=101983826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 pixel_size = 0.004
 modulate = Color(0.6, 0.7, 1, 1)
@@ -591,22 +668,22 @@ text = "♠"
 font_size = 72
 outline_size = 0
 
-[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_3" unique_id=727907482]
+[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_3" unique_id=1114497161]
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_TURN_VALVE"
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_3/Handle" unique_id=1565993493]
-shape = SubResource("BoxShape3D_ulgy2")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_3/Handle" unique_id=475466443]
+shape = SubResource("BoxShape3D_xtw4s")
 
-[node name="valve_4" type="Node3D" parent="ValveRoom/Valves" unique_id=1515300051]
+[node name="valve_4" type="Node3D" parent="ValveRoom/Valves" unique_id=448893558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 1.25, -3.6)
 
-[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_4" unique_id=1677514818]
+[node name="Wheel" type="MeshInstance3D" parent="ValveRoom/Valves/valve_4" unique_id=1307675570]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_1rsjv")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_2nviu")
 
-[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_4" unique_id=1778540103]
+[node name="Symbol" type="Label3D" parent="ValveRoom/Valves/valve_4" unique_id=1420777790]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 pixel_size = 0.004
 modulate = Color(1, 0.4, 0.6, 1)
@@ -614,79 +691,79 @@ text = "♥"
 font_size = 72
 outline_size = 0
 
-[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_4" unique_id=7734771]
+[node name="Handle" type="Area3D" parent="ValveRoom/Valves/valve_4" unique_id=1329793228]
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_TURN_VALVE"
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_4/Handle" unique_id=2085741883]
-shape = SubResource("BoxShape3D_pxpey")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/Valves/valve_4/Handle" unique_id=1102581997]
+shape = SubResource("BoxShape3D_e324w")
 
-[node name="ValveStand" type="StaticBody3D" parent="ValveRoom" unique_id=221942116]
+[node name="ValveStand" type="StaticBody3D" parent="ValveRoom" unique_id=46693291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.55, -3.6)
 
-[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand" unique_id=1817219095]
+[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand" unique_id=905890099]
 material_override = SubResource("StandardMaterial3D_3fmaj")
-mesh = SubResource("BoxMesh_4n383")
+mesh = SubResource("BoxMesh_1khf0")
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand" unique_id=44864104]
-shape = SubResource("BoxShape3D_mo4jy")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand" unique_id=1195776678]
+shape = SubResource("BoxShape3D_vkyxf")
 
-[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand" unique_id=2096180682]
+[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand" unique_id=1356476140]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_wckea")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_x7k4t")
 
-[node name="ValveStand2" type="StaticBody3D" parent="ValveRoom" unique_id=1539687785]
+[node name="ValveStand2" type="StaticBody3D" parent="ValveRoom" unique_id=745168641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 0.55, -3.6)
 
-[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand2" unique_id=1105521607]
+[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand2" unique_id=1488700364]
 material_override = SubResource("StandardMaterial3D_3fmaj")
-mesh = SubResource("BoxMesh_64t8g")
+mesh = SubResource("BoxMesh_kh2x3")
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand2" unique_id=229741909]
-shape = SubResource("BoxShape3D_xtw4s")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand2" unique_id=1099148040]
+shape = SubResource("BoxShape3D_gr03b")
 
-[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand2" unique_id=668892253]
+[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand2" unique_id=2091924766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_2nviu")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_33feh")
 
-[node name="ValveStand3" type="StaticBody3D" parent="ValveRoom" unique_id=523700569]
+[node name="ValveStand3" type="StaticBody3D" parent="ValveRoom" unique_id=1116157940]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 0.55, -3.6)
 
-[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand3" unique_id=893773686]
+[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand3" unique_id=278968847]
 material_override = SubResource("StandardMaterial3D_3fmaj")
-mesh = SubResource("BoxMesh_e324w")
+mesh = SubResource("BoxMesh_3vmsn")
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand3" unique_id=177158132]
-shape = SubResource("BoxShape3D_1khf0")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand3" unique_id=550977586]
+shape = SubResource("BoxShape3D_8kik5")
 
-[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand3" unique_id=64121841]
+[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand3" unique_id=902952035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_vkyxf")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_fjx6w")
 
-[node name="ValveStand4" type="StaticBody3D" parent="ValveRoom" unique_id=1571018394]
+[node name="ValveStand4" type="StaticBody3D" parent="ValveRoom" unique_id=1104266290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0.55, -3.6)
 
-[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand4" unique_id=18130903]
+[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveStand4" unique_id=1086048236]
 material_override = SubResource("StandardMaterial3D_3fmaj")
-mesh = SubResource("BoxMesh_x7k4t")
+mesh = SubResource("BoxMesh_gbgig")
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand4" unique_id=235844194]
-shape = SubResource("BoxShape3D_kh2x3")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveStand4" unique_id=48857452]
+shape = SubResource("BoxShape3D_rrrin")
 
-[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand4" unique_id=2097687452]
+[node name="Pipe" type="MeshInstance3D" parent="ValveRoom/ValveStand4" unique_id=204536462]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_gr03b")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_q713k")
 
-[node name="RepeaterBody" type="MeshInstance3D" parent="ValveRoom" unique_id=1136745616]
+[node name="RepeaterBody" type="MeshInstance3D" parent="ValveRoom" unique_id=1636647497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 2.5, -5.6)
 material_override = SubResource("StandardMaterial3D_1gdrl")
-mesh = SubResource("BoxMesh_33feh")
+mesh = SubResource("BoxMesh_777al")
 
-[node name="Repeater" type="Label3D" parent="ValveRoom" unique_id=626530213]
+[node name="Repeater" type="Label3D" parent="ValveRoom" unique_id=1894837376]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 2.5, -5.52)
 pixel_size = 0.004
@@ -695,55 +772,71 @@ text = "10"
 font_size = 64
 outline_size = 0
 
-[node name="ValvePlate" type="Area3D" parent="ValveRoom" unique_id=1142937283]
+[node name="ValvePlate" type="Area3D" parent="ValveRoom" unique_id=809002421]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.02, 4)
 script = ExtResource("3_5r7og")
 
-[node name="ValveCrate" type="StaticBody3D" parent="ValveRoom" unique_id=693370706 groups=["heavy"]]
+[node name="ValveCrate" type="StaticBody3D" parent="ValveRoom" unique_id=1071958378 groups=["heavy"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.5, 0.5)
 
-[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveCrate" unique_id=2136921470]
+[node name="Mesh" type="MeshInstance3D" parent="ValveRoom/ValveCrate" unique_id=1424935400]
 material_override = SubResource("StandardMaterial3D_qak6d")
-mesh = SubResource("BoxMesh_3vmsn")
+mesh = SubResource("BoxMesh_1vkso")
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveCrate" unique_id=1245017766]
-shape = SubResource("BoxShape3D_8kik5")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveCrate" unique_id=939023896]
+shape = SubResource("BoxShape3D_2n865")
 
-[node name="ValveCrateHandle" type="Area3D" parent="ValveRoom/ValveCrate" unique_id=792442788]
+[node name="ValveCrateHandle" type="Area3D" parent="ValveRoom/ValveCrate" unique_id=1261060113]
 unique_name_in_owner = true
 script = ExtResource("4_ulpl7")
 prompt_text = "PROMPT_PUSH_CRATE"
 
-[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveCrate/ValveCrateHandle" unique_id=209687207]
-shape = SubResource("BoxShape3D_fjx6w")
+[node name="Shape" type="CollisionShape3D" parent="ValveRoom/ValveCrate/ValveCrateHandle" unique_id=1309439130]
+shape = SubResource("BoxShape3D_0r547")
 
-[node name="RoomLightE" type="OmniLight3D" parent="ValveRoom" unique_id=1097460613]
+[node name="RoomLightE" type="OmniLight3D" parent="ValveRoom" unique_id=7593605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3.3, 0)
 light_color = Color(1, 0.76, 0.48, 1)
-light_energy = 2.2
-omni_range = 10.0
+light_energy = 3.5
+omni_range = 14.0
 script = ExtResource("2_65xk3")
 mode = 2
-on_energy = 2.2
+on_energy = 3.5
 
-[node name="Label" type="Label3D" parent="ValveRoom" unique_id=1073698033]
+[node name="RoomFillE" type="OmniLight3D" parent="ValveRoom" unique_id=1887966714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3.3, -4)
+light_color = Color(1, 0.76, 0.48, 1)
+light_energy = 1.6
+omni_range = 9.0
+script = ExtResource("2_65xk3")
+on_energy = 1.6
+
+[node name="RoomFillE2" type="OmniLight3D" parent="ValveRoom" unique_id=1094458726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3.3, 4)
+light_color = Color(1, 0.76, 0.48, 1)
+light_energy = 1.6
+omni_range = 9.0
+script = ExtResource("2_65xk3")
+on_energy = 1.6
+
+[node name="Label" type="Label3D" parent="ValveRoom" unique_id=1788194403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 2.6, -5.5)
 modulate = Color(0.5, 0.05, 0.05, 1)
 text = "♣ 9"
 font_size = 150
 outline_size = 0
 
-[node name="GasFog" type="Node3D" parent="." unique_id=1185376384]
+[node name="GasFog" type="Node3D" parent="." unique_id=970499646]
 unique_name_in_owner = true
 
-[node name="Fog" type="FogVolume" parent="GasFog" unique_id=81390237]
+[node name="Fog" type="FogVolume" parent="GasFog" unique_id=1350739100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 size = Vector3(19, 3.6, 12)
-material = SubResource("FogMaterial_gbgig")
+material = SubResource("FogMaterial_02j4n")
 
-[node name="LeakLight" type="OmniLight3D" parent="GasFog" unique_id=799490454]
+[node name="LeakLight" type="OmniLight3D" parent="GasFog" unique_id=1940504028]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.6, -5)
 light_color = Color(0.5, 1, 0.4, 1)
 light_energy = 1.2
@@ -752,12 +845,12 @@ script = ExtResource("2_65xk3")
 mode = 2
 on_energy = 1.2
 
-[node name="Vent" type="MeshInstance3D" parent="GasFog/LeakLight" unique_id=1313509114]
+[node name="Vent" type="MeshInstance3D" parent="GasFog/LeakLight" unique_id=940474911]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_rrrin")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_mwmx3")
 
-[node name="LeakLight2" type="OmniLight3D" parent="GasFog" unique_id=663802863]
+[node name="LeakLight2" type="OmniLight3D" parent="GasFog" unique_id=985052658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.6, -5)
 light_color = Color(0.5, 1, 0.4, 1)
 light_energy = 1.2
@@ -766,31 +859,31 @@ script = ExtResource("2_65xk3")
 mode = 2
 on_energy = 1.2
 
-[node name="Vent" type="MeshInstance3D" parent="GasFog/LeakLight2" unique_id=1172081560]
+[node name="Vent" type="MeshInstance3D" parent="GasFog/LeakLight2" unique_id=1919274548]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ekaid")
-mesh = SubResource("CylinderMesh_q713k")
+material_override = SubResource("StandardMaterial3D_1rsjv")
+mesh = SubResource("CylinderMesh_oukln")
 
-[node name="HorrorFX" type="CanvasLayer" parent="." unique_id=1417389614]
+[node name="HorrorFX" type="CanvasLayer" parent="." unique_id=277558484]
 unique_name_in_owner = true
 script = ExtResource("7_gxrig")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=222496050]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=252383257]
 script = ExtResource("8_o3kdd")
 
-[node name="Announcer" type="Node" parent="." unique_id=1272752592]
+[node name="Announcer" type="Node" parent="." unique_id=1125558553]
 unique_name_in_owner = true
 script = ExtResource("9_yhk8x")
 preferred_voices = PackedStringArray("Zira", "Female", "Hazel", "Susan")
 
-[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=649480093]
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1311999736]
 volume_db = 1.0
 script = ExtResource("10_78uns")
 sound_id = &"music_level_4"
 play_on_ready = true
 audio_bus = "BGM"
 
-[node name="Alarm" type="AudioStreamPlayer" parent="." unique_id=1680970413]
+[node name="Alarm" type="AudioStreamPlayer" parent="." unique_id=1195255912]
 unique_name_in_owner = true
 volume_db = -8.0
 script = ExtResource("10_78uns")
