@@ -53,6 +53,9 @@ const TURN_TIME := 0.9
 @onready var _valve_crate_handle: Interactable = %ValveCrateHandle
 @onready var _exit_door: Door = %ExitDoor
 @onready var _exit_trigger: TriggerZone = %ExitTrigger
+@onready var _exit_glow: OmniLight3D = %ExitGlow
+@onready var _exit_sign: Label3D = %ExitSign
+@onready var _exit_panel: MeshInstance3D = %ExitLightPanel
 @onready var _gas: Node3D = %GasFog
 @onready var _alarm: ProceduralSound = %Alarm
 
@@ -93,6 +96,9 @@ func _ready() -> void:
 	_control_crate_handle.enabled = false
 	_valve_crate_handle.enabled = false
 	_exit_trigger.triggered.connect(_on_exit.unbind(1))
+	# The exit's materials are animated: give this run its own copies, so a
+	# replay does not start with the light already on.
+	_exit_panel.material_override = _exit_panel.material_override.duplicate()
 	_intro()
 
 
@@ -383,12 +389,24 @@ func _check_plates() -> void:
 	_door_open = true
 	_gauge.position = _gauge_origin
 	_alarm.stop()
-	_exit_door.open()
+	_reveal_exit()
 	_announcer.announce("L4_PA_DOOR_OPEN", false)
 	EventBus.subtitle_requested.emit("L4_SAY_DOOR_OPEN", 4.0)
 	EventBus.objective_changed.emit("L4_OBJ_LEAVE")
 
 
+## The way out: the shutter rolls up on blinding white light and the EXIT
+## sign comes on.
+func _reveal_exit() -> void:
+	_exit_door.open()
+	_exit_sign.modulate = Color(0.3, 1.0, 0.5)
+	var light := create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
+	light.tween_property(_exit_glow, "light_energy", 3.5, 2.5)
+	light.tween_property(_exit_panel.material_override, "emission_energy_multiplier", 6.0, 2.5)
+
+
+## Out through the door and into the light: the screen goes white (and the
+## ending dream fades in from that same white).
 func _on_exit() -> void:
 	if _escaped or not _door_open:
 		return
@@ -396,7 +414,15 @@ func _on_exit() -> void:
 	is_running = false
 	player.set_input_enabled(false)
 	EventBus.good_ending_earned.emit(_vents <= GOOD_ENDING_MAX_VENTS)
-	await _fx.blink_to(1.0, 1.2)
+	EventBus.objective_changed.emit("")
+	(get_node(^"HUD") as CanvasLayer).visible = false
+	var walk := create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	walk.tween_property(player, "global_position",
+		player.global_position + Vector3(-0.6, 0.0, 0.0), 1.2)
+	create_tween().tween_property(_exit_glow, "light_energy", 9.0, 1.5)
+	var overlay := TransitionOverlay.new()
+	add_child(overlay)
+	await overlay.fade_to_white(1.6)
 	complete_level()
 
 

@@ -21,6 +21,9 @@ const LEVEL_NAME_KEYS: Dictionary[StringName, StringName] = {
 }
 const ENDING_GOOD := "res://scenes/endings/ending_good.tscn"
 const ENDING_BAD := "res://scenes/endings/ending_bad.tscn"
+## Played after the last level, before the good / bad ending card.
+const ENDING_DREAM := "res://scenes/endings/dream/dream_ending.tscn"
+const DREAM_LIGHT := Color(1.0, 0.97, 0.9)
 const GAME_OVER_DELAY := 2.0
 
 var state: State = State.BOOT
@@ -78,6 +81,7 @@ func _open_pause_menu() -> void:
 
 ## Back to the title screen (from an ending or the pause menu).
 func return_to_menu() -> void:
+	SceneTransition.set_color(Color.BLACK) # in case the dream's white fade is still set
 	set_state(State.MENU)
 	LevelLoader.change_level(MAIN_MENU)
 
@@ -114,7 +118,7 @@ func _on_level_started(level_id: StringName) -> void:
 
 func _on_level_completed(level_id: StringName) -> void:
 	if level_id == LEVEL_ORDER.back():
-		_trigger_ending(good_ending)
+		_enter_dream()
 		return
 	var index := LEVEL_ORDER.find(level_id)
 	if index == -1:
@@ -135,6 +139,21 @@ func _apply_player_settings(player: Node3D) -> void:
 	_current_player = player as Player
 	if _current_player:
 		_current_player.mouse_sensitivity = SettingsManager.get_mouse_sensitivity()
+
+
+## Final stage cleared: fade to warm white into the ending dream
+## (scenes/endings/dream), which calls finish_dream() once the player wakes up.
+func _enter_dream() -> void:
+	current_level_id = &"dream_ending"
+	set_state(State.CUTSCENE)
+	SceneTransition.set_color(DREAM_LIGHT)
+	LevelLoader.change_level(ENDING_DREAM)
+
+
+## The player woke up: back to black fades, then the good / bad ending card.
+func finish_dream() -> void:
+	SceneTransition.set_color(Color.BLACK)
+	_trigger_ending(good_ending)
 
 
 func _trigger_ending(is_good: bool) -> void:
