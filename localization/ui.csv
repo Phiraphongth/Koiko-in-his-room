@@ -175,3 +175,8 @@ L4_SAY_CRATE_PUSHED,The crate holds the plate down.,ลังกดแป้น�
 L4_SAY_OWN_WEIGHT,My own weight is holding it. I need something else.,น้ำหนักตัวฉันเองกดอยู่ ต้องใช้อย่างอื่นแทน
 L4_SAY_DOOR_OPEN,Both plates down. The door is open — go!,แป้นถูกกดทั้งสองฝั่งแล้ว ประตูเปิดแล้ว ไปเลย!
 L4_SAY_EXPLOSION,The pressure finds the spark.,แรงดันเจอประกายไฟเข้าแล้ว
+PROMPT_ALARM_OFF,Turn off the alarm,ปิดนาฬิกาปลุก
+DREAM_OBJ_ALARM,Turn off the alarm,ปิดนาฬิกาปลุก
+DREAM_SAY_WHERE,...Where am I? It's so warm here.,...ที่นี่ที่ไหน อบอุ่นจัง
+DREAM_SAY_ALARM,That sound... my alarm?,เสียงนั่น... นาฬิกาปลุกของฉันเหรอ
+DREAM_SAY_AWAKE,...My room. Was it all just a dream?,...ห้องของฉัน ทั้งหมดนั่นเป็นแค่ความฝันเหรอ
