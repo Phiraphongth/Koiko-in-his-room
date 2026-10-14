@@ -8,3 +8,6 @@
 # Exported builds
 /builds/
 /export/
+
+# Throwaway screenshot / test scripts
+/.tmp_shots/
