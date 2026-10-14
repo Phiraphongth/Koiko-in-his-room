@@ -11,14 +11,13 @@ const LEVELS: Dictionary[StringName, String] = {
 	&"hub": "res://scenes/hub/hub.tscn",
 	&"level_1": "res://scenes/levels/level_1_maze/level_1.tscn",
 	&"level_2": "res://scenes/levels/level_2_stalker/level_2.tscn",
-	&"level_3": "res://scenes/levels/level_3_abyss/level_3.tscn",
 	&"level_4": "res://scenes/levels/level_4_valve/level_4.tscn",
 }
-const LEVEL_ORDER: Array[StringName] = [&"hub", &"level_1", &"level_2", &"level_3", &"level_4"]
+const LEVEL_ORDER: Array[StringName] = [&"hub", &"level_1", &"level_2", &"level_4"]
 ## Translation keys shown in the level-select menu (see localization/ui.csv).
 const LEVEL_NAME_KEYS: Dictionary[StringName, StringName] = {
 	&"hub": &"LEVEL_HUB", &"level_1": &"LEVEL_1", &"level_2": &"LEVEL_2",
-	&"level_3": &"LEVEL_3", &"level_4": &"LEVEL_4",
+	&"level_4": &"LEVEL_4",
 }
 const ENDING_GOOD := "res://scenes/endings/ending_good.tscn"
 const ENDING_BAD := "res://scenes/endings/ending_bad.tscn"
