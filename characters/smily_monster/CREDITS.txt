@@ -1,0 +1,5 @@
+"Smily horror monster" by Bento (https://sketchfab.com/gostbento)
+Source: https://sketchfab.com/3d-models/smily-horror-monster-3d3fc31eddaa409a8f2df564823154e1
+License: CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)
+Used unmodified as the Blind Stalker's body in Level 2 (scaled and posed at
+runtime by gameplay/stalker_rig.gd). Keep this credit in the game's credits.

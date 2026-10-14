@@ -241,6 +241,17 @@ func cinematic_look_at(point: Vector3, duration := 0.5) -> void:
 	tween.tween_property(_camera_pitch, "rotation:x", pitch, duration)
 
 
+## Points the head at a world point instantly. Cutscenes that follow a moving
+## target call this every frame and smooth the point themselves.
+func cinematic_face(point: Vector3) -> void:
+	var to := point - _camera_yaw.global_position
+	var flat := Vector2(to.x, to.z).length()
+	if flat < 0.01:
+		return
+	_camera_yaw.rotation.y = atan2(-to.x, -to.z)
+	_camera_pitch.rotation.x = clampf(atan2(to.y, flat), -1.2, 1.2)
+
+
 ## Pulls the third-person camera in (0 = first person) and changes the FOV.
 ## The over-the-shoulder offset is centred as well, so what the camera looks
 ## at ends up in the middle of the frame.
@@ -257,6 +268,30 @@ func cinematic_shake(strength: float, duration: float) -> void:
 	_shake_strength = strength
 	_shake_total = maxf(duration, 0.05)
 	_shake_left = _shake_total
+
+
+## Drops the cutscene camera to `height` metres above the feet (knocked to
+## the floor). Falls like a body: slow at first, then fast.
+func cinematic_height(height: float, duration := 0.5) -> Tween:
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(_camera_yaw, "position:y", height, duration)
+	return tween
+
+
+## Dutch angle: rolls the camera around the way it is looking.
+func cinematic_roll(angle: float, duration := 0.5) -> void:
+	create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT) \
+		.tween_property(_camera, "rotation:z", angle, duration)
+
+
+## Lays the body on its back for death cutscenes: torso at `center`, the head
+## pointing along `head_dir`. Returns the body so the cutscene can jolt it.
+func cinematic_corpse(center: Vector3, head_dir: Vector3) -> Node3D:
+	var along := Vector3(head_dir.x, 0.0, head_dir.z).normalized()
+	var on_back := Basis(Vector3.UP, atan2(along.x, along.z)) * Basis(Vector3.RIGHT, PI * 0.5)
+	_visual.global_transform = Transform3D(on_back, center - along * 0.95 + Vector3.UP * 0.12)
+	_visual.visible = true
+	return _visual
 
 
 func kill(reason: String) -> void:
