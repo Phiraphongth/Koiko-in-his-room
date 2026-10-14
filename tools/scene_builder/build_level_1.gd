@@ -18,7 +18,7 @@ const WHISPER_STONE := preload("res://gameplay/whisper_stone.gd")
 const CELLS := 9
 const CELL := 3.4
 const WALL := 0.25
-const HEIGHT := 3.2
+const HEIGHT := 2.9 ## hedge: over the player's head, under the treeline
 const CONFIGURATIONS := 3
 const GATE_COUNT := 12
 const LASER_COUNT := 7
@@ -42,7 +42,8 @@ func _build() -> void:
 	_root.set("time_limit", 360.0)
 	_root.set("autostart", false)
 	_materials()
-	_environment(0.045, Color(0.13, 0.13, 0.17))
+	# Daylight: the game is played in the open, in full view of a blue sky.
+	_environment(0.008, Color(0.55, 0.60, 0.66), 1.1, 1.0, 1.0, "day")
 	_generate_maze()
 	_place_gates()
 	_build_shell()
@@ -52,14 +53,21 @@ func _build() -> void:
 
 
 func _materials() -> void:
-	_m.stone = _textured(Color(0.10, 0.10, 0.11), Color(0.28, 0.27, 0.26), 0.012, 91, 0.95, Vector3.ONE * 0.35)
-	_m.floor = _textured(Color(0.07, 0.07, 0.08), Color(0.22, 0.21, 0.2), 0.02, 92, 0.9, Vector3.ONE * 0.4)
-	(_m.floor as StandardMaterial3D).roughness_texture = _noise(0.008, Color(0.15, 0.15, 0.15), Color.WHITE, 93)
-	_m.gate = _textured(Color(0.12, 0.09, 0.09), Color(0.3, 0.22, 0.2), 0.03, 94, 0.6, Vector3.ONE, {"metallic": 0.5})
-	_m.metal = _textured(Color(0.1, 0.1, 0.11), Color(0.28, 0.27, 0.26), 0.03, 95, 0.45, Vector3.ONE, {"metallic": 0.7})
+	# A clipped formal garden at midday. The noise is deliberately coarse and
+	# wide in colour: a hedge needs visible clumps of leaf and shadow, a narrow
+	# range just renders as a painted slab.
+	_m.hedge = _textured(Color(0.05, 0.17, 0.04), Color(0.42, 0.68, 0.22), 1.1, 91, 1.0, Vector3.ONE * 1.1)
+	_m.hedge_dark = _textured(Color(0.04, 0.12, 0.03), Color(0.30, 0.52, 0.16), 1.4, 97, 1.0, Vector3.ONE * 1.4)
+	_m.grass = _textured(Color(0.10, 0.26, 0.07), Color(0.38, 0.58, 0.20), 0.55, 92, 0.95, Vector3.ONE * 0.9)
+	_m.gravel = _textured(Color(0.40, 0.38, 0.34), Color(0.68, 0.66, 0.60), 0.35, 98, 0.9, Vector3.ONE * 0.9)
+	_m.stone = _textured(Color(0.46, 0.45, 0.42), Color(0.78, 0.77, 0.73), 0.02, 93, 0.9, Vector3.ONE * 0.35)
+	_m.floor = _m.grass
+	_m.gate = _m.hedge_dark
+	_m.metal = _textured(Color(0.05, 0.05, 0.06), Color(0.16, 0.16, 0.17), 0.03, 95, 0.45, Vector3.ONE, {"metallic": 0.8})
 	_m.card = _flat(Color(0.9, 0.9, 0.88), 0.45)
-	_m.pipe = _flat(Color(0.2, 0.2, 0.19), 0.6, {"metallic": 0.7})
-	_m.bulb = _emissive(WARM, 6.0)
+	_m.glass_lamp = _flat(Color(0.75, 0.78, 0.72), 0.25, {"metallic": 0.2})
+	_m.pipe = _flat(Color(0.14, 0.14, 0.13), 0.6, {"metallic": 0.7})
+	_m.bulb = _emissive(Color(1.0, 0.85, 0.55), 6.0)
 	_m.red_lamp = _emissive(BLOOD_RED, 6.0)
 	_m.screen = _emissive(Color(0.03, 0.02, 0.02), 1.0)
 
@@ -215,20 +223,50 @@ func _build_shell() -> void:
 	var arch := CSGCombiner3D.new()
 	arch.use_collision = true
 	_add(_root, arch, "Architecture")
-	_csg(arch, "Floor", Vector3(0, -0.1, 0), Vector3(span + 8.0, 0.2, span + 20.0), _m.floor)
-	_csg(arch, "Ceiling", Vector3(0, HEIGHT + 0.1, 0), Vector3(span + 8.0, 0.2, span + 20.0), _m.stone)
-	# Entrance corridor (south) and exit corridor (north).
+	# Lawn, and nothing overhead: the maze is cut into a garden, not a building.
+	_csg(arch, "Lawn", Vector3(0, -0.1, 0), Vector3(span + 26.0, 0.2, span + 32.0), _m.grass)
+	_csg(arch, "WalkSouth", Vector3(0, 0.02, span * 0.5 + 5.0), Vector3(CELL * 1.25, 0.12, 12.0), _m.gravel)
+	_csg(arch, "WalkNorth", Vector3(0, 0.02, -(span * 0.5 + 5.0)), Vector3(CELL * 1.25, 0.12, 12.0), _m.gravel)
+
+	# A garden wall around the grounds: the player is outdoors, but not free.
+	var outer := span * 0.5 + 10.0
+	var wall_h := 4.4
+	for side: int in 4:
+		var horizontal := side < 2
+		var sign := 1.0 if side % 2 == 0 else -1.0
+		var centre := Vector3(0, wall_h * 0.5, outer * sign) if horizontal else Vector3(outer * sign, wall_h * 0.5, 0)
+		var size := Vector3(outer * 2.0 + 1.0, wall_h, 1.0) if horizontal else Vector3(1.0, wall_h, outer * 2.0 + 1.0)
+		_csg(arch, "GardenWall", centre, size, _m.stone)
+	# Gaps for the two gravel walks so the walls do not seal the garden off.
+	_csg(arch, "WalkGapS", Vector3(0, wall_h * 0.5, outer), Vector3(CELL * 1.3, wall_h + 0.4, 2.4), _m.stone, true)
+	_csg(arch, "WalkGapN", Vector3(0, wall_h * 0.5, -outer), Vector3(CELL * 1.3, wall_h + 0.4, 2.4), _m.stone, true)
+
+	# Entrance and exit are hedge corridors with stone pillars.
 	var entrance := _cell_center(START) + Vector3(0, 0, CELL * 1.6)
-	_csg(arch, "EntranceL", entrance + Vector3(-CELL * 0.6, HEIGHT * 0.5, 0), Vector3(WALL, HEIGHT, CELL * 2.2), _m.stone)
-	_csg(arch, "EntranceR", entrance + Vector3(CELL * 0.6, HEIGHT * 0.5, 0), Vector3(WALL, HEIGHT, CELL * 2.2), _m.stone)
-	_csg(arch, "EntranceBack", entrance + Vector3(0, HEIGHT * 0.5, CELL * 1.1), Vector3(CELL * 1.4, HEIGHT, WALL), _m.stone)
+	_hedge_run(arch, entrance + Vector3(-CELL * 0.6, 0, 0), Vector3(WALL, HEIGHT, CELL * 2.2))
+	_hedge_run(arch, entrance + Vector3(CELL * 0.6, 0, 0), Vector3(WALL, HEIGHT, CELL * 2.2))
 	var exit_center := _cell_center(EXIT) - Vector3(0, 0, CELL * 1.6)
-	_csg(arch, "ExitL", exit_center + Vector3(-CELL * 0.6, HEIGHT * 0.5, 0), Vector3(WALL, HEIGHT, CELL * 2.4), _m.stone)
-	_csg(arch, "ExitR", exit_center + Vector3(CELL * 0.6, HEIGHT * 0.5, 0), Vector3(WALL, HEIGHT, CELL * 2.4), _m.stone)
-	_csg(arch, "ExitBack", exit_center + Vector3(0, HEIGHT * 0.5, -CELL * 1.25), Vector3(CELL * 1.4, HEIGHT, WALL), _m.stone)
+	_hedge_run(arch, exit_center + Vector3(-CELL * 0.6, 0, 0), Vector3(WALL, HEIGHT, CELL * 2.4))
+	_hedge_run(arch, exit_center + Vector3(CELL * 0.6, 0, 0), Vector3(WALL, HEIGHT, CELL * 2.4))
+	for pillar: Vector3 in [entrance + Vector3(-CELL * 0.6, 0, CELL * 1.1),
+			entrance + Vector3(CELL * 0.6, 0, CELL * 1.1),
+			exit_center + Vector3(-CELL * 0.6, 0, -CELL * 1.2),
+			exit_center + Vector3(CELL * 0.6, 0, -CELL * 1.2)]:
+		_box(_root, "Pillar", Vector3(0.5, HEIGHT + 0.9, 0.5), pillar + Vector3(0, (HEIGHT + 0.9) * 0.5, 0), _m.stone)
+		_mesh(_root, "PillarCap", _sphere(0.32), pillar + Vector3(0, HEIGHT + 1.1, 0), _m.stone)
 
 	var spawn := Marker3D.new()
 	_add(_root, spawn, "SpawnPoint").position = entrance + Vector3(0, 0.05, CELL * 0.7)
+
+
+## One run of clipped hedge: stone kerb, body, and an uneven crown on top.
+func _hedge_run(parent: Node, base: Vector3, size: Vector3) -> void:
+	var kerb := 0.3
+	_box(parent, "Kerb", Vector3(size.x + 0.16, kerb, size.z + 0.16), base + Vector3(0, kerb * 0.5, 0), _m.stone)
+	_box(parent, "Hedge", Vector3(size.x, size.y - kerb, size.z), base + Vector3(0, kerb + (size.y - kerb) * 0.5, 0), _m.hedge)
+	if _rng.randf() < 0.55: # a crown on some runs, so the tops are not a flat line
+		_box(parent, "Crown", Vector3(size.x * 1.5, 0.26, size.z * 0.98),
+			base + Vector3(0, size.y + 0.04, 0), _m.hedge_dark, false)
 
 
 func _build_walls() -> void:
@@ -239,7 +277,9 @@ func _build_walls() -> void:
 		if not _walls[id]:
 			continue
 		var placement := _wall_transform(id)
-		_box(walls, "Wall", placement[1], placement[0], _m.stone)
+		var size: Vector3 = placement[1]
+		var base: Vector3 = placement[0] - Vector3(0, size.y * 0.5, 0)
+		_hedge_run(walls, base, size)
 	for id: String in _gates:
 		var placement := _wall_transform(id)
 		var gate := Node3D.new()
@@ -252,24 +292,32 @@ func _build_walls() -> void:
 		panel.position = placement[0]
 		_box(panel, "Mesh", placement[1], Vector3.ZERO, _m.gate, false)
 		_box_shape(panel, placement[1], Vector3.ZERO)
-		# A warning stripe so raised gates read as machinery, not architecture.
-		_box(panel, "Stripe", placement[1] * Vector3(1.02, 0.04, 1.02) + Vector3(0.01, 0, 0.01),
-			Vector3(0, HEIGHT * 0.38, 0), _m.red_lamp, false)
+		# A line of lamps along the top, so a hedge that can move reads as
+		# different from one that cannot.
+		_box(panel, "Stripe", placement[1] * Vector3(1.3, 0.035, 1.0),
+			Vector3(0, HEIGHT * 0.5 - 0.1, 0), _m.bulb, false)
 
 
 func _build_props() -> void:
 	var span := (CELLS - 1) * 0.5 * CELL
-	# Dim ceiling lights spread over the maze.
+	# Midday sun. Everything in this maze is lit, which is the point: the
+	# danger is the walls moving, not the dark.
+	var sun := DirectionalLight3D.new()
+	sun.light_color = Color(1.0, 0.97, 0.90)
+	sun.light_energy = 2.6
+	sun.shadow_enabled = true
+	sun.directional_shadow_max_distance = 90.0
+	_add(_root, sun, "Sunlight").rotation_degrees = Vector3(-52, 38, 0)
+
+	# Garden lanterns, unlit at this hour: dressing tucked into the hedge
+	# corners so they never block a passage.
 	var lights := _group(_root, "MazeLights")
-	var lamp_index := 0
 	for cx in range(0, CELLS, 2):
 		for cz in range(0, CELLS, 2):
-			lamp_index += 1
 			var cell := Vector2i(cx, cz)
-			var lamp := _omni(lights, "Lamp", _cell_center(cell) + Vector3(0, HEIGHT - 0.35, 0),
-				WARM, 1.7, 8.0, false, Light.BROKEN if lamp_index % 4 == 0 else Light.STEADY)
-			_mesh(lamp, "Bulb", _sphere(0.06), Vector3.ZERO, _m.bulb)
-			lamp.set("emissive_mesh", NodePath("Bulb"))
+			var foot: Vector3 = _cell_center(cell) + Vector3(-CELL * 0.42, 0.0, -CELL * 0.42)
+			_mesh(lights, "LanternPost", _cylinder(0.05, 2.1), foot + Vector3(0, 1.05, 0), _m.pipe)
+			_mesh(lights, "LanternGlass", _sphere(0.11), foot + Vector3(0, 2.2, 0), _m.glass_lamp)
 
 	# Whisper stones: the three cells deepest into the maze.
 	var ranked: Array[Vector2i] = []
@@ -329,9 +377,28 @@ func _build_props() -> void:
 		{"slide_offset": Vector3(0, HEIGHT, 0), "open_time": 2.2, "interactive": false,
 		"open_sound": &"shutter", "player_can_close": false})
 	_unique.append(door)
-	_label(_root, "EXIT", exit_center + Vector3(0, HEIGHT - 0.4, -0.2), Vector3(0, 180, 0), 96, 0.004, Color(0.2, 0.9, 0.4))
+	_label(_root, "EXIT", exit_center + Vector3(0, HEIGHT + 0.55, -0.2), Vector3(0, 180, 0), 96, 0.004, Color(0.2, 0.9, 0.4))
+	# Iron arch over the way out.
+	_box(_root, "ArchBeam", Vector3(CELL * 1.5, 0.16, 0.16), exit_center + Vector3(0, HEIGHT + 0.3, 0), _m.metal, false)
 	_omni(_root, "ExitLight", _cell_center(EXIT) - Vector3(0, -2.4, CELL * 2.4), Color(0.7, 1.0, 0.8), 2.0, 6.0, false, Light.STEADY)
 	_trigger(_root, "ExitTrigger", _cell_center(EXIT) - Vector3(0, -1.0, CELL * 2.2), Vector3(CELL, 2.0, 1.0))
+
+	# Garden dressing: topiary and urns in the corners of random cells.
+	var dressing := _group(_root, "Dressing")
+	for i in 14:
+		var cell := Vector2i(_rng.randi_range(0, CELLS - 1), _rng.randi_range(0, CELLS - 1))
+		if cell == START or cell == EXIT:
+			continue
+		var corner := Vector3(CELL * 0.36 * (1.0 if _rng.randf() < 0.5 else -1.0), 0.0,
+			CELL * 0.36 * (1.0 if _rng.randf() < 0.5 else -1.0))
+		var spot: Vector3 = _cell_center(cell) + corner
+		if _rng.randf() < 0.55:
+			var r := _rng.randf_range(0.34, 0.52)
+			_mesh(dressing, "Topiary", _sphere(r), spot + Vector3(0, r + 0.25, 0), _m.hedge)
+			_mesh(dressing, "TopiaryPot", _cylinder(0.26, 0.5), spot + Vector3(0, 0.25, 0), _m.stone)
+		else:
+			_mesh(dressing, "Urn", _cylinder(0.3, 0.9), spot + Vector3(0, 0.45, 0), _m.stone)
+			_mesh(dressing, "UrnLip", _cylinder(0.36, 0.12), spot + Vector3(0, 0.92, 0), _m.stone)
 
 	# Entrance dressing: the cards from the hub keep leading the way in.
 	for i in 5:
@@ -341,6 +408,12 @@ func _build_props() -> void:
 
 func _systems() -> void:
 	_add_core_systems(-12.0)
+	# Outdoors in daylight the usual vignette and desaturation read as haze
+	# over a grey sky, so this level wears them lightly.
+	var fx: CanvasLayer = _root.get_node("HorrorFX")
+	fx.set("base_vignette", 0.18)
+	fx.set("desaturation", 0.05)
+	fx.set("base_grain", 0.03)
 	var shift := AudioStreamPlayer.new()
 	shift.set_script(SOUND)
 	shift.set("sound_id", &"shift")

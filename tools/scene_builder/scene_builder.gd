@@ -121,12 +121,34 @@ func _emissive(color: Color, energy: float) -> StandardMaterial3D:
 # =========================================================================
 
 func _environment(fog_density: float = 0.03, ambient: Color = Color(0.05, 0.06, 0.09),
-		ambient_energy: float = 0.3, exposure: float = 1.1, contrast: float = 1.12) -> void:
+		ambient_energy: float = 0.3, exposure: float = 1.1, contrast: float = 1.12,
+		sky_kind: String = "") -> void: ## "day" / "night" for outdoor levels
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color.BLACK
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = ambient
+	if sky_kind != "": # outdoor levels need something above the walls
+		var sky_material := ProceduralSkyMaterial.new()
+		if sky_kind == "day":
+			sky_material.sky_top_color = Color(0.30, 0.50, 0.85)
+			sky_material.sky_horizon_color = Color(0.72, 0.80, 0.90)
+			sky_material.ground_horizon_color = Color(0.62, 0.65, 0.66)
+			sky_material.ground_bottom_color = Color(0.35, 0.34, 0.30)
+			sky_material.sun_angle_max = 6.0
+			sky_material.sun_curve = 0.12
+		else:
+			sky_material.sky_top_color = Color(0.012, 0.016, 0.04)
+			sky_material.sky_horizon_color = Color(0.05, 0.055, 0.085)
+			sky_material.ground_horizon_color = Color(0.035, 0.04, 0.06)
+			sky_material.ground_bottom_color = Color(0.01, 0.012, 0.02)
+		sky_material.sky_curve = 0.25
+		var sky := Sky.new()
+		sky.sky_material = sky_material
+		env.sky = sky
+		env.background_mode = Environment.BG_SKY
+		# Daylight bounces off everything; take the ambient from the sky itself.
+		env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	env.ambient_light_energy = ambient_energy
 	env.tonemap_mode = Environment.TONE_MAPPER_AGX
 	env.tonemap_exposure = exposure
