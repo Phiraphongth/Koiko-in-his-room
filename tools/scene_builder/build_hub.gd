@@ -22,7 +22,9 @@ func _build() -> void:
 	_root.set("level_id", &"hub")
 	_root.set("autostart", false)
 	_materials()
-	_environment()
+	# The prologue is the player's own flat, not a crime scene: lift the floor
+	# of the lighting so the room and the corridor read without a torch.
+	_environment(0.02, Color(0.16, 0.17, 0.21), 0.8, 1.45, 1.0)
 	_architecture()
 	_room()
 	_hallway()
@@ -151,7 +153,7 @@ func _room() -> void:
 
 	# Ceiling bulb (broken: flickers every few seconds).
 	_mesh(room, "Cord", _cylinder(0.006, 0.3), Vector3(0.0, 2.63, 0.3), _m.plastic)
-	var bulb := _omni(room, "CeilingBulb", Vector3(0.0, 2.42, 0.3), WARM, 1.6, 6.0, true, Light.BROKEN)
+	var bulb := _omni(room, "CeilingBulb", Vector3(0.0, 2.42, 0.3), WARM, 2.4, 9.0, true, Light.BROKEN)
 	_mesh(bulb, "Glass", _sphere(0.05), Vector3(0.0, 0.03, 0.0), _m.bulb)
 	bulb.set("emissive_mesh", NodePath("Glass"))
 	bulb.set("emission_energy", 6.0)
@@ -197,10 +199,10 @@ func _hallway() -> void:
 	var lights := _group(hall, "HallLights")
 	_unique.append(lights)
 	var tube_z := [-4.0, -7.5, -11.0, -14.5, -18.0, -21.0]
-	var tube_mode := [Light.STEADY, Light.BROKEN, Light.STEADY, Light.OFF, Light.FLICKER, Light.STEADY]
+	var tube_mode := [Light.STEADY, Light.FLICKER, Light.STEADY, Light.STEADY, Light.BROKEN, Light.STEADY]
 	for i in tube_z.size():
 		var spot := _spot(lights, "Tube%d" % i, Vector3(1.5, 2.62, tube_z[i]), Vector3(-90, 0, 0),
-			TUBE_COLOR, 3.0, 4.5, 62.0, i == 0 or i == 2, tube_mode[i], i == 1 or i == 4)
+			TUBE_COLOR, 6.0, 9.0, 70.0, i == 0 or i == 2, tube_mode[i], i == 1 or i == 4)
 		_box(spot, "TubeMesh", Vector3(0.1, 1.2, 0.035), Vector3(0, 0, 0.05), _m.tube, false)
 		spot.set("emissive_mesh", NodePath("TubeMesh"))
 
@@ -273,9 +275,9 @@ func _lobby() -> void:
 			_add(phone, take, "RegisterPhone")
 			_box_shape(take, Vector3(0.4, 0.25, 0.4), Vector3.ZERO)
 			_unique.append(take)
-	_spot(lobby, "TableLight", Vector3(1.5, 4.4, -26.5), Vector3(-90, 0, 0), Color(1.0, 0.95, 0.85), 14.0, 6.0, 26.0, true, Light.STEADY, false)
+	_spot(lobby, "TableLight", Vector3(1.5, 4.4, -26.5), Vector3(-90, 0, 0), Color(1.0, 0.95, 0.85), 16.0, 9.0, 34.0, true, Light.STEADY, false)
 	for i in 3:
-		var dead := _spot(lobby, "DeadTube%d" % i, Vector3(-0.5 + i * 2.0, 4.45, -23.5), Vector3(-90, 0, 0), TUBE_COLOR, 3.0, 6.0, 60.0, false, Light.OFF if i != 2 else Light.FLICKER, false)
+		var dead := _spot(lobby, "DeadTube%d" % i, Vector3(-0.5 + i * 2.0, 4.45, -23.5), Vector3(-90, 0, 0), TUBE_COLOR, 5.0, 9.0, 65.0, false, Light.FLICKER if i == 2 else Light.STEADY, false)
 		_box(dead, "TubeMesh", Vector3(0.1, 1.2, 0.035), Vector3(0, 0, 0.05), _m.tube, false)
 		dead.set("emissive_mesh", NodePath("TubeMesh"))
 
