@@ -16,10 +16,10 @@
 [sub_resource type="Environment" id="Environment_a6kx1"]
 background_mode = 1
 ambient_light_source = 2
-ambient_light_color = Color(0.05, 0.06, 0.09, 1)
-ambient_light_energy = 0.3
+ambient_light_color = Color(0.16, 0.17, 0.21, 1)
+ambient_light_energy = 0.8
 tonemap_mode = 4
-tonemap_exposure = 1.1
+tonemap_exposure = 1.45
 ssr_enabled = true
 ssr_max_steps = 48
 ssao_enabled = true
@@ -29,11 +29,10 @@ glow_enabled = true
 glow_intensity = 0.7
 glow_bloom = 0.05
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
+volumetric_fog_density = 0.02
 volumetric_fog_albedo = Color(0.75, 0.75, 0.78, 1)
 volumetric_fog_length = 40.0
 adjustment_enabled = true
-adjustment_contrast = 1.12
 adjustment_saturation = 0.75
 
 [sub_resource type="Gradient" id="Gradient_w2rvg"]
@@ -925,301 +924,301 @@ size = Vector3(8, 2, 0.8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_70ctm"]
 size = Vector3(2.4, 2, 0.8)
 
-[node name="Hub" type="Node3D" unique_id=732272247]
+[node name="Hub" type="Node3D" unique_id=1988043615]
 script = ExtResource("1_2v8x0")
 level_id = &"hub"
 autostart = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=925754043]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1211810544]
 environment = SubResource("Environment_a6kx1")
 
-[node name="Architecture" type="CSGCombiner3D" parent="." unique_id=104061097]
+[node name="Architecture" type="CSGCombiner3D" parent="." unique_id=799507889]
 use_collision = true
 
-[node name="Shell" type="CSGBox3D" parent="Architecture" unique_id=1001082397]
+[node name="Shell" type="CSGBox3D" parent="Architecture" unique_id=1175227120]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.3, -16.1)
 size = Vector3(9, 5, 38)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="RoomSpace" type="CSGBox3D" parent="Architecture" unique_id=1348987204]
+[node name="RoomSpace" type="CSGBox3D" parent="Architecture" unique_id=1387347152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 operation = 2
 size = Vector3(5, 2.8, 4.5)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="HallSpace" type="CSGBox3D" parent="Architecture" unique_id=508388378]
+[node name="HallSpace" type="CSGBox3D" parent="Architecture" unique_id=1739163758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.35, -12.225)
 operation = 2
 size = Vector3(2.2, 2.7, 19.55)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="LobbySpace" type="CSGBox3D" parent="Architecture" unique_id=55550028]
+[node name="LobbySpace" type="CSGBox3D" parent="Architecture" unique_id=399701446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.25, -26)
 operation = 2
 size = Vector3(8, 4.5, 8)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="VestibuleSpace" type="CSGBox3D" parent="Architecture" unique_id=1618350214]
+[node name="VestibuleSpace" type="CSGBox3D" parent="Architecture" unique_id=486708125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, -32.1)
 operation = 2
 size = Vector3(2.4, 3, 3.8)
 material = SubResource("StandardMaterial3D_aqey8")
 
-[node name="RoomDoorway" type="CSGBox3D" parent="Architecture" unique_id=1823408739]
+[node name="RoomDoorway" type="CSGBox3D" parent="Architecture" unique_id=279323496]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.07, -2.35)
 operation = 2
 size = Vector3(1, 2.1, 0.6)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="GateOpening" type="CSGBox3D" parent="Architecture" unique_id=1712277679]
+[node name="GateOpening" type="CSGBox3D" parent="Architecture" unique_id=334996001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.52, -30.1)
 operation = 2
 size = Vector3(2.4, 3, 0.6)
 material = SubResource("StandardMaterial3D_aqey8")
 
-[node name="Window" type="CSGBox3D" parent="Architecture" unique_id=1791848376]
+[node name="Window" type="CSGBox3D" parent="Architecture" unique_id=1236008545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 1.6, 0)
 operation = 2
 size = Vector3(1.2, 1.2, 1.6)
 material = SubResource("StandardMaterial3D_hn0up")
 
-[node name="RoomFloor" type="CSGBox3D" parent="Architecture" unique_id=2113908034]
+[node name="RoomFloor" type="CSGBox3D" parent="Architecture" unique_id=1231942540]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
 size = Vector3(5.1, 0.04, 4.55)
 material = SubResource("StandardMaterial3D_f511r")
 
-[node name="HallFloor" type="CSGBox3D" parent="Architecture" unique_id=773269325]
+[node name="HallFloor" type="CSGBox3D" parent="Architecture" unique_id=1370549477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -12.125)
 size = Vector3(2.3, 0.04, 19.75)
 material = SubResource("StandardMaterial3D_l2yr5")
 
-[node name="LobbyFloor" type="CSGBox3D" parent="Architecture" unique_id=952931368]
+[node name="LobbyFloor" type="CSGBox3D" parent="Architecture" unique_id=204740455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -26)
 size = Vector3(8.1, 0.04, 8)
 material = SubResource("StandardMaterial3D_fpukw")
 
-[node name="VestibuleFloor" type="CSGBox3D" parent="Architecture" unique_id=1184636901]
+[node name="VestibuleFloor" type="CSGBox3D" parent="Architecture" unique_id=319729908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -32)
 size = Vector3(2.5, 0.04, 4)
 material = SubResource("StandardMaterial3D_aqey8")
 
-[node name="RoomCeiling" type="CSGBox3D" parent="Architecture" unique_id=448005123]
+[node name="RoomCeiling" type="CSGBox3D" parent="Architecture" unique_id=1684134977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
 size = Vector3(5.1, 0.04, 4.6)
 material = SubResource("StandardMaterial3D_8k622")
 
-[node name="HallCeiling" type="CSGBox3D" parent="Architecture" unique_id=1933547834]
+[node name="HallCeiling" type="CSGBox3D" parent="Architecture" unique_id=1877502602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.7, -12.225)
 size = Vector3(2.3, 0.04, 19.6)
 material = SubResource("StandardMaterial3D_8k622")
 
-[node name="LobbyCeiling" type="CSGBox3D" parent="Architecture" unique_id=1175826649]
+[node name="LobbyCeiling" type="CSGBox3D" parent="Architecture" unique_id=536404643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4.5, -26)
 size = Vector3(8.1, 0.04, 8.1)
 material = SubResource("StandardMaterial3D_8k622")
 
-[node name="Room" type="Node3D" parent="." unique_id=1198786698]
+[node name="Room" type="Node3D" parent="." unique_id=268167463]
 
-[node name="BedFrame" type="StaticBody3D" parent="Room" unique_id=849816376]
+[node name="BedFrame" type="StaticBody3D" parent="Room" unique_id=1319640953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0.16, 1.15)
 
-[node name="Mesh" type="MeshInstance3D" parent="Room/BedFrame" unique_id=238552005]
+[node name="Mesh" type="MeshInstance3D" parent="Room/BedFrame" unique_id=218616026]
 material_override = SubResource("StandardMaterial3D_n33od")
 mesh = SubResource("BoxMesh_phf8i")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/BedFrame" unique_id=430043634]
+[node name="Shape" type="CollisionShape3D" parent="Room/BedFrame" unique_id=1671275780]
 shape = SubResource("BoxShape3D_fnpcb")
 
-[node name="Mattress" type="MeshInstance3D" parent="Room" unique_id=2053215378]
+[node name="Mattress" type="MeshInstance3D" parent="Room" unique_id=1338007868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0.41, 1.15)
 material_override = SubResource("StandardMaterial3D_wpfvi")
 mesh = SubResource("BoxMesh_h1c3i")
 
-[node name="Pillow" type="MeshInstance3D" parent="Room" unique_id=399342999]
+[node name="Pillow" type="MeshInstance3D" parent="Room" unique_id=1776160471]
 transform = Transform3D(0.9945219, 0, 0.104528464, 0, 1, 0, -0.104528464, 0, 0.9945219, -1.95, 0.56, 1.9)
 material_override = SubResource("StandardMaterial3D_y72fa")
 mesh = SubResource("BoxMesh_jqkio")
 
-[node name="Blanket" type="MeshInstance3D" parent="Room" unique_id=2022505627]
+[node name="Blanket" type="MeshInstance3D" parent="Room" unique_id=1799785801]
 transform = Transform3D(0.98680097, -0.042651985, -0.15622008, 0.034851667, 0.9980212, -0.05233596, 0.15814319, 0.046200644, 0.98633474, -1.9, 0.53, 0.55)
 material_override = SubResource("StandardMaterial3D_80y1t")
 mesh = SubResource("BoxMesh_5mvb1")
 
-[node name="DeskTop" type="StaticBody3D" parent="Room" unique_id=518853706]
+[node name="DeskTop" type="StaticBody3D" parent="Room" unique_id=87173157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0.75, 0.9)
 
-[node name="Mesh" type="MeshInstance3D" parent="Room/DeskTop" unique_id=1449638177]
+[node name="Mesh" type="MeshInstance3D" parent="Room/DeskTop" unique_id=1928981603]
 material_override = SubResource("StandardMaterial3D_n33od")
 mesh = SubResource("BoxMesh_bsmeh")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/DeskTop" unique_id=2028714217]
+[node name="Shape" type="CollisionShape3D" parent="Room/DeskTop" unique_id=262361849]
 shape = SubResource("BoxShape3D_rayup")
 
-[node name="DeskLeg" type="MeshInstance3D" parent="Room" unique_id=1860675435]
+[node name="DeskLeg" type="MeshInstance3D" parent="Room" unique_id=1734718005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.37, 0.25)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_2c7vr")
 
-[node name="DeskLeg2" type="MeshInstance3D" parent="Room" unique_id=1533903615]
+[node name="DeskLeg2" type="MeshInstance3D" parent="Room" unique_id=1601628530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.37, 0.25)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_02lq7")
 
-[node name="DeskLeg3" type="MeshInstance3D" parent="Room" unique_id=868050435]
+[node name="DeskLeg3" type="MeshInstance3D" parent="Room" unique_id=2082941242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.37, 1.55)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_y4rwm")
 
-[node name="DeskLeg4" type="MeshInstance3D" parent="Room" unique_id=1405274896]
+[node name="DeskLeg4" type="MeshInstance3D" parent="Room" unique_id=1887982000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.37, 1.55)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_q8nxg")
 
-[node name="Monitor" type="MeshInstance3D" parent="Room" unique_id=279537045]
+[node name="Monitor" type="MeshInstance3D" parent="Room" unique_id=897029275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 1, 0.95)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_3rul2")
 
-[node name="MonitorScreen" type="MeshInstance3D" parent="Room" unique_id=310563591]
+[node name="MonitorScreen" type="MeshInstance3D" parent="Room" unique_id=275561411]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27, 1, 0.95)
 material_override = SubResource("StandardMaterial3D_hvq24")
 mesh = SubResource("BoxMesh_jbvaw")
 
-[node name="Keyboard" type="MeshInstance3D" parent="Room" unique_id=1143447658]
+[node name="Keyboard" type="MeshInstance3D" parent="Room" unique_id=2025388747]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02, 0.78, 0.95)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_oj6j5")
 
-[node name="ChairSeat" type="StaticBody3D" parent="Room" unique_id=450222647]
+[node name="ChairSeat" type="StaticBody3D" parent="Room" unique_id=2023253034]
 transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90630776, 1.45, 0.47, 1.1)
 
-[node name="Mesh" type="MeshInstance3D" parent="Room/ChairSeat" unique_id=261430729]
+[node name="Mesh" type="MeshInstance3D" parent="Room/ChairSeat" unique_id=1492742584]
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_c4d5o")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/ChairSeat" unique_id=477518939]
+[node name="Shape" type="CollisionShape3D" parent="Room/ChairSeat" unique_id=726439299]
 shape = SubResource("BoxShape3D_hkamm")
 
-[node name="ChairBack" type="MeshInstance3D" parent="Room" unique_id=1156546102]
+[node name="ChairBack" type="MeshInstance3D" parent="Room" unique_id=1823756801]
 transform = Transform3D(0.89748764, 0.12613367, 0.42261827, -0.1391731, 0.99026805, 0, -0.41850537, -0.058817096, 0.90630776, 1.24, 0.75, 1.2)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_it66a")
 
-[node name="PhoneBody" type="MeshInstance3D" parent="Room" unique_id=442825419]
+[node name="PhoneBody" type="MeshInstance3D" parent="Room" unique_id=1787748600]
 transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 1.95, 0.776, 0.45)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_63ob5")
 
-[node name="Screen" type="MeshInstance3D" parent="Room/PhoneBody" unique_id=1378420138]
+[node name="Screen" type="MeshInstance3D" parent="Room/PhoneBody" unique_id=1815560167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_1tmg4")
 
-[node name="Phone" type="Area3D" parent="Room/PhoneBody" unique_id=1486423068]
+[node name="Phone" type="Area3D" parent="Room/PhoneBody" unique_id=1750533326]
 unique_name_in_owner = true
 script = ExtResource("2_6ocvm")
 title = "HUB_PHONE_TITLE"
 body = "HUB_PHONE_BODY"
 prompt_text = "PROMPT_CHECK_PHONE"
 
-[node name="Shape" type="CollisionShape3D" parent="Room/PhoneBody/Phone" unique_id=1649150681]
+[node name="Shape" type="CollisionShape3D" parent="Room/PhoneBody/Phone" unique_id=1962289693]
 shape = SubResource("BoxShape3D_wv5l2")
 
-[node name="PhoneLight" type="OmniLight3D" parent="Room" unique_id=2099435993]
+[node name="PhoneLight" type="OmniLight3D" parent="Room" unique_id=517453627]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95, 0.9, 0.45)
 light_color = Color(0.55, 0.8, 1, 1)
 light_energy = 0.15
 omni_range = 1.6
 
-[node name="PhoneSound" type="AudioStreamPlayer3D" parent="Room" unique_id=882605067]
+[node name="PhoneSound" type="AudioStreamPlayer3D" parent="Room" unique_id=1446343608]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95, 0.8, 0.45)
 volume_db = -2.0
 script = ExtResource("3_qoa05")
 sound_id = &"buzz"
 
-[node name="Shelf" type="StaticBody3D" parent="Room" unique_id=309027064]
+[node name="Shelf" type="StaticBody3D" parent="Room" unique_id=377042886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0.95, -2.05)
 
-[node name="Mesh" type="MeshInstance3D" parent="Room/Shelf" unique_id=1583223415]
+[node name="Mesh" type="MeshInstance3D" parent="Room/Shelf" unique_id=1988258165]
 material_override = SubResource("StandardMaterial3D_n33od")
 mesh = SubResource("BoxMesh_m4ffb")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/Shelf" unique_id=1597077016]
+[node name="Shape" type="CollisionShape3D" parent="Room/Shelf" unique_id=1734063162]
 shape = SubResource("BoxShape3D_8da26")
 
-[node name="ShelfBox" type="MeshInstance3D" parent="Room" unique_id=702785349]
+[node name="ShelfBox" type="MeshInstance3D" parent="Room" unique_id=1762947720]
 transform = Transform3D(0.9911401, 0, -0.13282028, 0, 1, 0, 0.13282028, 0, 0.9911401, -2.1, 1.35, -2.05)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_nhjv2")
 
-[node name="ShelfBox2" type="MeshInstance3D" parent="Room" unique_id=42024347]
+[node name="ShelfBox2" type="MeshInstance3D" parent="Room" unique_id=2103862077]
 transform = Transform3D(0.9984596, 0, 0.055484273, 0, 1, 0, -0.055484273, 0, 0.9984596, -1.88, 1.85, -2.05)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_1cwtr")
 
-[node name="ShelfBox3" type="MeshInstance3D" parent="Room" unique_id=1900919571]
+[node name="ShelfBox3" type="MeshInstance3D" parent="Room" unique_id=1063524256]
 transform = Transform3D(0.9975197, 0, -0.07038785, 0, 1, 0, 0.07038785, 0, 0.9975197, -1.66, 1.35, -2.05)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_ulfo3")
 
-[node name="ShelfBox4" type="MeshInstance3D" parent="Room" unique_id=978956744]
+[node name="ShelfBox4" type="MeshInstance3D" parent="Room" unique_id=1962472898]
 transform = Transform3D(0.9870018, 0, -0.16070925, 0, 1, 0, 0.16070925, 0, 0.9870018, -1.44, 1.85, -2.05)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_2q0te")
 
-[node name="ShelfBox5" type="MeshInstance3D" parent="Room" unique_id=149103688]
+[node name="ShelfBox5" type="MeshInstance3D" parent="Room" unique_id=763953649]
 transform = Transform3D(0.99588734, 0, 0.09060008, 0, 1, 0, -0.09060008, 0, 0.99588734, -1.22, 1.35, -2.05)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_2lnff")
 
-[node name="TrashBag" type="MeshInstance3D" parent="Room" unique_id=773596571]
+[node name="TrashBag" type="MeshInstance3D" parent="Room" unique_id=1793343112]
 transform = Transform3D(0.9848077, -0.13891855, 0, 0.17364818, 0.7878462, 0, 0, 0, 1.1, 2.1, 0.22, -1.8)
 material_override = SubResource("StandardMaterial3D_blqaw")
 mesh = SubResource("SphereMesh_ko4e4")
 
-[node name="TrashBag2" type="MeshInstance3D" parent="Room" unique_id=838082702]
+[node name="TrashBag2" type="MeshInstance3D" parent="Room" unique_id=1783529483]
 transform = Transform3D(1.1, 0, 0, 0, 0.8, 0, 0, 0, 1, 1.7, 0.18, -1.95)
 material_override = SubResource("StandardMaterial3D_blqaw")
 mesh = SubResource("SphereMesh_od2hc")
 
-[node name="Rug" type="MeshInstance3D" parent="Room" unique_id=1316028338]
+[node name="Rug" type="MeshInstance3D" parent="Room" unique_id=1656757349]
 transform = Transform3D(0.9975641, 0, 0.06975647, 0, 1, 0, -0.06975647, 0, 0.9975641, -0.3, 0.025, 0.2)
 material_override = SubResource("StandardMaterial3D_80y1t")
 mesh = SubResource("BoxMesh_nyr6i")
 
-[node name="Clothes" type="MeshInstance3D" parent="Room" unique_id=1495821626]
+[node name="Clothes" type="MeshInstance3D" parent="Room" unique_id=1634849541]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0.4, 0.06, 1.6)
 material_override = SubResource("StandardMaterial3D_wpfvi")
 mesh = SubResource("BoxMesh_wh3ca")
 
-[node name="Bottle" type="MeshInstance3D" parent="Room" unique_id=1317127843]
+[node name="Bottle" type="MeshInstance3D" parent="Room" unique_id=1277253480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.14, -1.7)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("CylinderMesh_t8qw1")
 
-[node name="Bottle2" type="MeshInstance3D" parent="Room" unique_id=1659137434]
+[node name="Bottle2" type="MeshInstance3D" parent="Room" unique_id=234727803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48, 0.14, -1.8)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("CylinderMesh_l3yqd")
 
-[node name="Bottle3" type="MeshInstance3D" parent="Room" unique_id=1968276495]
+[node name="Bottle3" type="MeshInstance3D" parent="Room" unique_id=2092960457]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.36, 0.05, -1.7)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("CylinderMesh_jd8f4")
 
-[node name="Bottle4" type="MeshInstance3D" parent="Room" unique_id=734814013]
+[node name="Bottle4" type="MeshInstance3D" parent="Room" unique_id=1930003585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, 0.14, -1.8)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("CylinderMesh_oq73a")
 
-[node name="Poster" type="MeshInstance3D" parent="Room" unique_id=895229914]
+[node name="Poster" type="MeshInstance3D" parent="Room" unique_id=1563058742]
 transform = Transform3D(0.99939084, -0.034899496, 0, 0.034899496, 0.99939084, 0, 0, 0, 1, 2.49, 1.7, -0.9)
 material_override = SubResource("StandardMaterial3D_6r0x4")
 mesh = SubResource("BoxMesh_fjdmh")
 
-[node name="Label" type="Label3D" parent="Room" unique_id=1536024549]
+[node name="Label" type="Label3D" parent="Room" unique_id=293979335]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.47, 1.75, -0.9)
 pixel_size = 0.0025
 modulate = Color(0.95, 0.85, 0.8, 1)
@@ -1227,84 +1226,84 @@ text = "♥ K"
 font_size = 128
 outline_size = 0
 
-[node name="Clock" type="MeshInstance3D" parent="Room" unique_id=823640744]
+[node name="Clock" type="MeshInstance3D" parent="Room" unique_id=1659969279]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.15, 2.23)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("CylinderMesh_gr4k0")
 
-[node name="Cord" type="MeshInstance3D" parent="Room" unique_id=480610495]
+[node name="Cord" type="MeshInstance3D" parent="Room" unique_id=576482766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63, 0.3)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("CylinderMesh_hlele")
 
-[node name="CeilingBulb" type="OmniLight3D" parent="Room" unique_id=972885565]
+[node name="CeilingBulb" type="OmniLight3D" parent="Room" unique_id=132216007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42, 0.3)
 light_color = Color(1, 0.76, 0.48, 1)
-light_energy = 1.6
+light_energy = 2.4
 shadow_enabled = true
-omni_range = 6.0
+omni_range = 9.0
 script = ExtResource("4_flo7n")
 mode = 2
-on_energy = 1.6
+on_energy = 2.4
 emissive_mesh = NodePath("Glass")
 emission_energy = 6.0
 
-[node name="Glass" type="MeshInstance3D" parent="Room/CeilingBulb" unique_id=1118319899]
+[node name="Glass" type="MeshInstance3D" parent="Room/CeilingBulb" unique_id=887376801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
 material_override = SubResource("StandardMaterial3D_dj4f1")
 mesh = SubResource("SphereMesh_leseb")
 
-[node name="BlindSlat" type="MeshInstance3D" parent="Room" unique_id=1053825988]
+[node name="BlindSlat" type="MeshInstance3D" parent="Room" unique_id=226504813]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.06, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_vujl7")
 
-[node name="BlindSlat2" type="MeshInstance3D" parent="Room" unique_id=1358843224]
+[node name="BlindSlat2" type="MeshInstance3D" parent="Room" unique_id=827171638]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.195, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_6xpj2")
 
-[node name="BlindSlat3" type="MeshInstance3D" parent="Room" unique_id=1460961510]
+[node name="BlindSlat3" type="MeshInstance3D" parent="Room" unique_id=1240684497]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.33, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_15phm")
 
-[node name="BlindSlat4" type="MeshInstance3D" parent="Room" unique_id=759923171]
+[node name="BlindSlat4" type="MeshInstance3D" parent="Room" unique_id=2102631383]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.465, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_7l41l")
 
-[node name="BlindSlat5" type="MeshInstance3D" parent="Room" unique_id=2018007102]
+[node name="BlindSlat5" type="MeshInstance3D" parent="Room" unique_id=1787927126]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.6, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_6wmc8")
 
-[node name="BlindSlat6" type="MeshInstance3D" parent="Room" unique_id=465635928]
+[node name="BlindSlat6" type="MeshInstance3D" parent="Room" unique_id=376777605]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.735, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_yqi50")
 
-[node name="BlindSlat7" type="MeshInstance3D" parent="Room" unique_id=756564403]
+[node name="BlindSlat7" type="MeshInstance3D" parent="Room" unique_id=1159147104]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 1.87, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_q2hbx")
 
-[node name="BlindSlat8" type="MeshInstance3D" parent="Room" unique_id=365128277]
+[node name="BlindSlat8" type="MeshInstance3D" parent="Room" unique_id=1769800712]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 2.005, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_2uhv5")
 
-[node name="BlindSlat9" type="MeshInstance3D" parent="Room" unique_id=757520941]
+[node name="BlindSlat9" type="MeshInstance3D" parent="Room" unique_id=2022545664]
 transform = Transform3D(0.7880108, -0.6156615, 0, 0.6156615, 0.7880108, 0, 0, 0, 1, -2.42, 2.14, 0)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_5tlj5")
 
-[node name="WindowSill" type="MeshInstance3D" parent="Room" unique_id=1656747389]
+[node name="WindowSill" type="MeshInstance3D" parent="Room" unique_id=2043337874]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.98, 0)
 material_override = SubResource("StandardMaterial3D_n33od")
 mesh = SubResource("BoxMesh_8e4d6")
 
-[node name="RedSkyLight" type="SpotLight3D" parent="Room" unique_id=1386418811]
+[node name="RedSkyLight" type="SpotLight3D" parent="Room" unique_id=114838874]
 transform = Transform3D(-4.371139e-08, 0.37460658, -0.92718387, 0, 0.92718387, 0.37460658, 1, 1.6374573e-08, -4.0528494e-08, -4.8, 2.9, 0.25)
 light_color = Color(1, 0.16, 0.1, 1)
 light_energy = 9.0
@@ -1313,184 +1312,183 @@ shadow_enabled = true
 spot_range = 10.0
 spot_angle = 22.0
 
-[node name="RoomDoor" type="Node3D" parent="Room" unique_id=2108331065]
+[node name="RoomDoor" type="Node3D" parent="Room" unique_id=430469331]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02, 0.02, -2.35)
 script = ExtResource("5_cjrxo")
 
-[node name="Panel" type="AnimatableBody3D" parent="Room/RoomDoor" unique_id=49044324]
+[node name="Panel" type="AnimatableBody3D" parent="Room/RoomDoor" unique_id=1213640760]
 
-[node name="Mesh" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=1275635105]
+[node name="Mesh" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=1291463910]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 1.03, 0)
 material_override = SubResource("StandardMaterial3D_n33od")
 mesh = SubResource("BoxMesh_y2ojd")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/RoomDoor/Panel" unique_id=87695984]
+[node name="Shape" type="CollisionShape3D" parent="Room/RoomDoor/Panel" unique_id=752880688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 1.03, 0)
 shape = SubResource("BoxShape3D_gfhau")
 
-[node name="Knob" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=1660530678]
+[node name="Knob" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=709149410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85999995, 1, 0.055)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_2nipx")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=853472746]
+[node name="KnobBack" type="MeshInstance3D" parent="Room/RoomDoor/Panel" unique_id=732418500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85999995, 1, -0.055)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_ls0wa")
 
-[node name="Interactable" type="Area3D" parent="Room/RoomDoor/Panel" unique_id=702900683]
+[node name="Interactable" type="Area3D" parent="Room/RoomDoor/Panel" unique_id=279362690]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Room/RoomDoor/Panel/Interactable" unique_id=412133465]
+[node name="Shape" type="CollisionShape3D" parent="Room/RoomDoor/Panel/Interactable" unique_id=541750689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 1.03, 0)
 shape = SubResource("BoxShape3D_gwemi")
 
-[node name="IntroCamera" type="Camera3D" parent="Room" unique_id=1240528412]
+[node name="IntroCamera" type="Camera3D" parent="Room" unique_id=1032796060]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.034899496, -0.99939084, 0, 0.99939084, 0.034899496, -1.95, 0.72, 1.72)
 fov = 62.0
 
-[node name="SpawnPoint" type="Marker3D" parent="." unique_id=2055136981]
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1941035954]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0.05, 0.9)
 
-[node name="Hallway" type="Node3D" parent="." unique_id=590070683]
+[node name="Hallway" type="Node3D" parent="." unique_id=2069467115]
 
-[node name="HallLights" type="Node3D" parent="Hallway" unique_id=466569536]
+[node name="HallLights" type="Node3D" parent="Hallway" unique_id=303934091]
 unique_name_in_owner = true
 
-[node name="Tube0" type="SpotLight3D" parent="Hallway/HallLights" unique_id=185470520]
+[node name="Tube0" type="SpotLight3D" parent="Hallway/HallLights" unique_id=928856715]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -4)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
+light_energy = 6.0
 shadow_enabled = true
-spot_range = 4.5
-spot_angle = 62.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-on_energy = 3.0
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube0" unique_id=1796311586]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube0" unique_id=1552191826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_uumha")
 
-[node name="Tube1" type="SpotLight3D" parent="Hallway/HallLights" unique_id=171960964]
+[node name="Tube1" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1699054871]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -7.5)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 4.5
-spot_angle = 62.0
+light_energy = 6.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-mode = 2
-on_energy = 3.0
+mode = 1
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 hum = true
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube1" unique_id=884863186]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube1" unique_id=481853381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_2j12j")
 
-[node name="Tube2" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1120488586]
+[node name="Tube2" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1621548647]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -11)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
+light_energy = 6.0
 shadow_enabled = true
-spot_range = 4.5
-spot_angle = 62.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-on_energy = 3.0
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube2" unique_id=1943959030]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube2" unique_id=1966011803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_ganio")
 
-[node name="Tube3" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1840250514]
+[node name="Tube3" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1862104579]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -14.5)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 4.5
-spot_angle = 62.0
+light_energy = 6.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-mode = 3
-on_energy = 3.0
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube3" unique_id=1651091238]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube3" unique_id=873455015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_xo7fa")
 
-[node name="Tube4" type="SpotLight3D" parent="Hallway/HallLights" unique_id=916113679]
+[node name="Tube4" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1681184741]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -18)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 4.5
-spot_angle = 62.0
+light_energy = 6.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-mode = 1
-on_energy = 3.0
+mode = 2
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 hum = true
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube4" unique_id=895920941]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube4" unique_id=47430863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_gqngq")
 
-[node name="Tube5" type="SpotLight3D" parent="Hallway/HallLights" unique_id=480169560]
+[node name="Tube5" type="SpotLight3D" parent="Hallway/HallLights" unique_id=1129677717]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2.62, -21)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 4.5
-spot_angle = 62.0
+light_energy = 6.0
+spot_range = 9.0
+spot_angle = 70.0
 script = ExtResource("4_flo7n")
-on_energy = 3.0
+on_energy = 6.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube5" unique_id=621838290]
+[node name="TubeMesh" type="MeshInstance3D" parent="Hallway/HallLights/Tube5" unique_id=7906047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_xv4js")
 
-[node name="Door301" type="Node3D" parent="Hallway" unique_id=866569958]
+[node name="Door301" type="Node3D" parent="Hallway" unique_id=960389378]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.43, 0.02, -4.2)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door301" unique_id=2020684396]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door301" unique_id=1726404339]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=355975744]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=1618798949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_84krm")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door301/Panel" unique_id=1989663382]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door301/Panel" unique_id=317147408]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_md33l")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=506195565]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=1231721060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_aw54j")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=1034859750]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door301/Panel" unique_id=513755272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_oys7j")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door301/Panel" unique_id=1161382245]
+[node name="Interactable" type="Area3D" parent="Hallway/Door301/Panel" unique_id=874660567]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door301/Panel/Interactable" unique_id=788563901]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door301/Panel/Interactable" unique_id=1845758369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_o4mhr")
 
-[node name="Label" type="Label3D" parent="Hallway/Door301/Panel" unique_id=1788858327]
+[node name="Label" type="Label3D" parent="Hallway/Door301/Panel" unique_id=1115626551]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1498,41 +1496,41 @@ text = "301"
 font_size = 64
 outline_size = 0
 
-[node name="Door302" type="Node3D" parent="Hallway" unique_id=1190951288]
+[node name="Door302" type="Node3D" parent="Hallway" unique_id=1130462064]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.57, 0.02, -7.35)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door302" unique_id=1709141959]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door302" unique_id=1485532186]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=2080080859]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=363011023]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_nm1ln")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door302/Panel" unique_id=1325358403]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door302/Panel" unique_id=634358910]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_uh6xc")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=1950429301]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=488295235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_nndsw")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=1942136340]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door302/Panel" unique_id=1807565251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_7t7jg")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door302/Panel" unique_id=841379386]
+[node name="Interactable" type="Area3D" parent="Hallway/Door302/Panel" unique_id=132737720]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door302/Panel/Interactable" unique_id=754937245]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door302/Panel/Interactable" unique_id=1079976325]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_irer3")
 
-[node name="Label" type="Label3D" parent="Hallway/Door302/Panel" unique_id=603891181]
+[node name="Label" type="Label3D" parent="Hallway/Door302/Panel" unique_id=52025404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1540,41 +1538,41 @@ text = "302"
 font_size = 64
 outline_size = 0
 
-[node name="Door303" type="Node3D" parent="Hallway" unique_id=918708031]
+[node name="Door303" type="Node3D" parent="Hallway" unique_id=154025149]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.43, 0.02, -8.6)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door303" unique_id=939189006]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door303" unique_id=1038822257]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=349315875]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=2117993993]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_lp4rc")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door303/Panel" unique_id=442100911]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door303/Panel" unique_id=619596474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_5knk0")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=456181486]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=1508012441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_0s65k")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=390965116]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door303/Panel" unique_id=1814262968]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_bp7rd")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door303/Panel" unique_id=1692419082]
+[node name="Interactable" type="Area3D" parent="Hallway/Door303/Panel" unique_id=1972212110]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door303/Panel/Interactable" unique_id=2084145533]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door303/Panel/Interactable" unique_id=310277742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_464qv")
 
-[node name="Label" type="Label3D" parent="Hallway/Door303/Panel" unique_id=1261733582]
+[node name="Label" type="Label3D" parent="Hallway/Door303/Panel" unique_id=821924025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1582,41 +1580,41 @@ text = "303"
 font_size = 64
 outline_size = 0
 
-[node name="Door304" type="Node3D" parent="Hallway" unique_id=2134150452]
+[node name="Door304" type="Node3D" parent="Hallway" unique_id=1981401469]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.57, 0.02, -11.75)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door304" unique_id=1462650783]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door304" unique_id=1338433645]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=944572748]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=856056238]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_0perr")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door304/Panel" unique_id=743862097]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door304/Panel" unique_id=443263423]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_up6e3")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=1876211389]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=1314487592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_ee3ia")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=670025637]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door304/Panel" unique_id=881436182]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_rs1ya")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door304/Panel" unique_id=2055848122]
+[node name="Interactable" type="Area3D" parent="Hallway/Door304/Panel" unique_id=417484645]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door304/Panel/Interactable" unique_id=1788674658]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door304/Panel/Interactable" unique_id=2027320994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_8ftck")
 
-[node name="Label" type="Label3D" parent="Hallway/Door304/Panel" unique_id=1868216874]
+[node name="Label" type="Label3D" parent="Hallway/Door304/Panel" unique_id=2134865158]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1624,42 +1622,42 @@ text = "304"
 font_size = 64
 outline_size = 0
 
-[node name="RattleDoor" type="Node3D" parent="Hallway" unique_id=965477227]
+[node name="RattleDoor" type="Node3D" parent="Hallway" unique_id=609117913]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.43, 0.02, -13)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/RattleDoor" unique_id=2140245322]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/RattleDoor" unique_id=360820428]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=1594676521]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=952088149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_237b3")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/RattleDoor/Panel" unique_id=330187052]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/RattleDoor/Panel" unique_id=2087545641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_8kmwv")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=2005644933]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=143841938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_f80c2")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=1146301250]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/RattleDoor/Panel" unique_id=1092597519]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_ve3cl")
 
-[node name="Interactable" type="Area3D" parent="Hallway/RattleDoor/Panel" unique_id=1628265857]
+[node name="Interactable" type="Area3D" parent="Hallway/RattleDoor/Panel" unique_id=892842905]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/RattleDoor/Panel/Interactable" unique_id=61620025]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/RattleDoor/Panel/Interactable" unique_id=231580834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_jnxh4")
 
-[node name="Label" type="Label3D" parent="Hallway/RattleDoor/Panel" unique_id=1678920063]
+[node name="Label" type="Label3D" parent="Hallway/RattleDoor/Panel" unique_id=771967523]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1667,41 +1665,41 @@ text = "305"
 font_size = 64
 outline_size = 0
 
-[node name="Door306" type="Node3D" parent="Hallway" unique_id=1815982155]
+[node name="Door306" type="Node3D" parent="Hallway" unique_id=1364272627]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.57, 0.02, -16.15)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door306" unique_id=65153978]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door306" unique_id=1883345834]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=1317227499]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=5045348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_q24u1")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door306/Panel" unique_id=83238700]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door306/Panel" unique_id=647327295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_2omxf")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=1524991697]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=1565177037]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_l36vf")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=2054876768]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door306/Panel" unique_id=1193589228]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_q8ibg")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door306/Panel" unique_id=1237533565]
+[node name="Interactable" type="Area3D" parent="Hallway/Door306/Panel" unique_id=787560919]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door306/Panel/Interactable" unique_id=2050430631]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door306/Panel/Interactable" unique_id=1679873084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_241fm")
 
-[node name="Label" type="Label3D" parent="Hallway/Door306/Panel" unique_id=842472653]
+[node name="Label" type="Label3D" parent="Hallway/Door306/Panel" unique_id=300556095]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1709,41 +1707,41 @@ text = "306"
 font_size = 64
 outline_size = 0
 
-[node name="Door307" type="Node3D" parent="Hallway" unique_id=1402006733]
+[node name="Door307" type="Node3D" parent="Hallway" unique_id=1209380042]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.43, 0.02, -17.4)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door307" unique_id=444742721]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door307" unique_id=2097683838]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=425741515]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=638689626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_ongak")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door307/Panel" unique_id=1321286175]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door307/Panel" unique_id=137278791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_od3qg")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=1071075663]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=1220402893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_2g2xd")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=1088898058]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door307/Panel" unique_id=996390806]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_pcgub")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door307/Panel" unique_id=1077769621]
+[node name="Interactable" type="Area3D" parent="Hallway/Door307/Panel" unique_id=106468957]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door307/Panel/Interactable" unique_id=2049273804]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door307/Panel/Interactable" unique_id=1712446693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_0uags")
 
-[node name="Label" type="Label3D" parent="Hallway/Door307/Panel" unique_id=1937326933]
+[node name="Label" type="Label3D" parent="Hallway/Door307/Panel" unique_id=523645254]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1751,41 +1749,41 @@ text = "307"
 font_size = 64
 outline_size = 0
 
-[node name="Door308" type="Node3D" parent="Hallway" unique_id=1921896914]
+[node name="Door308" type="Node3D" parent="Hallway" unique_id=1323083491]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.57, 0.02, -20.55)
 script = ExtResource("5_cjrxo")
 locked = true
 locked_prompt = "Locked."
 
-[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door308" unique_id=1656853102]
+[node name="Panel" type="AnimatableBody3D" parent="Hallway/Door308" unique_id=738985372]
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=1032327589]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=192799205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 material_override = SubResource("StandardMaterial3D_tfdju")
 mesh = SubResource("BoxMesh_jqvf0")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door308/Panel" unique_id=692190259]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door308/Panel" unique_id=62062093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_6wlo3")
 
-[node name="Knob" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=1950831264]
+[node name="Knob" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=2135021568]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, 0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_d4aa0")
 
-[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=2065794884]
+[node name="KnobBack" type="MeshInstance3D" parent="Hallway/Door308/Panel" unique_id=2122039343]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84999996, 1, -0.06)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("SphereMesh_crjwe")
 
-[node name="Interactable" type="Area3D" parent="Hallway/Door308/Panel" unique_id=89086201]
+[node name="Interactable" type="Area3D" parent="Hallway/Door308/Panel" unique_id=810382847]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/Door308/Panel/Interactable" unique_id=2100799858]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/Door308/Panel/Interactable" unique_id=507206834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.025, 0)
 shape = SubResource("BoxShape3D_pvm7w")
 
-[node name="Label" type="Label3D" parent="Hallway/Door308/Panel" unique_id=1472677024]
+[node name="Label" type="Label3D" parent="Hallway/Door308/Panel" unique_id=1590576119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 1.72, 0.035)
 pixel_size = 0.0015
 modulate = Color(0.8, 0.8, 0.75, 1)
@@ -1793,72 +1791,72 @@ text = "308"
 font_size = 64
 outline_size = 0
 
-[node name="PipeA" type="MeshInstance3D" parent="Hallway" unique_id=1667160629]
+[node name="PipeA" type="MeshInstance3D" parent="Hallway" unique_id=2123085677]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.6, 2.55, -12.2)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("CylinderMesh_dunky")
 
-[node name="PipeB" type="MeshInstance3D" parent="Hallway" unique_id=936112145]
+[node name="PipeB" type="MeshInstance3D" parent="Hallway" unique_id=106673032]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.75, 2.58, -12.2)
 material_override = SubResource("StandardMaterial3D_o5smf")
 mesh = SubResource("CylinderMesh_wiwqq")
 
-[node name="FallenChair" type="StaticBody3D" parent="Hallway" unique_id=779186241]
+[node name="FallenChair" type="StaticBody3D" parent="Hallway" unique_id=1119301847]
 transform = Transform3D(0.9396926, 0.3213938, 0.11697777, 0, 0.34202015, -0.9396926, -0.34202012, 0.8830222, 0.32139382, 2.2, 0.25, -9.3)
 
-[node name="Mesh" type="MeshInstance3D" parent="Hallway/FallenChair" unique_id=972977192]
+[node name="Mesh" type="MeshInstance3D" parent="Hallway/FallenChair" unique_id=1985406915]
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_52hht")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/FallenChair" unique_id=482121172]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/FallenChair" unique_id=395233822]
 shape = SubResource("BoxShape3D_w531g")
 
-[node name="HallTrash" type="MeshInstance3D" parent="Hallway" unique_id=1220408132]
+[node name="HallTrash" type="MeshInstance3D" parent="Hallway" unique_id=1385303704]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1.2, 0.7, 0.2, -16.3)
 material_override = SubResource("StandardMaterial3D_blqaw")
 mesh = SubResource("SphereMesh_2r324")
 
-[node name="Newspaper" type="MeshInstance3D" parent="Hallway" unique_id=431480812]
+[node name="Newspaper" type="MeshInstance3D" parent="Hallway" unique_id=323469724]
 transform = Transform3D(0.9497739, 0, 0.31293693, 0, 1, 0, -0.31293693, 0, 0.9497739, 0.95622313, 0.024, -4.5340824)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_y7i5e")
 
-[node name="Newspaper2" type="MeshInstance3D" parent="Hallway" unique_id=1799760443]
+[node name="Newspaper2" type="MeshInstance3D" parent="Hallway" unique_id=999862434]
 transform = Transform3D(0.9826923, 0, 0.18524522, 0, 1, 0, -0.18524522, 0, 0.9826923, 0.9861697, 0.024, -4.020647)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_vbdps")
 
-[node name="Newspaper3" type="MeshInstance3D" parent="Hallway" unique_id=719975450]
+[node name="Newspaper3" type="MeshInstance3D" parent="Hallway" unique_id=859068174]
 transform = Transform3D(-0.689786, 0, 0.7240133, 0, 1, 0, -0.7240133, 0, -0.689786, 0.791819, 0.024, -19.770903)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_okwk4")
 
-[node name="Newspaper4" type="MeshInstance3D" parent="Hallway" unique_id=1674542676]
+[node name="Newspaper4" type="MeshInstance3D" parent="Hallway" unique_id=1924919829]
 transform = Transform3D(-0.4539617, 0, 0.8910212, 0, 1, 0, -0.8910212, 0, -0.4539617, 2.0526023, 0.024, -12.413883)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_kipgj")
 
-[node name="Newspaper5" type="MeshInstance3D" parent="Hallway" unique_id=486607359]
+[node name="Newspaper5" type="MeshInstance3D" parent="Hallway" unique_id=139864363]
 transform = Transform3D(0.0126447445, 0, 0.99992007, 0, 1, 0, -0.99992007, 0, 0.0126447445, 1.1178753, 0.024, -7.3403625)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_iey4d")
 
-[node name="Newspaper6" type="MeshInstance3D" parent="Hallway" unique_id=1801850604]
+[node name="Newspaper6" type="MeshInstance3D" parent="Hallway" unique_id=1617885392]
 transform = Transform3D(-0.48597583, 0, 0.87397224, 0, 1, 0, -0.87397224, 0, -0.48597583, 2.184507, 0.024, -8.049616)
 material_override = SubResource("StandardMaterial3D_sxq3y")
 mesh = SubResource("BoxMesh_3subm")
 
-[node name="Stain" type="MeshInstance3D" parent="Hallway" unique_id=64267711]
+[node name="Stain" type="MeshInstance3D" parent="Hallway" unique_id=840937606]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 1.8, 0.023, -15.6)
 material_override = SubResource("StandardMaterial3D_qprf1")
 mesh = SubResource("BoxMesh_bpw8h")
 
-[node name="Card" type="MeshInstance3D" parent="Hallway" unique_id=337022849]
+[node name="Card" type="MeshInstance3D" parent="Hallway" unique_id=962032645]
 transform = Transform3D(0.1539904, 0, 0.98807234, 0, 1, 0, -0.98807234, 0, 0.1539904, 1.5, 0.022, -3.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_bqkbq")
 
-[node name="Label" type="Label3D" parent="Hallway/Card" unique_id=368361700]
+[node name="Label" type="Label3D" parent="Hallway/Card" unique_id=2036355789]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1866,12 +1864,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card2" type="MeshInstance3D" parent="Hallway" unique_id=2136241618]
+[node name="Card2" type="MeshInstance3D" parent="Hallway" unique_id=403832090]
 transform = Transform3D(-0.9845222, 0, -0.17525987, 0, 1, 0, 0.17525987, 0, -0.9845222, 1.9462491, 0.022, -4.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_c848d")
 
-[node name="Label" type="Label3D" parent="Hallway/Card2" unique_id=626892433]
+[node name="Label" type="Label3D" parent="Hallway/Card2" unique_id=2053583681]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -1879,12 +1877,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card3" type="MeshInstance3D" parent="Hallway" unique_id=1620944113]
+[node name="Card3" type="MeshInstance3D" parent="Hallway" unique_id=793063519]
 transform = Transform3D(0.9868553, 0, -0.16160622, 0, 1, 0, 0.16160622, 0, 0.9868553, 1.3850065, 0.022, -6.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_00t7w")
 
-[node name="Label" type="Label3D" parent="Hallway/Card3" unique_id=702226998]
+[node name="Label" type="Label3D" parent="Hallway/Card3" unique_id=689401493]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1892,12 +1890,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card4" type="MeshInstance3D" parent="Hallway" unique_id=1671812780]
+[node name="Card4" type="MeshInstance3D" parent="Hallway" unique_id=1300374873]
 transform = Transform3D(-0.586709, 0, -0.8097978, 0, 1, 0, 0.8097978, 0, -0.586709, 1.0833834, 0.022, -7.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_tga5h")
 
-[node name="Label" type="Label3D" parent="Hallway/Card4" unique_id=682294595]
+[node name="Label" type="Label3D" parent="Hallway/Card4" unique_id=568115820]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -1905,12 +1903,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card5" type="MeshInstance3D" parent="Hallway" unique_id=1642849806]
+[node name="Card5" type="MeshInstance3D" parent="Hallway" unique_id=558874709]
 transform = Transform3D(-0.93674874, 0, 0.35000262, 0, 1, 0, -0.35000262, 0, -0.93674874, 1.722351, 0.022, -9.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_uce0k")
 
-[node name="Label" type="Label3D" parent="Hallway/Card5" unique_id=744227698]
+[node name="Label" type="Label3D" parent="Hallway/Card5" unique_id=2129693272]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1918,12 +1916,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card6" type="MeshInstance3D" parent="Hallway" unique_id=941312775]
+[node name="Card6" type="MeshInstance3D" parent="Hallway" unique_id=621517010]
 transform = Transform3D(-0.9916917, 0, 0.12863742, 0, 1, 0, -0.12863742, 0, -0.9916917, 1.8593192, 0.022, -10.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_bt57r")
 
-[node name="Label" type="Label3D" parent="Hallway/Card6" unique_id=1274385797]
+[node name="Label" type="Label3D" parent="Hallway/Card6" unique_id=1295979147]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -1931,12 +1929,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card7" type="MeshInstance3D" parent="Hallway" unique_id=1287964192]
+[node name="Card7" type="MeshInstance3D" parent="Hallway" unique_id=394942440]
 transform = Transform3D(-0.7462686, 0, 0.66564494, 0, 1, 0, -0.66564494, 0, -0.7462686, 1.1850564, 0.022, -12.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_1xtdo")
 
-[node name="Label" type="Label3D" parent="Hallway/Card7" unique_id=803564428]
+[node name="Label" type="Label3D" parent="Hallway/Card7" unique_id=1696869733]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1944,12 +1942,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card8" type="MeshInstance3D" parent="Hallway" unique_id=612069097]
+[node name="Card8" type="MeshInstance3D" parent="Hallway" unique_id=116625300]
 transform = Transform3D(0.19847281, 0, 0.9801064, 0, 1, 0, -0.9801064, 0, 0.19847281, 1.2218384, 0.022, -13.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_wbmbq")
 
-[node name="Label" type="Label3D" parent="Hallway/Card8" unique_id=418403038]
+[node name="Label" type="Label3D" parent="Hallway/Card8" unique_id=1164048511]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -1957,12 +1955,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card9" type="MeshInstance3D" parent="Hallway" unique_id=473746271]
+[node name="Card9" type="MeshInstance3D" parent="Hallway" unique_id=387660832]
 transform = Transform3D(0.59682655, 0, -0.80237025, 0, 1, 0, 0.80237025, 0, 0.59682655, 1.8866228, 0.022, -15.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_snd1r")
 
-[node name="Label" type="Label3D" parent="Hallway/Card9" unique_id=781991453]
+[node name="Label" type="Label3D" parent="Hallway/Card9" unique_id=1608621932]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1970,12 +1968,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card10" type="MeshInstance3D" parent="Hallway" unique_id=337608121]
+[node name="Card10" type="MeshInstance3D" parent="Hallway" unique_id=1980223328]
 transform = Transform3D(-0.8724348, 0, -0.4887305, 0, 1, 0, 0.4887305, 0, -0.8724348, 1.6785333, 0.022, -16.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_hn7i0")
 
-[node name="Label" type="Label3D" parent="Hallway/Card10" unique_id=1891623730]
+[node name="Label" type="Label3D" parent="Hallway/Card10" unique_id=1175221318]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -1983,12 +1981,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card11" type="MeshInstance3D" parent="Hallway" unique_id=557559380]
+[node name="Card11" type="MeshInstance3D" parent="Hallway" unique_id=1399953629]
 transform = Transform3D(-0.7386482, 0, -0.6740911, 0, 1, 0, 0.6740911, 0, -0.7386482, 1.0673711, 0.022, -18.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_jxs6x")
 
-[node name="Label" type="Label3D" parent="Hallway/Card11" unique_id=1660870928]
+[node name="Label" type="Label3D" parent="Hallway/Card11" unique_id=1847530850]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -1996,12 +1994,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card12" type="MeshInstance3D" parent="Hallway" unique_id=110419342]
+[node name="Card12" type="MeshInstance3D" parent="Hallway" unique_id=1758052684]
 transform = Transform3D(0.119003385, 0, -0.9928939, 0, 1, 0, 0.9928939, 0, 0.119003385, 1.4329505, 0.022, -19.8)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_wsvvp")
 
-[node name="Label" type="Label3D" parent="Hallway/Card12" unique_id=276469151]
+[node name="Label" type="Label3D" parent="Hallway/Card12" unique_id=726475606]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -2009,12 +2007,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card13" type="MeshInstance3D" parent="Hallway" unique_id=1587187027]
+[node name="Card13" type="MeshInstance3D" parent="Hallway" unique_id=584329376]
 transform = Transform3D(0.58731973, 0, -0.809355, 0, 1, 0, 0.809355, 0, 0.58731973, 1.9499068, 0.022, -21.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_cojwc")
 
-[node name="Label" type="Label3D" parent="Hallway/Card13" unique_id=1859381279]
+[node name="Label" type="Label3D" parent="Hallway/Card13" unique_id=2106479901]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -2022,31 +2020,31 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Stalker" type="Node3D" parent="Hallway" unique_id=164553114]
+[node name="Stalker" type="Node3D" parent="Hallway" unique_id=49552777]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, 0.02, -19.4)
 script = ExtResource("7_turaw")
 
-[node name="HallTrigger" type="Area3D" parent="Hallway" unique_id=650590518]
+[node name="HallTrigger" type="Area3D" parent="Hallway" unique_id=1134632134]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -3.9)
 script = ExtResource("8_01nsj")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/HallTrigger" unique_id=498655101]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/HallTrigger" unique_id=938711256]
 shape = SubResource("BoxShape3D_pl0jx")
 
-[node name="ScareTrigger" type="Area3D" parent="Hallway" unique_id=173499393]
+[node name="ScareTrigger" type="Area3D" parent="Hallway" unique_id=963969498]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -11.5)
 script = ExtResource("8_01nsj")
 
-[node name="Shape" type="CollisionShape3D" parent="Hallway/ScareTrigger" unique_id=1922916819]
+[node name="Shape" type="CollisionShape3D" parent="Hallway/ScareTrigger" unique_id=771507989]
 shape = SubResource("BoxShape3D_iq1fq")
 
-[node name="EmergencyLights" type="Node3D" parent="." unique_id=1458560877]
+[node name="EmergencyLights" type="Node3D" parent="." unique_id=1093388773]
 unique_name_in_owner = true
 
-[node name="Emergency0" type="OmniLight3D" parent="EmergencyLights" unique_id=1393961905]
+[node name="Emergency0" type="OmniLight3D" parent="EmergencyLights" unique_id=1440461685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 2.3, -6)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.6
@@ -2057,11 +2055,11 @@ on_energy = 1.6
 emissive_mesh = NodePath("LampMesh")
 emission_energy = 6.0
 
-[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency0" unique_id=2017259370]
+[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency0" unique_id=2083404647]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("BoxMesh_ap8vl")
 
-[node name="Emergency1" type="OmniLight3D" parent="EmergencyLights" unique_id=812906131]
+[node name="Emergency1" type="OmniLight3D" parent="EmergencyLights" unique_id=1394614565]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 2.3, -13)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.6
@@ -2072,11 +2070,11 @@ on_energy = 1.6
 emissive_mesh = NodePath("LampMesh")
 emission_energy = 6.0
 
-[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency1" unique_id=1203110163]
+[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency1" unique_id=36620149]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("BoxMesh_i1afl")
 
-[node name="Emergency2" type="OmniLight3D" parent="EmergencyLights" unique_id=1595212284]
+[node name="Emergency2" type="OmniLight3D" parent="EmergencyLights" unique_id=1532639878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 2.3, -19.5)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.6
@@ -2087,11 +2085,11 @@ on_energy = 1.6
 emissive_mesh = NodePath("LampMesh")
 emission_energy = 6.0
 
-[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency2" unique_id=482261814]
+[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency2" unique_id=1286323942]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("BoxMesh_m3yaq")
 
-[node name="Emergency3" type="OmniLight3D" parent="EmergencyLights" unique_id=2086809912]
+[node name="Emergency3" type="OmniLight3D" parent="EmergencyLights" unique_id=680983168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, 3.5, -24)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.6
@@ -2102,11 +2100,11 @@ on_energy = 1.6
 emissive_mesh = NodePath("LampMesh")
 emission_energy = 6.0
 
-[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency3" unique_id=199706839]
+[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency3" unique_id=1240382092]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("BoxMesh_4vmsx")
 
-[node name="Emergency4" type="OmniLight3D" parent="EmergencyLights" unique_id=1221191993]
+[node name="Emergency4" type="OmniLight3D" parent="EmergencyLights" unique_id=20451852]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45, 3.5, -28)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.6
@@ -2117,164 +2115,162 @@ on_energy = 1.6
 emissive_mesh = NodePath("LampMesh")
 emission_energy = 6.0
 
-[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency4" unique_id=594838078]
+[node name="LampMesh" type="MeshInstance3D" parent="EmergencyLights/Emergency4" unique_id=791983238]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("BoxMesh_dv84u")
 
-[node name="Lobby" type="Node3D" parent="." unique_id=1737641267]
+[node name="Lobby" type="Node3D" parent="." unique_id=682408180]
 
-[node name="Table" type="StaticBody3D" parent="Lobby" unique_id=928742703]
+[node name="Table" type="StaticBody3D" parent="Lobby" unique_id=148043402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.75, -26.5)
 
-[node name="Mesh" type="MeshInstance3D" parent="Lobby/Table" unique_id=2003813803]
+[node name="Mesh" type="MeshInstance3D" parent="Lobby/Table" unique_id=337057552]
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_35ug4")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/Table" unique_id=309514610]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/Table" unique_id=1531987309]
 shape = SubResource("BoxShape3D_18hqp")
 
-[node name="TableLeg" type="MeshInstance3D" parent="Lobby" unique_id=804404126]
+[node name="TableLeg" type="MeshInstance3D" parent="Lobby" unique_id=1121042516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.37, -26.1)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_f8g71")
 
-[node name="TableLeg2" type="MeshInstance3D" parent="Lobby" unique_id=257996670]
+[node name="TableLeg2" type="MeshInstance3D" parent="Lobby" unique_id=350482753]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.37, -26.1)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_mq7cs")
 
-[node name="TableLeg3" type="MeshInstance3D" parent="Lobby" unique_id=1023800168]
+[node name="TableLeg3" type="MeshInstance3D" parent="Lobby" unique_id=234792564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.37, -26.9)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_nloq7")
 
-[node name="TableLeg4" type="MeshInstance3D" parent="Lobby" unique_id=882947095]
+[node name="TableLeg4" type="MeshInstance3D" parent="Lobby" unique_id=1262405432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.37, -26.9)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_r8liq")
 
-[node name="EntryPhone0" type="MeshInstance3D" parent="Lobby" unique_id=511488163]
+[node name="EntryPhone0" type="MeshInstance3D" parent="Lobby" unique_id=1716047365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.782, -26.4)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_pcu5h")
 
-[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone0" unique_id=968563523]
+[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone0" unique_id=424967454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_c13jy")
 
-[node name="EntryPhone1" type="MeshInstance3D" parent="Lobby" unique_id=876305801]
+[node name="EntryPhone1" type="MeshInstance3D" parent="Lobby" unique_id=1001502743]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.782, -26.4)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_5h8es")
 
-[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone1" unique_id=568581501]
+[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone1" unique_id=928804007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_s1pd8")
 
-[node name="EntryPhone2" type="MeshInstance3D" parent="Lobby" unique_id=1381676728]
+[node name="EntryPhone2" type="MeshInstance3D" parent="Lobby" unique_id=180419492]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.782, -26.4)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_ged5d")
 
-[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone2" unique_id=1481938674]
+[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone2" unique_id=534605625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_u7sij")
 
-[node name="RegisterPhone" type="Area3D" parent="Lobby/EntryPhone2" unique_id=570968292]
+[node name="RegisterPhone" type="Area3D" parent="Lobby/EntryPhone2" unique_id=1333448122]
 unique_name_in_owner = true
 script = ExtResource("6_3vp1u")
 prompt_text = "PROMPT_TAKE_PHONE"
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/EntryPhone2/RegisterPhone" unique_id=226634510]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/EntryPhone2/RegisterPhone" unique_id=889095395]
 shape = SubResource("BoxShape3D_r1xv1")
 
-[node name="EntryPhone3" type="MeshInstance3D" parent="Lobby" unique_id=292310579]
+[node name="EntryPhone3" type="MeshInstance3D" parent="Lobby" unique_id=756387158]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.782, -26.4)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_injla")
 
-[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone3" unique_id=207498707]
+[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone3" unique_id=95399855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_v2ivf")
 
-[node name="EntryPhone4" type="MeshInstance3D" parent="Lobby" unique_id=1080899399]
+[node name="EntryPhone4" type="MeshInstance3D" parent="Lobby" unique_id=1957804840]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0.782, -26.4)
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_fdlre")
 
-[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone4" unique_id=1622480986]
+[node name="Screen" type="MeshInstance3D" parent="Lobby/EntryPhone4" unique_id=781200032]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, 0)
 material_override = SubResource("StandardMaterial3D_alqh0")
 mesh = SubResource("BoxMesh_77q17")
 
-[node name="TableLight" type="SpotLight3D" parent="Lobby" unique_id=967833422]
+[node name="TableLight" type="SpotLight3D" parent="Lobby" unique_id=2135365944]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 4.4, -26.5)
 light_color = Color(1, 0.95, 0.85, 1)
-light_energy = 14.0
+light_energy = 16.0
 shadow_enabled = true
-spot_range = 6.0
-spot_angle = 26.0
+spot_range = 9.0
+spot_angle = 34.0
 script = ExtResource("4_flo7n")
-on_energy = 14.0
+on_energy = 16.0
 
-[node name="DeadTube0" type="SpotLight3D" parent="Lobby" unique_id=727427307]
+[node name="DeadTube0" type="SpotLight3D" parent="Lobby" unique_id=423560269]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.5, 4.45, -23.5)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 6.0
-spot_angle = 60.0
+light_energy = 5.0
+spot_range = 9.0
+spot_angle = 65.0
 script = ExtResource("4_flo7n")
-mode = 3
-on_energy = 3.0
+on_energy = 5.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube0" unique_id=542703641]
+[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube0" unique_id=1404354700]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_j25wl")
 
-[node name="DeadTube1" type="SpotLight3D" parent="Lobby" unique_id=472161717]
+[node name="DeadTube1" type="SpotLight3D" parent="Lobby" unique_id=1846436695]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 4.45, -23.5)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 6.0
-spot_angle = 60.0
+light_energy = 5.0
+spot_range = 9.0
+spot_angle = 65.0
 script = ExtResource("4_flo7n")
-mode = 3
-on_energy = 3.0
+on_energy = 5.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube1" unique_id=301615004]
+[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube1" unique_id=161840288]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_74fa3")
 
-[node name="DeadTube2" type="SpotLight3D" parent="Lobby" unique_id=1340847808]
+[node name="DeadTube2" type="SpotLight3D" parent="Lobby" unique_id=661081049]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.5, 4.45, -23.5)
 light_color = Color(0.82, 0.92, 1, 1)
-light_energy = 3.0
-spot_range = 6.0
-spot_angle = 60.0
+light_energy = 5.0
+spot_range = 9.0
+spot_angle = 65.0
 script = ExtResource("4_flo7n")
 mode = 1
-on_energy = 3.0
+on_energy = 5.0
 emissive_mesh = NodePath("TubeMesh")
 
-[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube2" unique_id=196004101]
+[node name="TubeMesh" type="MeshInstance3D" parent="Lobby/DeadTube2" unique_id=181579377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3vnbu")
 mesh = SubResource("BoxMesh_shgpn")
 
-[node name="ScreenPanel" type="MeshInstance3D" parent="Lobby" unique_id=1894073129]
+[node name="ScreenPanel" type="MeshInstance3D" parent="Lobby" unique_id=237103508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47, 2.5, -26)
 material_override = SubResource("StandardMaterial3D_0sx03")
 mesh = SubResource("BoxMesh_quixx")
 
-[node name="EntryScreen" type="Label3D" parent="Lobby" unique_id=1923133497]
+[node name="EntryScreen" type="Label3D" parent="Lobby" unique_id=741229732]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.43, 2.5, -26)
 pixel_size = 0.004
@@ -2283,13 +2279,13 @@ text = "— STANDBY —"
 font_size = 64
 outline_size = 0
 
-[node name="ScreenGlow" type="OmniLight3D" parent="Lobby" unique_id=440512827]
+[node name="ScreenGlow" type="OmniLight3D" parent="Lobby" unique_id=1285526499]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -26)
 light_color = Color(1, 0.3, 0.25, 1)
 light_energy = 0.8
 omni_range = 4.0
 
-[node name="Label" type="Label3D" parent="Lobby" unique_id=728297763]
+[node name="Label" type="Label3D" parent="Lobby" unique_id=1420592523]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.47, 2.3, -25.5)
 pixel_size = 0.006
 modulate = Color(0.55, 0.02, 0.02, 1)
@@ -2297,26 +2293,26 @@ text = "♦"
 font_size = 256
 outline_size = 0
 
-[node name="Label2" type="Label3D" parent="Lobby" unique_id=1578258146]
+[node name="Label2" type="Label3D" parent="Lobby" unique_id=382963987]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.5, 2.6, -22.03)
 modulate = Color(0.08, 0.08, 0.08, 1)
 text = "♣"
 font_size = 256
 outline_size = 0
 
-[node name="Label3" type="Label3D" parent="Lobby" unique_id=1558503181]
+[node name="Label3" type="Label3D" parent="Lobby" unique_id=1372381062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.6, -29.97)
 modulate = Color(0.75, 0.72, 0.68, 1)
 text = "GAME"
 font_size = 128
 outline_size = 0
 
-[node name="Card" type="MeshInstance3D" parent="Lobby" unique_id=1293790324]
+[node name="Card" type="MeshInstance3D" parent="Lobby" unique_id=385353037]
 transform = Transform3D(0.41506287, 0, -0.9097927, 0, 1, 0, 0.9097927, 0, 0.41506287, 1.5, 0.022, -22.6)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_x27u3")
 
-[node name="Label" type="Label3D" parent="Lobby/Card" unique_id=673445277]
+[node name="Label" type="Label3D" parent="Lobby/Card" unique_id=522032363]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -2324,12 +2320,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card2" type="MeshInstance3D" parent="Lobby" unique_id=1913468869]
+[node name="Card2" type="MeshInstance3D" parent="Lobby" unique_id=2105114403]
 transform = Transform3D(0.5281836, 0, 0.8491302, 0, 1, 0, -0.8491302, 0, 0.5281836, 1.8452837, 0.022, -23.5)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_h7bph")
 
-[node name="Label" type="Label3D" parent="Lobby/Card2" unique_id=133381459]
+[node name="Label" type="Label3D" parent="Lobby/Card2" unique_id=1729946691]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -2337,12 +2333,12 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Card3" type="MeshInstance3D" parent="Lobby" unique_id=453687358]
+[node name="Card3" type="MeshInstance3D" parent="Lobby" unique_id=596741326]
 transform = Transform3D(-0.2501072, 0, 0.96821815, 0, 1, 0, -0.96821815, 0, -0.2501072, 1.1513697, 0.022, -24.4)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_hgl4h")
 
-[node name="Label" type="Label3D" parent="Lobby/Card3" unique_id=154055845]
+[node name="Label" type="Label3D" parent="Lobby/Card3" unique_id=476534379]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.8, 0.05, 0.05, 1)
@@ -2350,12 +2346,12 @@ text = "♦"
 font_size = 96
 outline_size = 0
 
-[node name="Card4" type="MeshInstance3D" parent="Lobby" unique_id=1077153466]
+[node name="Card4" type="MeshInstance3D" parent="Lobby" unique_id=1375019244]
 transform = Transform3D(-0.11657469, 0, -0.99318194, 0, 1, 0, 0.99318194, 0, -0.11657469, 1.5067255, 0.022, -25.3)
 material_override = SubResource("StandardMaterial3D_8q2oi")
 mesh = SubResource("BoxMesh_tagxr")
 
-[node name="Label" type="Label3D" parent="Lobby/Card4" unique_id=533329837]
+[node name="Label" type="Label3D" parent="Lobby/Card4" unique_id=761464937]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.002, 0)
 pixel_size = 0.0004
 modulate = Color(0.05, 0.05, 0.05, 1)
@@ -2363,22 +2359,22 @@ text = "♣"
 font_size = 96
 outline_size = 0
 
-[node name="Stain" type="MeshInstance3D" parent="Lobby" unique_id=1492423112]
+[node name="Stain" type="MeshInstance3D" parent="Lobby" unique_id=1719193222]
 transform = Transform3D(0.9396926, 0, -0.34202012, 0, 1, 0, 0.34202012, 0, 0.9396926, 3.8, 0.023, -28.5)
 material_override = SubResource("StandardMaterial3D_qprf1")
 mesh = SubResource("BoxMesh_mttdt")
 
-[node name="ToppledChair" type="StaticBody3D" parent="Lobby" unique_id=1019078693]
+[node name="ToppledChair" type="StaticBody3D" parent="Lobby" unique_id=493021936]
 transform = Transform3D(0.76604444, -0.6330222, -0.11161892, 0, 0.17364822, -0.9848077, 0.6427876, 0.7544065, 0.13302225, 4.2, 0.25, -24)
 
-[node name="Mesh" type="MeshInstance3D" parent="Lobby/ToppledChair" unique_id=552523719]
+[node name="Mesh" type="MeshInstance3D" parent="Lobby/ToppledChair" unique_id=596764249]
 material_override = SubResource("StandardMaterial3D_ali2o")
 mesh = SubResource("BoxMesh_6wcu5")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/ToppledChair" unique_id=89990620]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/ToppledChair" unique_id=1355252078]
 shape = SubResource("BoxShape3D_dvc7d")
 
-[node name="Gate" type="Node3D" parent="Lobby" unique_id=1617662829]
+[node name="Gate" type="Node3D" parent="Lobby" unique_id=1391420064]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.02, -30.15)
 script = ExtResource("5_cjrxo")
@@ -2389,33 +2385,33 @@ player_can_close = false
 interactive = false
 open_sound = &"shutter"
 
-[node name="Panel" type="AnimatableBody3D" parent="Lobby/Gate" unique_id=896153248]
+[node name="Panel" type="AnimatableBody3D" parent="Lobby/Gate" unique_id=205241541]
 
-[node name="Mesh" type="MeshInstance3D" parent="Lobby/Gate/Panel" unique_id=15736928]
+[node name="Mesh" type="MeshInstance3D" parent="Lobby/Gate/Panel" unique_id=792753128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 0)
 material_override = SubResource("StandardMaterial3D_aqey8")
 mesh = SubResource("BoxMesh_ipxrb")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/Gate/Panel" unique_id=1072619631]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/Gate/Panel" unique_id=383722034]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 0)
 shape = SubResource("BoxShape3D_ppejw")
 
-[node name="Interactable" type="Area3D" parent="Lobby/Gate/Panel" unique_id=73486769]
+[node name="Interactable" type="Area3D" parent="Lobby/Gate/Panel" unique_id=1701453700]
 script = ExtResource("6_3vp1u")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/Gate/Panel/Interactable" unique_id=530557488]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/Gate/Panel/Interactable" unique_id=1427474445]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 0)
 shape = SubResource("BoxShape3D_ssh0x")
 
-[node name="GateBeacon" type="Node3D" parent="Lobby" unique_id=767438501]
+[node name="GateBeacon" type="Node3D" parent="Lobby" unique_id=117922543]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.35, -29.85)
 
-[node name="BeaconLamp" type="MeshInstance3D" parent="Lobby/GateBeacon" unique_id=1926354910]
+[node name="BeaconLamp" type="MeshInstance3D" parent="Lobby/GateBeacon" unique_id=1071755649]
 material_override = SubResource("StandardMaterial3D_opend")
 mesh = SubResource("CylinderMesh_khnse")
 
-[node name="Beam" type="SpotLight3D" parent="Lobby/GateBeacon" unique_id=438862485]
+[node name="Beam" type="SpotLight3D" parent="Lobby/GateBeacon" unique_id=612129687]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 12.0
@@ -2423,53 +2419,53 @@ light_volumetric_fog_energy = 3.0
 spot_range = 12.0
 spot_angle = 18.0
 
-[node name="VestibuleLight" type="OmniLight3D" parent="Lobby" unique_id=845041669]
+[node name="VestibuleLight" type="OmniLight3D" parent="Lobby" unique_id=1273270676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.6, -33)
 light_color = Color(1, 0.07, 0.04, 1)
 light_energy = 1.5
 
-[node name="LobbyTrigger" type="Area3D" parent="Lobby" unique_id=237155127]
+[node name="LobbyTrigger" type="Area3D" parent="Lobby" unique_id=599360353]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -22.8)
 script = ExtResource("8_01nsj")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/LobbyTrigger" unique_id=594370530]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/LobbyTrigger" unique_id=1409095027]
 shape = SubResource("BoxShape3D_kvhm3")
 
-[node name="GateTrigger" type="Area3D" parent="Lobby" unique_id=82684138]
+[node name="GateTrigger" type="Area3D" parent="Lobby" unique_id=1853741884]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -32.2)
 script = ExtResource("8_01nsj")
 
-[node name="Shape" type="CollisionShape3D" parent="Lobby/GateTrigger" unique_id=144775124]
+[node name="Shape" type="CollisionShape3D" parent="Lobby/GateTrigger" unique_id=66304454]
 shape = SubResource("BoxShape3D_70ctm")
 
-[node name="HorrorFX" type="CanvasLayer" parent="." unique_id=1226649963]
+[node name="HorrorFX" type="CanvasLayer" parent="." unique_id=1234802045]
 unique_name_in_owner = true
 script = ExtResource("9_amp7s")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1026928378]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1339497673]
 script = ExtResource("10_77t3o")
 
-[node name="Announcer" type="Node" parent="." unique_id=1510605006]
+[node name="Announcer" type="Node" parent="." unique_id=1472333247]
 unique_name_in_owner = true
 script = ExtResource("11_0xhv4")
 preferred_voices = PackedStringArray("Zira", "Female", "Hazel", "Susan")
 
-[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=303305454]
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=326251269]
 volume_db = 1.0
 script = ExtResource("12_1p6mw")
 sound_id = &"music_hub"
 play_on_ready = true
 audio_bus = "BGM"
 
-[node name="Beep" type="AudioStreamPlayer" parent="." unique_id=414351058]
+[node name="Beep" type="AudioStreamPlayer" parent="." unique_id=829065162]
 unique_name_in_owner = true
 volume_db = -6.0
 script = ExtResource("12_1p6mw")
 sound_id = &"beep"
 
-[node name="Alarm" type="AudioStreamPlayer3D" parent="." unique_id=394539478]
+[node name="Alarm" type="AudioStreamPlayer3D" parent="." unique_id=1514800760]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.3, -29.6)
 volume_db = -4.0
